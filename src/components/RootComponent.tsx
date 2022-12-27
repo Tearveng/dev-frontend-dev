@@ -1,7 +1,7 @@
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
-import { Box } from 'native-base';
-import { RootStack } from '../../src/navigators/rootNavigator';
+// import { Box } from 'native-base';
+import { RootStack } from '../navigators/rootNavigator';
 
 export const Root = () => {
 	// const [lightBg, darkBg] = useToken(
@@ -12,27 +12,24 @@ export const Root = () => {
 	// const bgColor = useColorModeValue(lightBg, darkBg);
 
 	return (
-		<NavigationContainer
-			// theme={{
-			// 	colors: { background: bgColor },
-			// }}
-		>
-			<Box
-				flex={1}
-				w="100%"
-				_light={{
-					bg: 'coolGray.50',
-				}}
-				_dark={{
-					bg: 'blueGray.900',
-				}}
-				// bg={useColorModeValue('', 'blueGray.900')}
-				_web={{
-					overflowX: 'hidden',
-				}}
-			>
+		<NavigationContainer>
+			{/*<Box*/}
+			{/*	flex={1}*/}
+			{/*	w="100px"*/}
+			{/*	_light={{*/}
+			{/*		bg: 'cyan.700',*/}
+			{/*	}}*/}
+			{/*	_dark={{*/}
+			{/*		bg: 'cyan.700',*/}
+			{/*	}}*/}
+			{/*	// bg={useColorModeValue('', 'blueGray.900')}*/}
+			{/*	_web={{*/}
+			{/*		overflowX: 'hidden',*/}
+			{/*	}}*/}
+			{/*>*/}
+			{/*	<RootStack />*/}
+			{/*</Box>*/}
 				<RootStack />
-			</Box>
 		</NavigationContainer>
 	);
 };

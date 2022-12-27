@@ -1,12 +1,65 @@
 import { extendTheme } from 'native-base';
-
 export const BaseTheme = extendTheme({
 	components: {
-		Text: {
-			defaultProps: {
-				fontSize: 'lg',
-			},
-		},
+        Button: {
+            baseStyle: {
+                borderRadius: "8px",
+                color: 'gray.300',
+            }
+            // variants: {
+            //     rounded: ({
+            //                   colorScheme
+            //               }:any) => {
+            //         return {
+            //             bg: `${colorScheme}.500`,
+            //             rounded: "full"
+            //         };
+            //     }
+            // }
+        },
+        Input: {
+            baseStyle: {
+                color: "white",
+                paddingLeft: "10px",
+                height: '40px',
+                border: "5px solid",
+                borderColor: "white",
+                borderBottomColor: "white",
+                hovered: {
+                    borderColor: "white",
+                },
+                focused: {
+                    background: 'none',
+                    outline: 'none',
+                }
+            }
+        },
+        Text: {
+            baseStyle: {
+                color: 'gray.300'
+            },
+            variants: {
+                smallText: {
+                    color: 'gray.300',
+                    fontWeight: "300",
+                    fontSize: 12,
+                }
+            },
+            sizes: {
+                xl: {
+                    fontSize: '64px'
+                },
+                lg: {
+                    fontSize: '32px'
+                },
+                md: {
+                    fontSize: '20px'
+                },
+                sm: {
+                    fontSize: '14px'
+                }
+            }
+        },
 	},
 	colors: {
 		slateGray: {
@@ -28,6 +81,6 @@ export const BaseTheme = extendTheme({
 
 	config: {
 		// Changing initialColorMode to 'dark'
-		initialColorMode: 'dark',
+		initialColorMode: 'light',
 	},
 });
