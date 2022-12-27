@@ -1,6 +1,5 @@
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
-// import { Box } from 'native-base';
 import { RootStack } from '../navigators/rootNavigator';
 
 export const Root = () => {

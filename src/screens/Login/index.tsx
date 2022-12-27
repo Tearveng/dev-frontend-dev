@@ -7,6 +7,7 @@ import {
     Input,
     Pressable,
     Text, useBreakpointValue,
+    View,
     // View,
     VStack
 } from 'native-base';
@@ -15,14 +16,12 @@ import React from 'react';
 import {faUser, faLock, faEyeSlash, faEye} from "@fortawesome/free-solid-svg-icons";
 import {TouchableOpacity/*, Platform*/} from "react-native";
 import {style} from '../../../styles/style';
-// import LinearGradient from 'react-native-linear-gradient';
-import {LinearGradient as LinearGradientWeb} from 'expo-linear-gradient';
 
 export interface Props {
     navigation: any,
 }
 
-export function Login({navigation}: Props) {
+export function LoginScreen({navigation}: Props) {
     const [show, setShow] = React.useState(true);
     const [username, setUsername] = React.useState('');
     const [password, setPassword] = React.useState('');
@@ -30,12 +29,10 @@ export function Login({navigation}: Props) {
         base: "row",
     });
 
-    return (<LinearGradientWeb start={{x: 0, y: 0}}
-                               end={{x: 0.5, y: 1}}
-                               colors={['#456F97', '#3E255B', '#5E2B28']}
-                               style={[style.linearGradient, style.container]}>
+    return (
 
-            <Box style={style.card} alignSelf='center' marginTop='15%'
+           <View style={[style.linearGradient,style.container]}>
+             <Box style={style.card} alignSelf='center' marginTop='15%'
                  w={{base: 300, md: 300, sm: 250, lg: 380}}>
                 <Box style={style.cardHeader}>
                     <Center>
@@ -100,6 +97,7 @@ export function Login({navigation}: Props) {
                         }}>LOGIN</Button>
                 </VStack>
             </Box>
-        </LinearGradientWeb>
+           </View>
+        
     );
 }

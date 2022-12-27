@@ -18,7 +18,7 @@ export interface Props {
     navigation: any,
 }
 
-export function Home({route, navigation}: Props) {
+export function HomeScreen({route, navigation}: Props) {
     const [list, setList] = React.useState([{id: 1, name: 'hello guys'}]);
     useEffect(() => {
         setList(prevState => [...prevState, {id: 2, name: route?.params.username}]);

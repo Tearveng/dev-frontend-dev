@@ -15,7 +15,7 @@ export interface Props {
     navigation: any,
 }
 
-export function ForgotPassword({navigation}: Props) {
+export function ForgotPasswordScreen({navigation}: Props) {
     return (
         <View
             style={{
