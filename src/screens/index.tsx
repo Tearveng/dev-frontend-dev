@@ -1,6 +1,3 @@
-import LoginScreen from "./LoginScreen";
-import HomeScreen from "./HomeScreen";
-export {
-  LoginScreen,
-  HomeScreen
-}
+export {Login} from "./Login";
+export {ForgotPassword} from "./ForgotPassword";
+export {Home} from "./Home";
