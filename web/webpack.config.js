@@ -5,6 +5,7 @@ const rootDir = path.join(__dirname, '..');
 const webpackEnv = process.env.NODE_ENV || 'development';
 
 module.exports = {
+
   mode: webpackEnv,
   entry: {
     app: path.join(rootDir, './index.web.ts'),
@@ -21,7 +22,7 @@ module.exports = {
         exclude: /node_modules/,
         loader: 'ts-loader',
       },
-      { test: /\.png$/, use: 'raw-loader' }
+      {test: /\.png$/, use: 'raw-loader'},
     ],
   },
   plugins: [
@@ -41,8 +42,13 @@ module.exports = {
       '.jsx',
       '.js',
     ], // read files in fillowing order
-    alias: Object.assign({
+    alias: {
       'react-native$': 'react-native-web',
-    }),
+      '@styles':path.resolve(__dirname,"../src/styles"),
+      '@screens':path.resolve(__dirname,"../src/screens"),
+      '@component':path.resolve(__dirname,"../src/components"),
+      '@src':path.resolve(__dirname,"../src"),
+      
+    },
   },
 };

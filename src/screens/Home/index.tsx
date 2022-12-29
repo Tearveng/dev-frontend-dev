@@ -8,16 +8,14 @@ import {
 // import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
 import React, {useEffect} from 'react';
 // import {faUser} from "@fortawesome/free-solid-svg-icons";
-import {style} from "../../../styles/style";
+import {style} from "../../styles/style";
 import {TouchableOpacity} from 'react-native';
 import ShowFile from "./ShowFile";
 import FileForm from "./FileForm";
-
 export interface Props {
     route: any,
     navigation: any,
 }
-
 export function HomeScreen({route, navigation}: Props) {
     const [list, setList] = React.useState([{id: 1, name: 'hello guys'}]);
     useEffect(() => {

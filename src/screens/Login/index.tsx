@@ -20,12 +20,13 @@ import {
   faEye,
 } from '@fortawesome/free-solid-svg-icons';
 import {TouchableOpacity /*, Platform*/} from 'react-native';
-import {style} from '../../../styles/style';
+import {style} from '@styles/style';
+// import {style} from './../../styles/style';
 
 export interface Props {
   navigation: any;
 }
-
+ 
 export function LoginScreen({navigation}: Props) {
   const [show, setShow] = React.useState(true);
   const [username, setUsername] = React.useState('');
@@ -44,7 +45,7 @@ export function LoginScreen({navigation}: Props) {
       >
         <Box style={style.cardHeader}>
           <Center>
-            <Text size={'md'}>{'CUSTOMER LOGIN'}</Text>
+            <Text size={'md'}>{'CUSTOMER LOGIN__'}</Text>
           </Center>
         </Box>
         <VStack p={10} pt={5} space={6}>
