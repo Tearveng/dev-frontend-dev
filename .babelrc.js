@@ -17,12 +17,12 @@ module.exports = {
           '.json',
         ],
         alias: {
-          '*': '.',
-          '@root': './',
           '@src': './src',
           '@components': './src/components',
           '@screens':'./src/screens',
-          '@styles':'./src/styles'
+          '@styles':'./src/styles',
+          '@utils':'src/utils'
+
         }
       }
     ]

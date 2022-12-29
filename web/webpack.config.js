@@ -48,6 +48,7 @@ module.exports = {
       '@screens':path.resolve(__dirname,"../src/screens"),
       '@component':path.resolve(__dirname,"../src/components"),
       '@src':path.resolve(__dirname,"../src"),
+      '@utils':path.resolve(__dirname,"../utils")
       
     },
   },
