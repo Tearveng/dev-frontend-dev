@@ -13,7 +13,7 @@ import {style} from "../../styles/style";
 import { TouchableOpacity} from 'react-native';
 import ShowFile from "./ShowFile";
 import FileForm from "./FileForm";
-import { Platform } from 'react-native';
+
 import ViewPdfNative from '@src/components/templates/pdf/ViewPdf.native';
 
 export interface Props {
@@ -60,9 +60,7 @@ export function HomeScreen({route, navigation}: Props) {
               </Button>
           </View>
         
-      {
-        Platform.OS=='android' && <ViewPdfNative/>
-      }
+          <ViewPdfNative/>
       </View>
   );
 }

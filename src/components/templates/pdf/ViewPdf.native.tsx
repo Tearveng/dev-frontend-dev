@@ -8,7 +8,7 @@ const ViewPdfNative = () => {
     cache: true,
   };
   if (Platform.OS === 'web') {
-    return <View style={styles.container}></View>;
+    return <div style={{backgroundColor:'lightblue'}}>WEB VIEW PDF</div>;
   }
   const Pdf = require('react-native-pdf');
   return (
