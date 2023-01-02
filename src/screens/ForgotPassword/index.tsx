@@ -10,12 +10,21 @@ import {
 import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
 import React from 'react';
 import {faUser} from "@fortawesome/free-solid-svg-icons";
+import { getData } from '@src/utils/api';
 
 export interface Props {
     navigation: any,
 }
 
 export function ForgotPasswordScreen({navigation}: Props) {
+    const [users,setUsers]=React.useState([]);
+    React.useEffect(()=>{
+        getData('https://jsonplaceholder.typicode.com/users').then((res)=>{
+            console.log(res);
+            setUsers(res);
+        })
+    },[]);
+
     return (
         <View
             style={{
@@ -50,6 +59,15 @@ export function ForgotPasswordScreen({navigation}: Props) {
                         }}>Login</Button>
                 </VStack>
             </Box>
+            <View>
+                {
+                    users.map((_,index)=>{
+                        return(
+                            <Button key={index}>{index+1}</Button>
+                        )
+                    })
+                }
+            </View>
         </View>
     );
 }

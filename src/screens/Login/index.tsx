@@ -87,7 +87,7 @@ export function LoginScreen({navigation}: Props) {
 
             <TouchableOpacity
               onPress={() => {
-                navigation.navigate('Index');
+                navigation.navigate('ForgotPassword', );
               }}
             >
               <Text style={{paddingTop: 0}} italic variant={'smallText'}>

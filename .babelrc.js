@@ -1,6 +1,10 @@
 module.exports = {
-  presets: ['module:metro-react-native-babel-preset'],
+  presets: [
+    'module:metro-react-native-babel-preset',
+    
+  ],
   plugins: [
+    ["@babel/plugin-proposal-private-methods", { "loose": true }],
     [
       'module-resolver',
       {
@@ -19,12 +23,11 @@ module.exports = {
         alias: {
           '@src': './src',
           '@components': './src/components',
-          '@screens':'./src/screens',
-          '@styles':'./src/styles',
-          '@utils':'src/utils'
-
-        }
-      }
-    ]
-  ]
+          '@screens': './src/screens',
+          '@styles': './src/styles',
+          '@utils': 'src/utils',
+        },
+      },
+    ],
+  ],
 };
