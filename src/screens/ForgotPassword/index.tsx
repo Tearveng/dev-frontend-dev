@@ -10,20 +10,15 @@ import {
 import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
 import React from 'react';
 import {faUser} from "@fortawesome/free-solid-svg-icons";
-import { getData } from '@src/utils/api';
+
 
 export interface Props {
     navigation: any,
 }
 
 export function ForgotPasswordScreen({navigation}: Props) {
-    const [users,setUsers]=React.useState([]);
-    React.useEffect(()=>{
-        getData('https://jsonplaceholder.typicode.com/users').then((res)=>{
-            console.log(res);
-            setUsers(res);
-        })
-    },[]);
+    const [users,_]=React.useState([]);
+    
 
     return (
         <View

@@ -17,7 +17,7 @@ const ViewPdf = () => {
   }
   if (Platform.OS === 'web') {
     return (
-      <div>
+      <div style={{margin:25}}>
         <Document file={'files/Web_Service_Signature_Certigna_v2.0.pdf'} onLoadSuccess={onDocumentLoadSuccess}>
           <Page pageNumber={pageNumber} />
         </Document>

@@ -6,9 +6,8 @@ const Stack = createStackNavigator();
 
 export function RootNavigator() {
   return (
-    <Stack.Navigator screenOptions={{ headerShown: false }}>
+    <Stack.Navigator screenOptions={{headerShown: false}}>
       <Stack.Screen
-      
         name="Login"
         component={LoginScreen}
         options={{
@@ -20,13 +19,22 @@ export function RootNavigator() {
         component={ForgotPasswordScreen}
         options={{
           headerShown: false,
+          title: 'Frogot | Screen',
         }}
       />
       <Stack.Screen
         name="Home"
         component={HomeScreen}
         options={{
-          headerShown: false,
+          headerShown:true,
+          title: 'View PDF',
+          // headerStyle: {
+          //   backgroundColor: '#f4511e',
+          // },
+          // headerTintColor: '#fff',
+          // headerTitleStyle: {
+          //   fontWeight: 'bold',
+          // },
         }}
       />
     </Stack.Navigator>

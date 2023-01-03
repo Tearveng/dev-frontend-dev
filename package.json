@@ -5,7 +5,7 @@
   "scripts": {
     "android": "react-native run-android",
     "ios": "react-native run-ios",
-    "start": "react-native start",
+    "start": " react-native start",
     "web": "cd web && webpack-dev-server",
     "web:build": "cd web && webpack ",
     "test": "jest",
@@ -32,6 +32,7 @@
     "react-dom": "^18.2.0",
     "react-native": "^0.70.6",
     "react-native-blob-util": "^0.17.0",
+    "react-native-dotenv": "^3.4.6",
     "react-native-gesture-handler": "^2.8.0",
     "react-native-pdf": "^6.6.2",
     "react-native-safe-area-context": "^4.4.1",

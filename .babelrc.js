@@ -29,5 +29,13 @@ module.exports = {
         },
       },
     ],
+    [
+      "module:react-native-dotenv",
+      {
+        envName: "NODE_ENV",
+        moduleName: "@env",
+        path: ".env.development"
+      }
+    ]
   ],
 };
