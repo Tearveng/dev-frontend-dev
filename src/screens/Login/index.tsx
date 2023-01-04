@@ -21,9 +21,8 @@ import {
     faEye,
     faWarning
 } from '@fortawesome/free-solid-svg-icons';
-import {
-    TextInput, TouchableOpacity, KeyboardAvoidingView, /*, Platform*/
-    Platform,
+import { TouchableOpacity, KeyboardAvoidingView, /*, Platform*/
+    Platform,TextInput,
     TouchableWithoutFeedback, Keyboard,
 } from 'react-native';
 import {style} from '@styles/style';
@@ -87,7 +86,7 @@ export function LoginScreen({navigation}: Props) {
     }
     const validate = () => {
         let validForm = true;
-        if (!userForm.email.toString().includes('@')) {
+        if (!userForm.email.includes('@')) {
             validForm = false;
             setUserForm(prevState => ({
                 ...prevState,
@@ -140,9 +139,9 @@ export function LoginScreen({navigation}: Props) {
                             <FormControl isInvalid={!userForm.isEmailValid} isRequired={true}>
                                 <Input
                                     type="text"
-                                    onChange={(e: any) => setUserForm(prevState => ({
+                                    onChangeText={e  => setUserForm(prevState => ({
                                         ...prevState,
-                                        email: e.target.value
+                                        email: e
                                     }))}
                                     ref={refEmail}
                                     variant="underlined"
@@ -153,12 +152,12 @@ export function LoginScreen({navigation}: Props) {
                                     {userForm.emailMessage}
                                 </FormControl.ErrorMessage>
                             </FormControl>
-                            <FormControl isInvalid={!userForm.isPasswordValid} isRequired>
+                            <FormControl isInvalid={!userForm.isPasswordValid} >
                                 <Input
                                     secureTextEntry={userForm.isSecure}
-                                    onChange={(e: any) => setUserForm(prevState => ({
+                                    onChangeText={e  => setUserForm(prevState => ({
                                         ...prevState,
-                                        password: e.target.value
+                                        password: e
                                     }))}
                                     ref={refPassword}
                                     variant="underlined"
