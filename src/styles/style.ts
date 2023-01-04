@@ -2,11 +2,12 @@ import {StyleSheet} from "react-native";
 
 export const style = StyleSheet.create({
     container: {
-        width: "100%",
-        height: "auto",
-        minHeight: "100%",
-        paddingLeft:50,
-        paddingRight:50,
+        padding: 24,
+        flex: 1,
+        justifyContent: "space-around"
+    },
+    avoidingView:{
+        flex: 1
     },
     linearGradient: {
         paddingLeft: 1,

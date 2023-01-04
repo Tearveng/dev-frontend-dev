@@ -1,7 +1,7 @@
 import React from 'react';
 import {View} from 'native-base';
 
-import {style} from '../../styles/style';
+import {style} from '@styles/style';
 
 import {ViewPdf} from '@src/components/templates/pdf';
 export interface Props {
