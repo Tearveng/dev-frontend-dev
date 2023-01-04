@@ -5,9 +5,8 @@ const rootDir = path.join(__dirname, '..');
 const webpackEnv = process.env.NODE_ENV || 'development';
 
 module.exports = {
-
   mode: webpackEnv,
-  
+
   entry: {
     app: path.join(rootDir, './index.web.ts'),
   },
@@ -24,24 +23,27 @@ module.exports = {
         loader: 'ts-loader',
       },
       {test: /\.png$/, use: 'raw-loader'},
-     
+
       {
         test: /\.css$/,
-        loader:  'css-loader',
-        options:{
-          url:true
-        }
+        loader: 'css-loader',
+        options: {
+          url: true,
+        },
       },
     ],
   },
   plugins: [
+    new webpack.DefinePlugin({
+      process: {env: {}},
+    }),
     new HtmlWebpackPlugin({
       template: path.join(__dirname, './index.html'),
     }),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.IgnorePlugin({
-      resourceRegExp:/react-native-pdf/
-    })
+      resourceRegExp: /react-native-pdf/,
+    }),
   ],
   resolve: {
     extensions: [
@@ -56,19 +58,17 @@ module.exports = {
     ], // read files in fillowing order
     alias: {
       'react-native$': 'react-native-web',
-      '@styles':path.resolve(__dirname,"../src/styles"),
-      '@screens':path.resolve(__dirname,"../src/screens"),
-      '@components':path.resolve(__dirname,"../src/components"),
-      '@src':path.resolve(__dirname,"../src"),
-      '@utils':path.resolve(__dirname,"../utils")
-      
+      '@styles': path.resolve(__dirname, '../src/styles'),
+      '@screens': path.resolve(__dirname, '../src/screens'),
+      '@components': path.resolve(__dirname, '../src/components'),
+      '@src': path.resolve(__dirname, '../src'),
+      '@utils': path.resolve(__dirname, '../utils'),
     },
   },
-  devServer:{
+  devServer: {
     port: 3000,
-    static:{
-      directory: path.join(__dirname,"../src/assets")
+    static: {
+      directory: path.join(__dirname, '../src/assets'),
     },
-   
   },
 };

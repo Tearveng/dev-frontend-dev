@@ -21,11 +21,12 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import {TouchableOpacity /*, Platform*/} from 'react-native';
 import {style} from '@styles/style';
+import {NavigatorRoute} from '@src/navigation/NavigatorRouteConstant';
 
 export interface Props {
   navigation: any;
 }
- 
+
 export function LoginScreen({navigation}: Props) {
   const [show, setShow] = React.useState(true);
   const [username, setUsername] = React.useState('');
@@ -86,7 +87,7 @@ export function LoginScreen({navigation}: Props) {
 
             <TouchableOpacity
               onPress={() => {
-                navigation.navigate('ForgotPassword', );
+                navigation.navigate('ForgotPassword');
               }}
             >
               <Text style={{paddingTop: 0}} italic variant={'smallText'}>
@@ -100,7 +101,7 @@ export function LoginScreen({navigation}: Props) {
             mx="auto"
             w={{base: '75%'}}
             onPress={() => {
-              navigation.navigate('Home', {
+              navigation.navigate(NavigatorRoute.HOME, {
                 username: username,
                 password: password,
               });
