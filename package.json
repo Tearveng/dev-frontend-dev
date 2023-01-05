@@ -27,6 +27,7 @@
     "@storybook/react": "^6.5.13",
     "@types/react-pdf": "^6.2.0",
     "dotenv-webpack": "^8.0.1",
+    "axios": "^1.2.2",
     "expo-linear-gradient": "^12.0.1",
     "expo-modules-core": "^1.0.4",
     "native-base": "^3.4.23",

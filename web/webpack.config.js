@@ -6,7 +6,6 @@ const webpackEnv = process.env.NODE_ENV || 'development';
 const Dotenv = require('dotenv-webpack');
 
 module.exports = {
-
   mode: webpackEnv,
 
   entry: {
@@ -28,10 +27,10 @@ module.exports = {
 
       {
         test: /\.css$/,
-        loader:  'css-loader',
-        options:{
-          url:true
-        }
+        loader: 'css-loader',
+        options: {
+          url: true,
+        },
       },
     ],
   },
@@ -68,11 +67,10 @@ module.exports = {
 
     },
   },
-  devServer:{
+  devServer: {
     port: 3000,
-    static:{
-      directory: path.join(__dirname,"../src/assets")
+    static: {
+      directory: path.join(__dirname, '../src/assets'),
     },
-
   },
 };
