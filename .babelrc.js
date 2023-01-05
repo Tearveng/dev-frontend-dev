@@ -1,7 +1,7 @@
 module.exports = {
   presets: [
     'module:metro-react-native-babel-preset',
-    
+
   ],
   plugins: [
     ["@babel/plugin-proposal-private-methods", { "loose": true }],
@@ -29,13 +29,5 @@ module.exports = {
         },
       },
     ],
-    [
-      "module:react-native-dotenv",
-      {
-        envName: "NODE_ENV",
-        moduleName: "@env",
-        path: ".env.development"
-      }
-    ]
   ],
 };

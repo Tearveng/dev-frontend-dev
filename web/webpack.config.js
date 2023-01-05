@@ -3,11 +3,12 @@ const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const rootDir = path.join(__dirname, '..');
 const webpackEnv = process.env.NODE_ENV || 'development';
+const Dotenv = require('dotenv-webpack');
 
 module.exports = {
 
   mode: webpackEnv,
-  
+
   entry: {
     app: path.join(rootDir, './index.web.ts'),
   },
@@ -24,7 +25,7 @@ module.exports = {
         loader: 'ts-loader',
       },
       {test: /\.png$/, use: 'raw-loader'},
-     
+
       {
         test: /\.css$/,
         loader:  'css-loader',
@@ -41,6 +42,9 @@ module.exports = {
     new webpack.HotModuleReplacementPlugin(),
     new webpack.IgnorePlugin({
       resourceRegExp:/react-native-pdf/
+    }),
+    new Dotenv({
+      path: path.join(rootDir, './.env')
     })
   ],
   resolve: {
@@ -61,7 +65,7 @@ module.exports = {
       '@components':path.resolve(__dirname,"../src/components"),
       '@src':path.resolve(__dirname,"../src"),
       '@utils':path.resolve(__dirname,"../utils")
-      
+
     },
   },
   devServer:{
@@ -69,6 +73,6 @@ module.exports = {
     static:{
       directory: path.join(__dirname,"../src/assets")
     },
-   
+
   },
 };
