@@ -73,8 +73,6 @@ export class NGRequest {
     let headers: RequestHeaders = {};
     const timeoutError = NGUniqueError.timeoutError();
     try {
-      // const response = await this.channel(config);
-      console.log(config);
       const response = await $timeout(
         this.channel(config),
         timeout,
