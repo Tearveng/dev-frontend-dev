@@ -1,5 +1,5 @@
-import {APIService} from '@src/utils/classes/APIService';
-import axios, {AxiosError} from 'axios';
+import {APIServer} from '@src/utils/classes/APIService';
+import {Verb, RespType, Resp} from '@src/utils/classes/interfaces/APIConstants';
 import {View, Text, Button} from 'native-base';
 import React, {useState} from 'react';
 
@@ -38,54 +38,114 @@ export interface Headers {
 export interface Params {}
 
 export const TestAPiServerRequestScreen = () => {
-  const api = new APIService('http://127.0.0.1:8080');
+  const api = new APIServer('http://127.0.0.1:8080', {
+    certignahash: 'ySsPUR23',
+    certignarole: 2,
+    certignauser: 'pps#test',
+  });
+
   const [dataGet, setDataGet] = useState<PingModel | null>();
-  const [errorGet, setErrorGet] = useState<AxiosError | null>();
-  const getPing = async () => {
-    const _data = await api.get<PingModel>('/api/v1/dev/ping');
-    if (axios.isAxiosError(_data)) {
-      // const error = _data as AxiosError;
-      setErrorGet(_data);
-    }
-    setDataGet(_data);
-  };
 
   const post = async () => {
-    const url = `/api/v1/dev/sign-document?file-name=hello&format=1&level=1&type1=1&certificate=generate`;
-    const data = await api.post(url);
-    console.log(data);
+    try {
+      const url = `/api/v1/dev/sign-document?file-name=hello&format=1&level=1&type1=1&certificate=generate`;
+      const data = await api.ngrequest(url, Verb.Post, RespType.Json);
+      console.log(data);
+    } catch (error: any) {
+      console.log(error);
+    }
+  };
+
+  const postSessions = async () => {
+    try {
+      const url = `/api/v1/sessions`;
+      const data = await api.ngrequest(
+        url,
+        Verb.Post,
+        RespType.Json,
+        [Resp.Created],
+        {
+          ttl: 900,
+        },
+      );
+      console.log(data);
+    } catch (error: any) {
+      console.log(error);
+    }
   };
 
   const put = async () => {
-    const body = {
-      'manifest-data': {},
-      reason: 'string',
-      force: true,
-    };
-    const url = `/api/v1/session/2/close`;
-    const data = await api.put(url, body);
-    console.log(data);
+    try {
+      const body = {
+        'manifest-data': {},
+        reason: 'string',
+        force: true,
+      };
+      const url = `/api/v1/session/2/close`;
+      const data = await api.ngrequest(
+        url,
+        Verb.Put,
+        RespType.Json,
+        [Resp.OK, Resp.Created],
+        body,
+      );
+      console.log(data);
+    } catch (error: any) {
+      console.log(error);
+    }
   };
 
   const deleteApi = async () => {
-    const url = `/api/v1/session/2/scenario/1`;
-    const data = await api.delete(url);
-    console.log(data);
+    try {
+      const url = `/api/v1/session/2/scenario/1`;
+      const data = await api.ngrequest(url, Verb.Delete, RespType.Json, [
+        Resp.OK,
+        Resp.Forbidden,
+      ]);
+      console.log(data);
+    } catch (error: any) {}
   };
 
-  if (errorGet)
-    return (
-      <View>
-        <Text>{errorGet.message}</Text>
-      </View>
-    );
+  const getPing = async () => {
+    try {
+      const data = await api.ngrequest(
+        '/api/v1/dev/ping',
+        Verb.Get,
+        RespType.Json,
+        [Resp.OK, Resp.TimeOut],
+      );
+      setDataGet(data);
+      console.log(data);
+    } catch (error: any) {
+      console.log(error);
+    }
+  };
+
+  const getSessions = async () => {
+    try {
+      const data = await api.ngrequest(
+        '/api/v1/sessions',
+        Verb.Get,
+        RespType.Json,
+        [Resp.OK],
+        undefined,
+        {
+          certignarole: 1,
+        },
+      );
+      console.log(data);
+    } catch (error: any) {
+      console.log(error);
+    }
+  };
+
   return (
     <View>
       <Button colorScheme="primary" onPress={getPing}>
         Test Get API
       </Button>
       <Text padding={5} color="black">
-        TestAPiServerRequest{' '}
+        TestAPiServerRequest
         <Text color="green.500">
           {dataGet?.requestId} {dataGet?.requestUrl}
         </Text>
@@ -103,9 +163,13 @@ export const TestAPiServerRequestScreen = () => {
         Test Delete API
       </Button>
       <br />
-      {/* <Button colorScheme="yellow" onPress={post}>
-        Test Patch API
-      </Button> */}
+      <Button colorScheme="primary" onPress={getSessions}>
+        Test Get Sessions
+      </Button>
+      <br />
+      <Button colorScheme="green" onPress={postSessions}>
+        Create Session
+      </Button>
     </View>
   );
 };

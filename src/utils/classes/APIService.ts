@@ -1,68 +1,45 @@
-import axios, {AxiosInstance} from 'axios';
+import {$count, $ok} from '../commons';
+import {Nullable} from '../commons/type';
+import {Resp} from './interfaces/APIConstants';
+import {APIHeaders, RequestHeaders} from './interfaces/APIInterface';
+import {NGRequest} from './NGResquest';
 
-export class APIService {
-  private readonly axiosInstance: AxiosInstance;
-  constructor(baseUrl: string) {
-    this.axiosInstance = axios.create({
-      baseURL: baseUrl,
+export class APIServer extends NGRequest {
+  static DEFAULT_TIMEOUT = 8000;
+
+  public readonly authentication?: APIHeaders;
+  public constructor(baseURL: string, authentication?: APIHeaders) {
+    super(baseURL, {
+      timeout: APIServer.DEFAULT_TIMEOUT,
     });
+
+    this.authentication = authentication;
   }
 
-  async get<T>(url: string, headers = {}): Promise<T | null> {
-    try {
-      const {data} = await this.axiosInstance.get<T>(url, {
-        headers,
-      });
-      return data;
-    } catch (e: any) {
-      console.error(e);
-      return e;
-    }
-  }
+  public async ngrequest<T = any>(
+    relativeURL: string,
+    method?: string,
+    responseType?: string,
+    statuses?: number[],
+    body?: Nullable<object>,
+    suplHeaders?: RequestHeaders,
+    timeout?: number,
+  ): Promise<T | null> {
+    suplHeaders = $ok(suplHeaders)
+      ? {...this.authentication, ...suplHeaders}
+      : {...this.authentication};
+    statuses = $count(statuses) ? statuses! : [Resp.OK];
+    const resp = await this.req(
+      relativeURL,
+      method,
+      responseType,
+      body,
+      suplHeaders,
+      timeout,
+    );
 
-  async post<T>(url: string, data?: any, headers?: {}): Promise<T | null> {
-    try {
-      const {data: res} = await this.axiosInstance.post<T>(url, data, {
-        headers,
-      });
-      return res;
-    } catch (error: any) {
-      console.error(error);
-      return error;
-    }
-  }
-
-  async put<T>(url: string, data?: any, headers?: {}): Promise<T | null> {
-    try {
-      const {data: res} = await this.axiosInstance.put<T>(url, data, {
-        headers,
-      });
-      return res;
-    } catch (error: any) {
-      console.error(error);
-      return error;
-    }
-  }
-
-  async patch<T>(url: string, data?: any, headers?: {}): Promise<T | null> {
-    try {
-      const {data: res} = await this.axiosInstance.patch<T>(url, data, {
-        headers,
-      });
-      return res;
-    } catch (error: any) {
-      console.error(error);
-      return error;
-    }
-  }
-
-  async delete<T>(url: string, headers?: {}): Promise<T | null> {
-    try {
-      const {data: res} = await this.axiosInstance.delete<T>(url, {headers});
-      return res;
-    } catch (error: any) {
-      console.error(error);
-      return error;
-    }
+    return statuses.includes(resp.status) && $ok(resp.response)
+      ? (resp.response as T)
+      : null;
   }
 }

@@ -34,9 +34,6 @@ module.exports = {
     ],
   },
   plugins: [
-    new webpack.DefinePlugin({
-      process: {env: {}},
-    }),
     new HtmlWebpackPlugin({
       template: path.join(__dirname, './index.html'),
     }),
