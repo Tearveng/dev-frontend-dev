@@ -7,10 +7,11 @@ const webpackEnv = process.env.NODE_ENV || 'development';
 module.exports = {
 
   mode: webpackEnv,
-  
-  entry: {
-    app: path.join(rootDir, './index.web.ts'),
-  },
+
+  entry: [
+      'babel-polyfill',
+      '../index'
+  ],
   output: {
     path: path.resolve(rootDir, 'dist'),
     filename: 'app-[hash].bundle.js',
@@ -19,12 +20,27 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.(tsx|ts|jsx|js|mjs)$/,
+        test: /\.(tsx|ts|mjs)$/,
         exclude: /node_modules/,
         loader: 'ts-loader',
       },
+      {
+        test: /\.(js|jsx)$/,
+        use: {
+          loader: 'babel-loader',
+          options: {
+            presets: [
+              '@babel/preset-react',
+              { plugins: [
+                  '@babel/plugin-proposal-class-properties',
+                  '@babel/plugin-proposal-private-methods'
+                ]
+              }
+            ],
+          },
+        },
+      },
       {test: /\.png$/, use: 'raw-loader'},
-     
       {
         test: /\.css$/,
         loader:  'css-loader',
@@ -41,7 +57,9 @@ module.exports = {
     new webpack.HotModuleReplacementPlugin(),
     new webpack.IgnorePlugin({
       resourceRegExp:/react-native-pdf/
-    })
+    }),
+    new webpack.EnvironmentPlugin({ JEST_WORKER_ID: null }),
+    new webpack.DefinePlugin({ __DEV__: process.env.NODE_ENV === 'development'  })
   ],
   resolve: {
     extensions: [
@@ -61,7 +79,7 @@ module.exports = {
       '@components':path.resolve(__dirname,"../src/components"),
       '@src':path.resolve(__dirname,"../src"),
       '@utils':path.resolve(__dirname,"../utils")
-      
+
     },
   },
   devServer:{
@@ -69,6 +87,6 @@ module.exports = {
     static:{
       directory: path.join(__dirname,"../src/assets")
     },
-   
+
   },
 };
