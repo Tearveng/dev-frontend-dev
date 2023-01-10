@@ -1,6 +1,6 @@
 import {APIServer} from '@src/utils/classes/APIService';
 import {Verb, RespType, Resp} from '@src/utils/classes/interfaces/APIConstants';
-import {View, Text, Button} from 'native-base';
+import {Text, Button, View} from 'native-base';
 import React, {useState} from 'react';
 
 export interface PingModel {
@@ -38,7 +38,7 @@ export interface Headers {
 export interface Params {}
 
 export const TestAPiServerRequestScreen = () => {
-  const api = new APIServer('http://127.0.0.1:8080', {
+  const api = new APIServer(process.env.API_URL, {
     certignahash: 'ySsPUR23',
     certignarole: 2,
     certignauser: 'pps#test',
