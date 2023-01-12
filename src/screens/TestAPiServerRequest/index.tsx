@@ -1,7 +1,22 @@
+import React, {useState} from 'react';
+import {API_URL} from '@src/config/env';
 import {APIServer} from '@src/utils/classes/APIService';
 import {Verb, RespType, Resp} from '@src/utils/classes/interfaces/APIConstants';
-import {Text, Button, View} from 'native-base';
-import React, {useState} from 'react';
+import {
+  Text,
+  Button,
+  Divider,
+  Box,
+  useBreakpointValue,
+  VStack,
+  Heading,
+  ScrollView,
+} from 'native-base';
+import {Platform, View} from 'react-native';
+// import SvgView from './SVGLogo';
+import {Brainstorming} from '@src/components/Svgs';
+import BrainstormingWeb from '@src/assets/logo/brainstorming.svg';
+import SvgView from './SVGLogo';
 
 export interface PingModel {
   requestId: string;
@@ -37,14 +52,31 @@ export interface Headers {
 
 export interface Params {}
 
+export interface Session {
+  sessions: string[];
+}
+
+// Converts JSON strings to/from your types
+export class Convert {
+  public static toSession(json: string): Session {
+    return JSON.parse(json);
+  }
+
+  public static sessionToJson(value: Session): string {
+    return JSON.stringify(value);
+  }
+}
+
 export const TestAPiServerRequestScreen = () => {
-  const api = new APIServer(process.env.API_URL, {
+  console.log('API_URL => ', API_URL);
+  const api = new APIServer(API_URL || 'http://127.0.0.1:8080', {
     certignahash: 'ySsPUR23',
     certignarole: 2,
     certignauser: 'pps#test',
   });
 
   const [dataGet, setDataGet] = useState<PingModel | null>();
+  const [session, setSession] = useState<Session | null>();
 
   const post = async () => {
     try {
@@ -68,6 +100,7 @@ export const TestAPiServerRequestScreen = () => {
           ttl: 900,
         },
       );
+      getSessions();
       console.log(data);
     } catch (error: any) {
       console.log(error);
@@ -123,7 +156,7 @@ export const TestAPiServerRequestScreen = () => {
 
   const getSessions = async () => {
     try {
-      const data = await api.ngrequest(
+      const data = await api.ngrequest<Session>(
         '/api/v1/sessions',
         Verb.Get,
         RespType.Json,
@@ -134,42 +167,313 @@ export const TestAPiServerRequestScreen = () => {
         },
       );
       console.log(data);
+      setSession(data);
     } catch (error: any) {
       console.log(error);
     }
   };
 
   return (
-    <View>
-      <Button colorScheme="primary" onPress={getPing}>
-        Test Get API
-      </Button>
-      <Text padding={5} color="black">
-        TestAPiServerRequest
-        <Text color="green.500">
-          {dataGet?.requestId} {dataGet?.requestUrl}
+    <Box safeArea px={3}>
+      <ScrollView h="100%">
+        <ScrollView horizontal={true} nestedScrollEnabled={true} style={{}}>
+          {Platform.OS === 'web' ? (
+            <>
+              <img src={BrainstormingWeb} height={250} width={200} />
+              <img src={BrainstormingWeb} height={250} width={200} />
+              <img src={BrainstormingWeb} height={250} width={200} />
+              <img src={BrainstormingWeb} height={250} width={200} />
+              <img src={BrainstormingWeb} height={250} width={200} />
+            </>
+          ) : (
+            <>
+              <SvgView xml={Brainstorming} height={200} width={150} />
+              <SvgView xml={Brainstorming} height={200} width={150} />
+              <SvgView xml={Brainstorming} height={200} width={150} />
+              <SvgView xml={Brainstorming} height={200} width={150} />
+              <SvgView xml={Brainstorming} height={200} width={150} />
+              <SvgView xml={Brainstorming} height={200} width={150} />
+              <SvgView xml={Brainstorming} height={200} width={150} />
+            </>
+          )}
+        </ScrollView>
+        <Button colorScheme="primary" onPress={getPing}>
+          Test Get API
+        </Button>
+        <Text padding={5} color="black">
+          TestAPiServerRequest
+          <Text color="green.500">
+            {dataGet?.requestId} {dataGet?.requestUrl}
+          </Text>
         </Text>
-      </Text>
-      <br />
-      <Button colorScheme="green" onPress={post}>
-        Test Post API
-      </Button>
-      <br />
-      <Button colorScheme="yellow" onPress={put}>
-        Test Put API
-      </Button>
-      <br />
-      <Button colorScheme="red" onPress={deleteApi}>
-        Test Delete API
-      </Button>
-      <br />
-      <Button colorScheme="primary" onPress={getSessions}>
-        Test Get Sessions
-      </Button>
-      <br />
-      <Button colorScheme="green" onPress={postSessions}>
-        Create Session
-      </Button>
-    </View>
+        <Divider height={5} bg={'white:alpha.0'} />
+        <Button colorScheme="green" onPress={post}>
+          Test Post API
+        </Button>
+        <Divider height={5} bg={'white:alpha.0'} />
+        <Button colorScheme="yellow" onPress={put}>
+          Test Put API
+        </Button>
+        <Divider height={5} bg={'white:alpha.0'} />
+        <Button colorScheme="red" onPress={deleteApi}>
+          Test Delete API
+        </Button>
+        <Divider height={5} bg={'white:alpha.0'} />
+        <Button colorScheme="primary" onPress={getSessions}>
+          Test Get Sessions
+        </Button>
+        <Box h={300}>
+          <ScrollView p={5} h={300} nestedScrollEnabled={true}>
+            {session?.sessions.map((_session, index) => (
+              <Box key={index} py={1}>
+                <Text color={'black'}>{_session}</Text>
+              </Box>
+            ))}
+          </ScrollView>
+          {/* {session && session.sessions?.length > 0 && (
+          <FlatList
+            data={session?.sessions}
+            renderItem={({item}) => renderItem(item)}
+            keyExtractor={item => item}
+          />
+        )} */}
+        </Box>
+        <Divider height={5} bg={'white:alpha.0'} />
+        <Button colorScheme="green" onPress={postSessions}>
+          Create Session
+        </Button>
+        <Example />
+      </ScrollView>
+    </Box>
+  );
+};
+// const renderItem = (item: string) => (
+//   <Box py={1}>
+//     <Text color={'black'}>{item}</Text>
+//   </Box>
+// );
+
+const Example = () => {
+  const flexDir = useBreakpointValue({
+    base: 'column',
+    md: 'row',
+    lg: 'row',
+  });
+  return (
+    <ScrollView showsVerticalScrollIndicator={false}>
+      <VStack py="8" space={8} alignItems="center" justifyContent="center">
+        <Heading>Why us?</Heading>
+        <View
+          style={{
+            flexWrap: 'wrap',
+            flexDirection: flexDir,
+          }}
+        >
+          <VStack
+            m="3"
+            w="140"
+            borderRadius="xl"
+            p="3"
+            bg="cyan.500"
+            space={2}
+            alignItems="center"
+            justifyContent="center"
+          >
+            {/* <Icon
+              as={Foundation}
+              name="shield"
+              size="sm"
+              textAlign="center"
+              _dark={{
+                color: 'coolGray.800',
+              }}
+            /> */}
+            <Text
+              fontSize="lg"
+              textAlign="center"
+              _dark={{
+                color: 'coolGray.800',
+              }}
+            >
+              Secure Checkout
+            </Text>
+          </VStack>
+          <VStack
+            m="3"
+            w="140"
+            borderRadius="xl"
+            p="3"
+            bg="cyan.500"
+            space={2}
+            alignItems="center"
+            justifyContent="center"
+          >
+            {/* <Icon
+              as={Foundation}
+              name="shield"
+              size="sm"
+              textAlign="center"
+              _dark={{
+                color: 'coolGray.800',
+              }}
+            /> */}
+            <Text
+              fontSize="lg"
+              textAlign="center"
+              _dark={{
+                color: 'coolGray.800',
+              }}
+            >
+              Secure Checkout
+            </Text>
+          </VStack>
+          <VStack
+            m="3"
+            w="140"
+            borderRadius="xl"
+            p="3"
+            bg="cyan.500"
+            space={2}
+            alignItems="center"
+            justifyContent="center"
+          >
+            {/* <Icon
+              as={Foundation}
+              name="shield"
+              size="sm"
+              textAlign="center"
+              _dark={{
+                color: 'coolGray.800',
+              }}
+            /> */}
+            <Text
+              fontSize="lg"
+              textAlign="center"
+              _dark={{
+                color: 'coolGray.800',
+              }}
+            >
+              Secure Checkout
+            </Text>
+          </VStack>
+          <VStack
+            m="3"
+            w="140"
+            borderRadius="xl"
+            p="3"
+            bg="cyan.500"
+            space={2}
+            alignItems="center"
+            justifyContent="center"
+          >
+            {/* <Icon
+              as={Foundation}
+              name="shield"
+              size="sm"
+              textAlign="center"
+              _dark={{
+                color: 'coolGray.800',
+              }}
+            /> */}
+            <Text
+              fontSize="lg"
+              textAlign="center"
+              _dark={{
+                color: 'coolGray.800',
+              }}
+            >
+              Secure Checkout
+            </Text>
+          </VStack>
+          <VStack
+            m="3"
+            w="140"
+            borderRadius="xl"
+            p="3"
+            bg="cyan.500"
+            space={2}
+            alignItems="center"
+            justifyContent="center"
+          >
+            {/* <Icon
+              as={Foundation}
+              name="shield"
+              size="sm"
+              textAlign="center"
+              _dark={{
+                color: 'coolGray.800',
+              }}
+            /> */}
+            <Text
+              fontSize="lg"
+              textAlign="center"
+              _dark={{
+                color: 'coolGray.800',
+              }}
+            >
+              Secure Checkout
+            </Text>
+          </VStack>
+          <VStack
+            m="3"
+            w="140"
+            borderRadius="xl"
+            p="3"
+            bg="cyan.500"
+            space={2}
+            alignItems="center"
+            justifyContent="center"
+          >
+            {/* <Icon
+              as={Foundation}
+              name="shield"
+              size="sm"
+              textAlign="center"
+              _dark={{
+                color: 'coolGray.800',
+              }}
+            /> */}
+            <Text
+              fontSize="lg"
+              textAlign="center"
+              _dark={{
+                color: 'coolGray.800',
+              }}
+            >
+              Secure Checkout
+            </Text>
+          </VStack>
+          <VStack
+            m="3"
+            w="140"
+            borderRadius="xl"
+            p="3"
+            bg="cyan.500"
+            space={2}
+            alignItems="center"
+            justifyContent="center"
+          >
+            {/* <Icon
+              as={Feather}
+              name="clock"
+              size="sm"
+              textAlign="center"
+              _dark={{
+                color: 'coolGray.800',
+              }}
+            /> */}
+            <Text
+              fontSize="lg"
+              textAlign="center"
+              _dark={{
+                color: 'coolGray.800',
+              }}
+            >
+              Fast Turn Around
+            </Text>
+          </VStack>
+        </View>
+      </VStack>
+    </ScrollView>
   );
 };

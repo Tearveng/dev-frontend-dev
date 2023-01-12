@@ -14,7 +14,7 @@ export function RootNavigator() {
   return (
     <Stack.Navigator screenOptions={{headerShown: false}}>
       <Stack.Screen
-        name={NavigatorRoute.TESTAPI}
+        name={NavigatorRoute.TEST_API}
         component={TestAPiServerRequestScreen}
         options={{
           headerShown: true,
