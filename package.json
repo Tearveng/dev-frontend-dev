@@ -26,15 +26,15 @@
     "@reduxjs/toolkit": "^1.9.1",
     "@storybook/react": "^6.5.13",
     "@types/react-pdf": "^6.2.0",
-    "dotenv-webpack": "^8.0.1",
     "axios": "^1.2.2",
+    "dotenv-webpack": "^8.0.1",
     "expo-linear-gradient": "^12.0.1",
     "expo-modules-core": "^1.0.4",
     "native-base": "^3.4.23",
     "raw-loader": "^4.0.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-native": "^0.70.6",
+    "react-native": "0.71.0",
     "react-native-blob-util": "^0.17.0",
     "react-native-config": "^1.4.11",
     "react-native-gesture-handler": "^2.8.0",
@@ -75,10 +75,10 @@
     "react-test-renderer": "18.1.0",
     "ts-alias": "^0.0.6",
     "ts-loader": "^9.4.1",
+    "url-loader": "^4.1.1",
     "webpack": "^5.75.0",
     "webpack-cli": "^5.0.0",
-    "webpack-dev-server": "^4.11.1",
-    "url-loader": "^4.1.1"
+    "webpack-dev-server": "^4.11.1"
   },
   "jest": {
     "preset": "react-native"
