@@ -15,6 +15,7 @@ import {SampleDetailScreen} from '@src/screens/Sample_UI/SampleDetailScreen';
 import {Image} from 'react-native';
 import BookmarkOutline from '@src/assets/logo/outline_bookmark.png';
 import {LanguagePicker} from '@src/components/LanguagePicker';
+import {Localization} from '@src/i18n/languages';
 
 const Stack = createStackNavigator();
 
@@ -82,7 +83,7 @@ export function RootNavigator() {
                 fontSize={'sm'}
                 fontWeight={'semibold'}
               >
-                {t('sampleUI')}
+                {t(Localization.sampleUI)}
               </Text>
             </View>
           ),

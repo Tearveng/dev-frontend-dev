@@ -1,3 +1,4 @@
+import {Localization} from '@src/i18n/languages';
 import {Button, Modal, VStack, Text, Pressable} from 'native-base';
 import React from 'react';
 import {useTranslation} from 'react-i18next';
@@ -56,7 +57,7 @@ export const LanguagePicker = () => {
             setModalVisible(!modalVisible);
           }}
         >
-          {`${t('language')}`}
+          {`${t(Localization.language)}`}
         </Button>
       </VStack>
     </>

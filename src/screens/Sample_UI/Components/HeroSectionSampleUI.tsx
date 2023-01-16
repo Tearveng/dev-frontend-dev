@@ -18,6 +18,7 @@ import {
   IViewProps,
 } from 'native-base/lib/typescript/components/basic/View/types';
 import {useTranslation} from 'react-i18next';
+import {Localization} from '@src/i18n/languages';
 
 interface Props extends PropsWithChildren {
   width?: string | number;
@@ -112,7 +113,7 @@ const HeroSectionSampleUI = (props: Props) => {
           onPress={() => {}}
           _web={buttonBreakPoint}
         >
-          {t('getStarted')}
+          {t(Localization.getStarted)}
         </Button>
         <Text
           position={'absolute'}
@@ -124,7 +125,7 @@ const HeroSectionSampleUI = (props: Props) => {
           fontWeight={'semibold'}
           _web={textBreakPoint}
         >
-          {t('whatDoYouWantToLearnToday')}
+          {t(Localization.whatDoYouWantToLearnToday)}
         </Text>
         <View
           {...props.imageContainer}

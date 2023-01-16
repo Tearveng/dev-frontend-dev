@@ -23,6 +23,7 @@ import {setCourses} from '@src/redux/reducers/course';
 import {ParamListBase, useNavigation} from '@react-navigation/native';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {NavigatorRoute} from '@src/navigation/NavigatorRouteConstant';
+import {Localization} from '@src/i18n/languages';
 
 const LandingScreen = () => {
   const navigation =
@@ -54,7 +55,7 @@ const LandingScreen = () => {
       >
         <View>
           <Text color={'muted.500'} fontSize={18}>
-            {t('hello')},
+            {t(Localization.hello)},
           </Text>
           <Box height={5} />
           <Text color={'muted.900'} fontSize={24} fontWeight={'bold'}>
@@ -96,7 +97,7 @@ const LandingScreen = () => {
       </View>
       <Box height={5} />
       <Text color={'muted.900'} fontSize={20} fontWeight={'semibold'}>
-        {t('lastSeenCourses')}
+        {t(Localization.lastSeenCourses)}
       </Text>
       <Box height={5} />
       <ScrollView height={'2/6'} width={'100%'}>
