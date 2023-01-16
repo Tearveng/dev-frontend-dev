@@ -13,7 +13,6 @@ interface Props extends PropsWithChildren {
   _web?: Partial<IViewProps>;
 }
 const LatestCourses = (props: Props) => {
-  console.log(props._web);
   return (
     <View
       width={'100%'}

@@ -2,22 +2,33 @@ import {Search} from '@src/components/Search';
 import {
   Avatar,
   Box,
+  Pressable,
   ScrollView,
   Text,
   useBreakpointValue,
   View,
 } from 'native-base';
-import React from 'react';
+import React, {useEffect} from 'react';
 import {HeroSectionSampleUI, LatestCourses} from './Components';
-import SvgView from '@src/components/common/SVGView';
-import {Training} from '@src/components/Svgs';
+import SvgView from '@src/components/commons/SVGView';
+import {Training} from '@src/components/svgs';
 import TrainingWeb from '@src/assets/logo/training.svg';
 import {Platform} from 'react-native';
 import PlayIcon from '@src/assets/logo/play.png';
-import {WorkFromHome} from '@src/components/Svgs';
-import {lastestCourses} from './mockdata';
+import {WorkFromHome} from '@src/components/svgs';
+import {courses, lastestCourses} from './mockdata';
+import {useTranslation} from 'react-i18next';
+import {useDispatch} from 'react-redux';
+import {setCourses} from '@src/redux/reducers/course';
+import {ParamListBase, useNavigation} from '@react-navigation/native';
+import {StackNavigationProp} from '@react-navigation/stack';
+import {NavigatorRoute} from '@src/navigation/NavigatorRouteConstant';
 
 const LandingScreen = () => {
+  const navigation =
+    useNavigation<StackNavigationProp<ParamListBase, string, undefined>>();
+  const dispatch = useDispatch();
+  const {t} = useTranslation();
   const flexDir = useBreakpointValue({
     base: 'column',
     md: 'row',
@@ -28,6 +39,11 @@ const LandingScreen = () => {
     md: {width: '48%'},
     lg: {width: '32%'},
   });
+
+  useEffect(() => {
+    dispatch(setCourses(courses));
+  }, []);
+
   return (
     <View p={4}>
       <View
@@ -38,7 +54,7 @@ const LandingScreen = () => {
       >
         <View>
           <Text color={'muted.500'} fontSize={18}>
-            Hello,
+            {t('hello')},
           </Text>
           <Box height={5} />
           <Text color={'muted.900'} fontSize={24} fontWeight={'bold'}>
@@ -77,59 +93,45 @@ const LandingScreen = () => {
             </>
           )}
         </HeroSectionSampleUI>
-        {/* {Platform.OS === 'web' && (
-          <>
-            <HeroSectionSampleUI width={'50%'}>
-              {Platform.OS === 'web' ? (
-                <img src={TrainingWeb} height={250} width={300} />
-              ) : (
-                <>
-                  <SvgView xml={Training} height={'100%'} width={'100%'} />
-                </>
-              )}
-            </HeroSectionSampleUI>
-            <HeroSectionSampleUI width={'50%'}>
-              {Platform.OS === 'web' ? (
-                <img src={TrainingWeb} height={250} width={300} />
-              ) : (
-                <>
-                  <SvgView xml={Training} height={'100%'} width={'100%'} />
-                </>
-              )}
-            </HeroSectionSampleUI>
-          </>
-        )} */}
       </View>
       <Box height={5} />
       <Text color={'muted.900'} fontSize={20} fontWeight={'semibold'}>
-        Last Seen Courses
+        {t('lastSeenCourses')}
       </Text>
       <Box height={5} />
-      <ScrollView height={'2/6'}>
+      <ScrollView height={'2/6'} width={'100%'}>
         <View
           display={'flex'}
           flexDir={flexDir}
           flexWrap="wrap"
           justifyContent="space-between"
+          width={'100%'}
         >
           {lastestCourses.map(data => (
-            <LatestCourses
-              duration={data.duration}
-              title={data.title}
-              key={data.id}
-              mb="3"
+            <Pressable
               _web={lastestCoursesBreakPoint}
+              key={data.id}
+              onPress={() =>
+                navigation.navigate(
+                  NavigatorRoute.SAMPLE_UI.SAMPLE_DETAIL_SCREEN,
+                  {
+                    params: {id: data.id},
+                  },
+                )
+              }
             >
-              {Platform.OS === 'web' ? (
-                <img src={data.leftImage.web} height={80} width={80} />
-              ) : (
-                <SvgView
-                  xml={data.leftImage.mobile ?? WorkFromHome}
-                  width={80}
-                  height={80}
-                />
-              )}
-            </LatestCourses>
+              <LatestCourses duration={data.duration} title={data.title} mb="3">
+                {Platform.OS === 'web' ? (
+                  <img src={data.leftImage.web} height={80} width={80} />
+                ) : (
+                  <SvgView
+                    xml={data.leftImage.mobile ?? WorkFromHome}
+                    width={80}
+                    height={80}
+                  />
+                )}
+              </LatestCourses>
+            </Pressable>
           ))}
         </View>
       </ScrollView>

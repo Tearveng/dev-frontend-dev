@@ -1,0 +1,64 @@
+import {Button, Modal, VStack, Text, Pressable} from 'native-base';
+import React from 'react';
+import {useTranslation} from 'react-i18next';
+
+export const LanguagePicker = () => {
+  const [modalVisible, setModalVisible] = React.useState(false);
+  const {i18n, t} = useTranslation();
+
+  const languages = [
+    {name: 'en', label: 'English'},
+    {name: 'fr', label: 'Français'},
+  ];
+
+  const LanguageItem = ({name, label}: {name: string; label: string}) => (
+    <Pressable
+      my={1}
+      py={2}
+      pl={3}
+      borderRadius={10}
+      backgroundColor={name === i18n.language ? 'blue.200' : ''}
+      onPress={() => {
+        i18n.changeLanguage(name);
+        setModalVisible(!modalVisible);
+      }}
+    >
+      <Text fontSize={18} color={'muted.700'}>
+        {label}
+      </Text>
+    </Pressable>
+  );
+
+  return (
+    <>
+      <Modal
+        isOpen={modalVisible}
+        onClose={() => setModalVisible(false)}
+        avoidKeyboard
+        justifyContent="flex-end"
+        bottom="4"
+        size="lg"
+      >
+        <Modal.Content>
+          <Modal.CloseButton />
+          <Modal.Header>{t('chooseYourPreferLanguage')}</Modal.Header>
+          <Modal.Body>
+            {languages.map(lang => (
+              <LanguageItem {...lang} key={lang.name} />
+            ))}
+          </Modal.Body>
+        </Modal.Content>
+      </Modal>
+      <VStack space={8} alignItems="center">
+        <Button
+          w="104"
+          onPress={() => {
+            setModalVisible(!modalVisible);
+          }}
+        >
+          {`${t('language')}`}
+        </Button>
+      </VStack>
+    </>
+  );
+};

@@ -1,7 +1,8 @@
-import {Training} from '@src/components/Svgs';
+import {Training} from '@src/components/svgs';
 import TrainingWeb from '@src/assets/logo/training.svg';
 import PlayIcon from '@src/assets/logo/play.png';
 import {ImageSourcePropType} from 'react-native';
+import {Course} from '@src/redux/reducers/course';
 
 export interface LastestCourse {
   id: number;
@@ -25,7 +26,7 @@ export const lastestCourses: LastestCourse[] = [
     },
     right: PlayIcon,
     duration: '3 hours',
-    title: 'Want to become a DevOps Developer? Helloajaskldf asoidfklas',
+    title: 'Want to become a DevOps Developer?',
   },
   {
     id: 2,
@@ -55,7 +56,7 @@ export const lastestCourses: LastestCourse[] = [
     },
     right: PlayIcon,
     duration: '3 hours',
-    title: 'Want to become a DevOps Developer? Helloajaskldf asoidfklas',
+    title: 'Want to become a DevOps Developer?',
   },
   {
     id: 5,
@@ -85,7 +86,7 @@ export const lastestCourses: LastestCourse[] = [
     },
     right: PlayIcon,
     duration: '3 hours',
-    title: 'Want to become a DevOps Developer? Helloajaskldf asoidfklas',
+    title: 'Want to become a DevOps Developer?',
   },
   {
     id: 8,
@@ -104,6 +105,54 @@ export const lastestCourses: LastestCourse[] = [
       web: TrainingWeb,
     },
     right: PlayIcon,
+    duration: '3 hours',
+    title: 'Want to become a DevOps Developer?',
+  },
+];
+
+export const courses: Course[] = [
+  {
+    id: 1,
+    duration: '3 hours',
+    title: 'Want to become a DevOps Developer?',
+  },
+  {
+    id: 2,
+    duration: '3 hours',
+    title: 'Want to become a DevOps Developer?',
+  },
+  {
+    id: 3,
+    duration: '3 hours',
+    title: 'Want to become a DevOps Developer?',
+  },
+  {
+    id: 4,
+    duration: '3 hours',
+    title: 'Want to become a DevOps Developer?',
+  },
+  {
+    id: 5,
+    duration: '3 hours',
+    title: 'Want to become a DevOps Developer?',
+  },
+  {
+    id: 6,
+    duration: '3 hours',
+    title: 'Want to become a DevOps Developer?',
+  },
+  {
+    id: 7,
+    duration: '3 hours',
+    title: 'Want to become a DevOps Developer?',
+  },
+  {
+    id: 8,
+    duration: '3 hours',
+    title: 'Want to become a DevOps Developer?',
+  },
+  {
+    id: 9,
     duration: '3 hours',
     title: 'Want to become a DevOps Developer?',
   },

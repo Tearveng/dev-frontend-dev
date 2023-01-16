@@ -1,7 +1,9 @@
 import {Box, ChevronDownIcon, Input, SearchIcon, View} from 'native-base';
 import React from 'react';
+import {useTranslation} from 'react-i18next';
 
 export const Search = () => {
+  const {t} = useTranslation();
   return (
     <View
       display={'flex'}
@@ -38,7 +40,7 @@ export const Search = () => {
             width={'80%'}
             backgroundColor={'muted.200'}
             borderWidth={'0'}
-            placeholder="Search here"
+            placeholder={t('search') ?? ''}
             color={'muted.800'}
             _web={{
               // marginLeft: 10,

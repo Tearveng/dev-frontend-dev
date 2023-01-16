@@ -1,8 +1,6 @@
 import React from 'react';
-import {
-  createStackNavigator,
-  StackNavigationProp,
-} from '@react-navigation/stack';
+import {useTranslation} from 'react-i18next';
+import {createStackNavigator} from '@react-navigation/stack';
 import {
   HomeScreen,
   LoginScreen,
@@ -10,19 +8,18 @@ import {
   TestAPiServerRequestScreen,
 } from '@screens/index';
 import {NavigatorRoute} from './NavigatorRouteConstant';
-import {LandingScreen} from '@src/screens/SampleUI';
-import {View, Text, Box, Button} from 'native-base';
-import {ParamListBase, useNavigation} from '@react-navigation/native';
+import {LandingScreen} from '@src/screens/Sample_UI';
+import {View, Box, Text} from 'native-base';
 import HeaderLeft from '@src/components/navigations/HeaderLeft';
-import {SampleDetailScreen} from '@src/screens/SampleUI/SampleDetailScreen';
+import {SampleDetailScreen} from '@src/screens/Sample_UI/SampleDetailScreen';
 import {Image} from 'react-native';
 import BookmarkOutline from '@src/assets/logo/outline_bookmark.png';
+import {LanguagePicker} from '@src/components/LanguagePicker';
 
 const Stack = createStackNavigator();
 
 export function RootNavigator() {
-  const navigation =
-    useNavigation<StackNavigationProp<ParamListBase, string, undefined>>();
+  const {t} = useTranslation();
   return (
     <Stack.Navigator
       screenOptions={{headerShown: false}}
@@ -75,13 +72,17 @@ export function RootNavigator() {
           title: '',
           headerTitle: () => (
             <View
-              width="40"
+              width="100%"
               display={'flex'}
               alignItems={'center'}
-              justifyContent={'center'}
+              justifyContent={'space-between'}
             >
-              <Text color={'primary.50'} fontSize={'xl'} fontWeight={'bold'}>
-                Sample UI
+              <Text
+                color={'primary.50'}
+                fontSize={'sm'}
+                fontWeight={'semibold'}
+              >
+                {t('sampleUI')}
               </Text>
             </View>
           ),
@@ -92,16 +93,11 @@ export function RootNavigator() {
                 color: 'amber.50',
               }}
               pr={1}
+              display={'flex'}
+              flexDir={'row'}
+              justifyContent={'space-between'}
             >
-              <Button
-                onPress={() =>
-                  navigation.navigate(
-                    NavigatorRoute.SAMPLE_UI.SAMPLE_DETAIL_SCREEN,
-                  )
-                }
-              >
-                New Page
-              </Button>
+              <LanguagePicker />
             </Box>
           ),
           headerStyle: {

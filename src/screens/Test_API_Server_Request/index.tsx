@@ -14,9 +14,9 @@ import {
 } from 'native-base';
 import {Platform, View} from 'react-native';
 // import SvgView from './SVGLogo';
-import {Brainstorming} from '@src/components/Svgs';
+import {Brainstorming} from '@src/components/svgs';
 import BrainstormingWeb from '@src/assets/logo/brainstorming.svg';
-import SvgView from '../../components/common/SVGView';
+import SvgView from '../../components/commons/SVGView';
 
 export interface PingModel {
   requestId: string;

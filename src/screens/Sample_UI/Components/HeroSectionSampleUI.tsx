@@ -17,6 +17,7 @@ import {
   InterfaceViewProps,
   IViewProps,
 } from 'native-base/lib/typescript/components/basic/View/types';
+import {useTranslation} from 'react-i18next';
 
 interface Props extends PropsWithChildren {
   width?: string | number;
@@ -63,6 +64,7 @@ interface Props extends PropsWithChildren {
 }
 
 const HeroSectionSampleUI = (props: Props) => {
+  const {t} = useTranslation();
   const containerBreakPoint = useBreakpointValue({
     base: {width: '100%', px: '20', height: '100%'},
     sm: {width: '100%', px: '20', height: '100%'},
@@ -110,7 +112,7 @@ const HeroSectionSampleUI = (props: Props) => {
           onPress={() => {}}
           _web={buttonBreakPoint}
         >
-          Get Started
+          {t('getStarted')}
         </Button>
         <Text
           position={'absolute'}
@@ -122,7 +124,7 @@ const HeroSectionSampleUI = (props: Props) => {
           fontWeight={'semibold'}
           _web={textBreakPoint}
         >
-          What do you want to learn today?
+          {t('whatDoYouWantToLearnToday')}
         </Text>
         <View
           {...props.imageContainer}
