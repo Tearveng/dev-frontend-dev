@@ -1,12 +1,22 @@
-import {StyleSheet} from "react-native";
+import { StyleSheet} from "react-native";
 
 export const style = StyleSheet.create({
-    container: {
-        padding: 24,
-        flex: 1,
-        justifyContent: "space-around"
+    appBar:{
+        zIndex: 99,
+        alignItems: "center",
+        width: "100%",
+        paddingRight: "2%",
+        paddingLeft: '2%',
+        paddingTop: 12,
+        paddingBottom: 12,
+        backgroundColor: "#3700B3"
     },
-    avoidingView:{
+    container: {
+        height: "auto",
+        padding: 24,
+        justifyContent: "space-around",
+    },
+    flex:{
         flex: 1
     },
     linearGradient: {

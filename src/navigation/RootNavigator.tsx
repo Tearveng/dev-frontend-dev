@@ -1,27 +1,58 @@
 import React from 'react';
-import {useTranslation} from 'react-i18next';
 import {createStackNavigator} from '@react-navigation/stack';
+import {createDrawerNavigator} from '@react-navigation/drawer';
 import {
   HomeScreen,
   LoginScreen,
   ForgotPasswordScreen,
   TestAPiServerRequestScreen,
 } from '@screens/index';
-import {NavigatorRoute} from './NavigatorRouteConstant';
-import {LandingScreen} from '@src/screens/sample_ui';
-import {View, Box} from 'native-base';
+import {MyText} from '@src/components/commons/my_text/MyText';
+import {LanguagePicker} from '@src/components/LanguagePicker';
 import HeaderLeft from '@src/components/navigations/HeaderLeft';
+import {Localization} from '@src/i18n/languages';
+import {LandingScreen} from '@src/screens/sample_ui';
 import {SampleDetailScreen} from '@src/screens/sample_ui/SampleDetailScreen';
+import {t} from 'i18next';
+import {Box, View} from 'native-base';
+import {NavigatorRoute} from './NavigatorRouteConstant';
 import {Image} from 'react-native';
 import BookmarkOutline from '@src/assets/logo/outline_bookmark.png';
-import {LanguagePicker} from '@src/components/LanguagePicker';
-import {Localization} from '@src/i18n/languages';
-import {MyText} from '@src/components/commons/my_text/MyText';
-
 const Stack = createStackNavigator();
 
+const Drawer = createDrawerNavigator();
+
+export function DrawerNavigator() {
+  return (
+    <>
+      <Drawer.Navigator useLegacyImplementation initialRouteName="Home">
+        <Drawer.Screen
+          name="Login"
+          component={LoginScreen}
+          options={{
+            headerShown: false,
+            drawerItemStyle: {display: 'none'},
+          }}
+        />
+        <Drawer.Screen
+          name="Home"
+          component={HomeScreen}
+          options={{
+            headerShown: false,
+          }}
+        />
+        <Drawer.Screen
+          name="ForgotPassword"
+          component={ForgotPasswordScreen}
+          options={{
+            headerShown: false,
+          }}
+        />
+      </Drawer.Navigator>
+    </>
+  );
+}
 export function RootNavigator() {
-  const {t} = useTranslation();
   return (
     <Stack.Navigator
       screenOptions={{headerShown: false}}
@@ -46,12 +77,12 @@ export function RootNavigator() {
         name="ForgotPassword"
         component={ForgotPasswordScreen}
         options={{
-          headerShown: true,
+          headerShown: false,
           title: 'Frogot | Screen',
         }}
       />
       <Stack.Screen
-        name={NavigatorRoute.HOME} // "Home"
+        name={NavigatorRoute.HOME}
         component={HomeScreen}
         options={{
           headerShown: true,
@@ -65,7 +96,6 @@ export function RootNavigator() {
           // },
         }}
       />
-
       <Stack.Screen
         name={NavigatorRoute.SAMPLE_UI.LANDING_SCREEN}
         component={LandingScreen}
@@ -126,3 +156,9 @@ export function RootNavigator() {
     </Stack.Navigator>
   );
 }
+
+export type RootStackParamList = {
+  Home: undefined;
+  Profile: {userId: string};
+  Feed: {sort: 'latest' | 'top'} | undefined;
+};

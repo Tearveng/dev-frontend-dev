@@ -30,11 +30,11 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.(tsx|ts|jsx|js|mjs)$/,
+        test: /\.(tsx|ts|mjs)$/,
         exclude: /node_modules/,
         loader: 'ts-loader',
       },
-      // {test: /\.png$/, use: 'raw-loader'},
+      {test: /\.png$/, use: 'raw-loader'},
       imageLoaderConfiguration,
       {
         test: /\.css$/,

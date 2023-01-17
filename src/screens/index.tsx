@@ -1,7 +1,7 @@
-import {LoginScreen} from './Login';
-import {ForgotPasswordScreen} from './Forgot_Password';
-import {HomeScreen} from './Home';
-import {TestAPiServerRequestScreen} from './Test_API_Server_Request';
+import {LoginScreen} from './login';
+import {ForgotPasswordScreen} from './forgot_password';
+import {HomeScreen} from './home';
+import {TestAPiServerRequestScreen} from './test_api_server_request';
 
 export {
   LoginScreen,

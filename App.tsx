@@ -1,3 +1,4 @@
+import 'react-native-gesture-handler';
 import React from 'react';
 import {NativeBaseProvider, View} from 'native-base';
 import {Dimensions, StyleSheet} from 'react-native';
