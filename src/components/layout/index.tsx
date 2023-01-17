@@ -1,11 +1,17 @@
-import React from 'react';
-import { Header } from '../Header';
+import {ParamListBase} from '@react-navigation/native';
+import {StackNavigationProp} from '@react-navigation/stack';
+import React, {PropsWithChildren} from 'react';
+import {Header} from '../Header';
 
-export const Layout = ({children, navigation}: any) => {
-    return(
-        <>
-            <Header navigation={navigation}></Header>
-                {children}
-        </>
-    )
+interface Props extends PropsWithChildren {
+  navigation: StackNavigationProp<ParamListBase, string, undefined>;
 }
+
+export const Layout = ({children, navigation}: Props) => {
+  return (
+    <>
+      <Header navigation={navigation}></Header>
+      {children}
+    </>
+  );
+};

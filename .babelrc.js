@@ -1,7 +1,11 @@
 module.exports = {
   presets: ['module:metro-react-native-babel-preset'],
   plugins: [
-    ['@babel/plugin-proposal-private-methods'],
+    [
+      '@babel/plugin-proposal-export-namespace-from',
+      'react-native-reanimated/plugin',
+      '@babel/plugin-proposal-private-methods',
+    ],
     [
       'module-resolver',
       {

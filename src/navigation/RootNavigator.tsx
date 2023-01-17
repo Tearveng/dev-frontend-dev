@@ -35,7 +35,7 @@ export function DrawerNavigator() {
           }}
         />
         <Drawer.Screen
-          name="Home"
+          name={NavigatorRoute.HOME}
           component={HomeScreen}
           options={{
             headerShown: false,
@@ -48,6 +48,30 @@ export function DrawerNavigator() {
             headerShown: false,
           }}
         />
+        <Drawer.Screen
+          name={NavigatorRoute.TEST_API}
+          component={TestAPiServerRequestScreen}
+          options={{
+            headerShown: false,
+            title: 'Test API Server Request Screen',
+          }}
+        />
+        <Drawer.Screen
+          name={NavigatorRoute.SAMPLE_UI.LANDING_SCREEN}
+          component={LandingScreen}
+          options={{
+            headerShown: false,
+            title: 'Sample UI Landing Screen',
+          }}
+        />
+        {/* <Drawer.Screen
+          name={NavigatorRoute.SAMPLE_UI.LANDING_SCREEN}
+          component={LandingScreen}
+          options={{
+            headerShown: false,
+            title: 'Sample UI Landing Screen',
+          }}
+        /> */}
       </Drawer.Navigator>
     </>
   );

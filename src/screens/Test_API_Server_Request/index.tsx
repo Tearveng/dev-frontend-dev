@@ -17,6 +17,9 @@ import {Brainstorming} from '@src/components/svgs';
 import BrainstormingWeb from '@src/assets/logo/brainstorming.svg';
 import SvgView from '../../components/commons/SVGView';
 import {MyText} from '@src/components/commons/my_text/MyText';
+import {Layout} from '@src/components/layout';
+import {useNavigation, ParamListBase} from '@react-navigation/native';
+import {StackNavigationProp} from '@react-navigation/stack';
 
 export interface PingModel {
   requestId: string;
@@ -172,79 +175,82 @@ export const TestAPiServerRequestScreen = () => {
       console.log(error);
     }
   };
-
+  const navigation =
+    useNavigation<StackNavigationProp<ParamListBase, string, undefined>>();
   return (
-    <Box safeArea px={3}>
-      <ScrollView h="100%">
-        <ScrollView horizontal={true} nestedScrollEnabled={true} style={{}}>
-          {Platform.OS === 'web' ? (
-            <>
-              <img src={BrainstormingWeb} height={250} width={200} />
-              <img src={BrainstormingWeb} height={250} width={200} />
-              <img src={BrainstormingWeb} height={250} width={200} />
-              <img src={BrainstormingWeb} height={250} width={200} />
-              <img src={BrainstormingWeb} height={250} width={200} />
-            </>
-          ) : (
-            <>
-              <SvgView xml={Brainstorming} height={200} width={150} />
-              <SvgView xml={Brainstorming} height={200} width={150} />
-              <SvgView xml={Brainstorming} height={200} width={150} />
-              <SvgView xml={Brainstorming} height={200} width={150} />
-              <SvgView xml={Brainstorming} height={200} width={150} />
-              <SvgView xml={Brainstorming} height={200} width={150} />
-              <SvgView xml={Brainstorming} height={200} width={150} />
-            </>
-          )}
-        </ScrollView>
-        <Button colorScheme="primary" onPress={getPing}>
-          Test Get API
-        </Button>
-        <MyText padding={'5'} type={'dark'}>
-          TestAPiServerRequest
-        </MyText>
-        <MyText type="success">
-          {`${dataGet?.requestId} ${dataGet?.requestUrl}`}
-        </MyText>
-        <Divider height={5} bg={'white:alpha.0'} />
-        <Button colorScheme="green" onPress={post}>
-          Test Post API
-        </Button>
-        <Divider height={5} bg={'white:alpha.0'} />
-        <Button colorScheme="yellow" onPress={put}>
-          Test Put API
-        </Button>
-        <Divider height={5} bg={'white:alpha.0'} />
-        <Button colorScheme="red" onPress={deleteApi}>
-          Test Delete API
-        </Button>
-        <Divider height={5} bg={'white:alpha.0'} />
-        <Button colorScheme="primary" onPress={getSessions}>
-          Test Get Sessions
-        </Button>
-        <Box h={300}>
-          <ScrollView p={5} h={300} nestedScrollEnabled={true}>
-            {session?.sessions.map((_session, index) => (
-              <Box key={index} py={1}>
-                <MyText type="dark">{_session}</MyText>
-              </Box>
-            ))}
+    <Layout navigation={navigation}>
+      <Box safeArea px={3}>
+        <ScrollView h="100%">
+          <ScrollView horizontal={true} nestedScrollEnabled={true} style={{}}>
+            {Platform.OS === 'web' ? (
+              <>
+                <img src={BrainstormingWeb} height={250} width={200} />
+                <img src={BrainstormingWeb} height={250} width={200} />
+                <img src={BrainstormingWeb} height={250} width={200} />
+                <img src={BrainstormingWeb} height={250} width={200} />
+                <img src={BrainstormingWeb} height={250} width={200} />
+              </>
+            ) : (
+              <>
+                <SvgView xml={Brainstorming} height={200} width={150} />
+                <SvgView xml={Brainstorming} height={200} width={150} />
+                <SvgView xml={Brainstorming} height={200} width={150} />
+                <SvgView xml={Brainstorming} height={200} width={150} />
+                <SvgView xml={Brainstorming} height={200} width={150} />
+                <SvgView xml={Brainstorming} height={200} width={150} />
+                <SvgView xml={Brainstorming} height={200} width={150} />
+              </>
+            )}
           </ScrollView>
-          {/* {session && session.sessions?.length > 0 && (
+          <Button colorScheme="primary" onPress={getPing}>
+            Test Get API
+          </Button>
+          <MyText padding={'5'} type={'dark'}>
+            TestAPiServerRequest
+          </MyText>
+          <MyText type="success">
+            {`${dataGet?.requestId} ${dataGet?.requestUrl}`}
+          </MyText>
+          <Divider height={5} bg={'white:alpha.0'} />
+          <Button colorScheme="green" onPress={post}>
+            Test Post API
+          </Button>
+          <Divider height={5} bg={'white:alpha.0'} />
+          <Button colorScheme="yellow" onPress={put}>
+            Test Put API
+          </Button>
+          <Divider height={5} bg={'white:alpha.0'} />
+          <Button colorScheme="red" onPress={deleteApi}>
+            Test Delete API
+          </Button>
+          <Divider height={5} bg={'white:alpha.0'} />
+          <Button colorScheme="primary" onPress={getSessions}>
+            Test Get Sessions
+          </Button>
+          <Box h={300}>
+            <ScrollView p={5} h={300} nestedScrollEnabled={true}>
+              {session?.sessions.map((_session, index) => (
+                <Box key={index} py={1}>
+                  <MyText type="dark">{_session}</MyText>
+                </Box>
+              ))}
+            </ScrollView>
+            {/* {session && session.sessions?.length > 0 && (
           <FlatList
             data={session?.sessions}
             renderItem={({item}) => renderItem(item)}
             keyExtractor={item => item}
           />
         )} */}
-        </Box>
-        <Divider height={5} bg={'white:alpha.0'} />
-        <Button colorScheme="green" onPress={postSessions}>
-          Create Session
-        </Button>
-        <Example />
-      </ScrollView>
-    </Box>
+          </Box>
+          <Divider height={5} bg={'white:alpha.0'} />
+          <Button colorScheme="green" onPress={postSessions}>
+            Create Session
+          </Button>
+          <Example />
+        </ScrollView>
+      </Box>
+    </Layout>
   );
 };
 // const renderItem = (item: string) => (

@@ -4,7 +4,6 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const rootDir = path.join(__dirname, '..');
 const webpackEnv = process.env.NODE_ENV || 'development';
 const Dotenv = require('dotenv-webpack');
-
 const imageLoaderConfiguration = {
   test: /\.(gif|jpe?g|png|svg)$/,
   use: {
@@ -19,9 +18,8 @@ const imageLoaderConfiguration = {
 module.exports = {
   mode: webpackEnv,
 
-  entry: {
-    app: path.join(rootDir, './index.web.ts'),
-  },
+  entry: ['babel-polyfill', '../index'],
+
   output: {
     path: path.resolve(rootDir, 'dist'),
     filename: 'app-[hash].bundle.js',
@@ -43,6 +41,23 @@ module.exports = {
           url: true,
         },
       },
+      {
+        test: /\.(js|jsx)$/,
+        use: {
+          loader: 'babel-loader',
+          options: {
+            presets: [
+              '@babel/preset-react',
+              {
+                plugins: [
+                  '@babel/plugin-proposal-class-properties',
+                  '@babel/plugin-proposal-private-methods',
+                ],
+              },
+            ],
+          },
+        },
+      },
     ],
   },
   plugins: [
@@ -56,6 +71,8 @@ module.exports = {
     new Dotenv({
       path: path.join(rootDir, './.env'),
     }),
+    new webpack.EnvironmentPlugin({JEST_WORKER_ID: null}),
+    new webpack.DefinePlugin({__DEV__: process.env.NODE_ENV === 'development'}),
   ],
   resolve: {
     extensions: [
