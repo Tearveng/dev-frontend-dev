@@ -3,7 +3,6 @@ import {API_URL} from '@src/config/env';
 import {APIServer} from '@src/utils/classes/APIService';
 import {Verb, RespType, Resp} from '@src/utils/classes/interfaces/APIConstants';
 import {
-  Text,
   Button,
   Divider,
   Box,
@@ -17,6 +16,7 @@ import {Platform, View} from 'react-native';
 import {Brainstorming} from '@src/components/svgs';
 import BrainstormingWeb from '@src/assets/logo/brainstorming.svg';
 import SvgView from '../../components/commons/SVGView';
+import {MyText} from '@src/components/commons/my_text/MyText';
 
 export interface PingModel {
   requestId: string;
@@ -200,12 +200,12 @@ export const TestAPiServerRequestScreen = () => {
         <Button colorScheme="primary" onPress={getPing}>
           Test Get API
         </Button>
-        <Text padding={5} color="black">
+        <MyText padding={'5'} type={'dark'}>
           TestAPiServerRequest
-          <Text color="green.500">
-            {dataGet?.requestId} {dataGet?.requestUrl}
-          </Text>
-        </Text>
+        </MyText>
+        <MyText type="success">
+          {`${dataGet?.requestId} ${dataGet?.requestUrl}`}
+        </MyText>
         <Divider height={5} bg={'white:alpha.0'} />
         <Button colorScheme="green" onPress={post}>
           Test Post API
@@ -226,7 +226,7 @@ export const TestAPiServerRequestScreen = () => {
           <ScrollView p={5} h={300} nestedScrollEnabled={true}>
             {session?.sessions.map((_session, index) => (
               <Box key={index} py={1}>
-                <Text color={'black'}>{_session}</Text>
+                <MyText type="dark">{_session}</MyText>
               </Box>
             ))}
           </ScrollView>
@@ -288,7 +288,7 @@ const Example = () => {
                 color: 'coolGray.800',
               }}
             /> */}
-            <Text
+            <MyText
               fontSize="lg"
               textAlign="center"
               _dark={{
@@ -296,7 +296,7 @@ const Example = () => {
               }}
             >
               Secure Checkout
-            </Text>
+            </MyText>
           </VStack>
           <VStack
             m="3"
@@ -317,7 +317,7 @@ const Example = () => {
                 color: 'coolGray.800',
               }}
             /> */}
-            <Text
+            <MyText
               fontSize="lg"
               textAlign="center"
               _dark={{
@@ -325,7 +325,7 @@ const Example = () => {
               }}
             >
               Secure Checkout
-            </Text>
+            </MyText>
           </VStack>
           <VStack
             m="3"
@@ -346,7 +346,7 @@ const Example = () => {
                 color: 'coolGray.800',
               }}
             /> */}
-            <Text
+            <MyText
               fontSize="lg"
               textAlign="center"
               _dark={{
@@ -354,7 +354,7 @@ const Example = () => {
               }}
             >
               Secure Checkout
-            </Text>
+            </MyText>
           </VStack>
           <VStack
             m="3"
@@ -375,7 +375,7 @@ const Example = () => {
                 color: 'coolGray.800',
               }}
             /> */}
-            <Text
+            <MyText
               fontSize="lg"
               textAlign="center"
               _dark={{
@@ -383,7 +383,7 @@ const Example = () => {
               }}
             >
               Secure Checkout
-            </Text>
+            </MyText>
           </VStack>
           <VStack
             m="3"
@@ -404,7 +404,7 @@ const Example = () => {
                 color: 'coolGray.800',
               }}
             /> */}
-            <Text
+            <MyText
               fontSize="lg"
               textAlign="center"
               _dark={{
@@ -412,7 +412,7 @@ const Example = () => {
               }}
             >
               Secure Checkout
-            </Text>
+            </MyText>
           </VStack>
           <VStack
             m="3"
@@ -433,7 +433,7 @@ const Example = () => {
                 color: 'coolGray.800',
               }}
             /> */}
-            <Text
+            <MyText
               fontSize="lg"
               textAlign="center"
               _dark={{
@@ -441,7 +441,7 @@ const Example = () => {
               }}
             >
               Secure Checkout
-            </Text>
+            </MyText>
           </VStack>
           <VStack
             m="3"
@@ -462,7 +462,7 @@ const Example = () => {
                 color: 'coolGray.800',
               }}
             /> */}
-            <Text
+            <MyText
               fontSize="lg"
               textAlign="center"
               _dark={{
@@ -470,7 +470,7 @@ const Example = () => {
               }}
             >
               Fast Turn Around
-            </Text>
+            </MyText>
           </VStack>
         </View>
       </VStack>

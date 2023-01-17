@@ -1,7 +1,8 @@
 import {Localization} from '@src/i18n/languages';
-import {Button, Modal, VStack, Text, Pressable} from 'native-base';
+import {Button, Modal, VStack, Pressable} from 'native-base';
 import React from 'react';
 import {useTranslation} from 'react-i18next';
+import {MyText} from './commons/my_text/MyText';
 
 export const LanguagePicker = () => {
   const [modalVisible, setModalVisible] = React.useState(false);
@@ -24,9 +25,9 @@ export const LanguagePicker = () => {
         setModalVisible(!modalVisible);
       }}
     >
-      <Text fontSize={18} color={'muted.700'}>
+      <MyText fontSize={'md'} type={'dark'}>
         {label}
-      </Text>
+      </MyText>
     </Pressable>
   );
 

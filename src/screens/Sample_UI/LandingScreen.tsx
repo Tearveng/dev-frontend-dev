@@ -4,12 +4,11 @@ import {
   Box,
   Pressable,
   ScrollView,
-  Text,
   useBreakpointValue,
   View,
 } from 'native-base';
 import React, {useEffect} from 'react';
-import {HeroSectionSampleUI, LatestCourses} from './Components';
+import {HeroSectionSampleUI, LatestCourses} from './components';
 import SvgView from '@src/components/commons/SVGView';
 import {Training} from '@src/components/svgs';
 import TrainingWeb from '@src/assets/logo/training.svg';
@@ -24,6 +23,7 @@ import {ParamListBase, useNavigation} from '@react-navigation/native';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {NavigatorRoute} from '@src/navigation/NavigatorRouteConstant';
 import {Localization} from '@src/i18n/languages';
+import {MyText} from '@src/components/commons/my_text/MyText';
 
 const LandingScreen = () => {
   const navigation =
@@ -54,13 +54,13 @@ const LandingScreen = () => {
         p={4}
       >
         <View>
-          <Text color={'muted.500'} fontSize={18}>
-            {t(Localization.hello)},
-          </Text>
+          <MyText color={'muted.500'} fontSize={'md'}>
+            {`${t(Localization.hello)},`}
+          </MyText>
           <Box height={5} />
-          <Text color={'muted.900'} fontSize={24} fontWeight={'bold'}>
+          <MyText color={'muted.900'} fontSize={'xl'} fontWeight={'bold'}>
             Sharkiri
-          </Text>
+          </MyText>
         </View>
         <View
           display={'flex'}
@@ -96,9 +96,9 @@ const LandingScreen = () => {
         </HeroSectionSampleUI>
       </View>
       <Box height={5} />
-      <Text color={'muted.900'} fontSize={20} fontWeight={'semibold'}>
+      <MyText color={'muted.900'} fontSize={'lg'} fontWeight={'semibold'}>
         {t(Localization.lastSeenCourses)}
-      </Text>
+      </MyText>
       <Box height={5} />
       <ScrollView height={'2/6'} width={'100%'}>
         <View

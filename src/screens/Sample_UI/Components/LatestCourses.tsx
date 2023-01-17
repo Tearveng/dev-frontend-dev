@@ -1,4 +1,5 @@
-import {Box, View, Text} from 'native-base';
+import {MyText} from '@src/components/commons/my_text/MyText';
+import {Box, View} from 'native-base';
 import {IViewProps} from 'native-base/lib/typescript/components/basic/View/types';
 import {ColorType} from 'native-base/lib/typescript/components/types';
 import React, {PropsWithChildren} from 'react';
@@ -29,13 +30,13 @@ const LatestCourses = (props: Props) => {
       <View width={'15%'}>{props.children}</View>
       <Box width={'6'} />
       <View width={'65%'}>
-        <Text fontSize={14} color={'muted.800'} fontWeight="semibold">
+        <MyText fontSize={'md'} color={'muted.800'} fontWeight="semibold">
           {props.title}
-        </Text>
+        </MyText>
         <Box height={2} />
-        <Text fontSize={12} color={'muted.600'}>
+        <MyText fontSize={'sm'} color={'muted.600'}>
           {props.duration}
-        </Text>
+        </MyText>
       </View>
       <View width={'15%'}>
         <Image

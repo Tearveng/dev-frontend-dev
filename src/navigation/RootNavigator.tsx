@@ -8,14 +8,15 @@ import {
   TestAPiServerRequestScreen,
 } from '@screens/index';
 import {NavigatorRoute} from './NavigatorRouteConstant';
-import {LandingScreen} from '@src/screens/Sample_UI';
-import {View, Box, Text} from 'native-base';
+import {LandingScreen} from '@src/screens/sample_ui';
+import {View, Box} from 'native-base';
 import HeaderLeft from '@src/components/navigations/HeaderLeft';
-import {SampleDetailScreen} from '@src/screens/Sample_UI/SampleDetailScreen';
+import {SampleDetailScreen} from '@src/screens/sample_ui/SampleDetailScreen';
 import {Image} from 'react-native';
 import BookmarkOutline from '@src/assets/logo/outline_bookmark.png';
 import {LanguagePicker} from '@src/components/LanguagePicker';
 import {Localization} from '@src/i18n/languages';
+import {MyText} from '@src/components/commons/my_text/MyText';
 
 const Stack = createStackNavigator();
 
@@ -78,13 +79,9 @@ export function RootNavigator() {
               alignItems={'center'}
               justifyContent={'space-between'}
             >
-              <Text
-                color={'primary.50'}
-                fontSize={'sm'}
-                fontWeight={'semibold'}
-              >
+              <MyText fontSize={'sm'} fontWeight={'semibold'} type="white">
                 {t(Localization.sampleUI)}
-              </Text>
+              </MyText>
             </View>
           ),
           headerLeft: () => <HeaderLeft />,

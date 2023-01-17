@@ -1,5 +1,5 @@
 import SvgView from '@src/components/commons/SVGView';
-import {Box, Text, View} from 'native-base';
+import {Box, View} from 'native-base';
 import React from 'react';
 import {Image, Platform} from 'react-native';
 import {Training} from '@src/components/svgs';
@@ -8,6 +8,7 @@ import TimeIcon from '@src/assets/logo/timeIcon.png';
 import {useSelector} from 'react-redux';
 import {RootState} from '@src/redux/store';
 import {useRoute} from '@react-navigation/native';
+import {MyText} from '@src/components/commons/my_text/MyText';
 
 export function SampleDetailScreen() {
   const {params} = useRoute();
@@ -20,11 +21,11 @@ export function SampleDetailScreen() {
   return (
     <View px={2.5} height={'100%'}>
       <View width={'100%'} height={'8%'} mt={3}>
-        <Text fontSize={18} color={'black'} fontWeight={'semibold'}>
+        <MyText fontSize={'md'} color={'black'} fontWeight={'semibold'}>
           Basic What is CQRS?
-        </Text>
+        </MyText>
         <Box height={3} />
-        <Text color="muted.400:alpha.70">By Sokchanith ROS</Text>
+        <MyText color="muted.400:alpha.70">By Sokchanith ROS</MyText>
       </View>
       <View
         width={'100%'}
@@ -42,14 +43,14 @@ export function SampleDetailScreen() {
         )}
       </View>
       <View mt={5}>
-        <Text fontSize={18} color={'black'} fontWeight={'semibold'}>
-          Command Query Responsibility Sergregation (CQRS),{' '}
-          <Text fontSize={16} color={'muted.500'} fontWeight={'normal'}>
-            a pattern that separates read and update operations for a data
-            store. Implementing CQRS in your application can maximize its
-            performance, scalability, and security.
-          </Text>
-        </Text>
+        <MyText fontSize={'lg'} color={'black'} fontWeight={'semibold'}>
+          Command Query Responsibility Sergregation (CQRS)
+        </MyText>
+        <MyText fontSize={'md'} color={'muted.500'} fontWeight={'normal'}>
+          a pattern that separates read and update operations for a data store.
+          Implementing CQRS in your application can maximize its performance,
+          scalability, and security.
+        </MyText>
       </View>
       <View
         height={'20%'}
@@ -59,9 +60,9 @@ export function SampleDetailScreen() {
         justifyContent="space-between"
         mt="8"
       >
-        <Text fontSize={20} color={'black'} fontWeight={'bold'}>
+        <MyText fontSize={'xl'} color={'black'} fontWeight={'bold'}>
           Course Detaikls
-        </Text>
+        </MyText>
         <View>
           <Image
             source={TimeIcon}

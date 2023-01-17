@@ -1,7 +1,6 @@
 import {
   View,
   Button,
-  Text,
   ITextProps,
   IButtonProps,
   useBreakpointValue,
@@ -19,6 +18,7 @@ import {
 } from 'native-base/lib/typescript/components/basic/View/types';
 import {useTranslation} from 'react-i18next';
 import {Localization} from '@src/i18n/languages';
+import {MyText} from '@src/components/commons/my_text/MyText';
 
 interface Props extends PropsWithChildren {
   width?: string | number;
@@ -75,7 +75,7 @@ const HeroSectionSampleUI = (props: Props) => {
     ...props.innerContainer?._web,
   });
   const buttonBreakPoint = useBreakpointValue({
-    base: {px: '10', left: 20},
+    base: {px: '10', left: 2},
     sm: {px: '10', left: 20},
     md: {px: '10', left: 20},
     ...props.button?._web,
@@ -103,6 +103,7 @@ const HeroSectionSampleUI = (props: Props) => {
       <View {...props.innerContainer} _web={containerBreakPoint}>
         <Button
           position={'absolute'}
+          zIndex={2}
           top={props.button?.top ?? 150}
           bottom={props.button?.bottom ?? 0}
           left={props.button?.left ?? 5}
@@ -115,18 +116,18 @@ const HeroSectionSampleUI = (props: Props) => {
         >
           {t(Localization.getStarted)}
         </Button>
-        <Text
+        <MyText
           position={'absolute'}
           top={1}
           left={5}
           width={200}
           color={'muted.900'}
-          fontSize={23}
+          fontSize={'xl'}
           fontWeight={'semibold'}
           _web={textBreakPoint}
         >
           {t(Localization.whatDoYouWantToLearnToday)}
-        </Text>
+        </MyText>
         <View
           {...props.imageContainer}
           ml={'20'}

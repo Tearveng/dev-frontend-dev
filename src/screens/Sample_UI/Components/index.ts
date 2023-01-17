@@ -1,4 +1,4 @@
-import HeroSectionSampleUI from '@screens/Sample_UI/Components/HeroSectionSampleUI';
-import LatestCourses from '@screens/Sample_UI/Components/LatestCourses';
+import HeroSectionSampleUI from './HeroSectionSampleUI';
+import LatestCourses from './LatestCourses';
 
 export {HeroSectionSampleUI, LatestCourses};

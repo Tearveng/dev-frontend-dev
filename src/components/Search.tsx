@@ -1,9 +1,27 @@
 import {Localization} from '@src/i18n/languages';
 import {Box, ChevronDownIcon, Input, SearchIcon, View} from 'native-base';
+import {ColorType} from 'native-base/lib/typescript/components/types';
 import React from 'react';
 import {useTranslation} from 'react-i18next';
+import {ColorValue} from 'react-native';
 
-export const Search = () => {
+interface Props {
+  placeHolder?: string;
+  placeHolderTextColor?: ColorValue;
+  backgroundColor?: ColorType;
+  textColor?: ColorType;
+  iconLeftColor?: ColorType;
+  iconRightColor?: ColorType;
+}
+
+export const Search = ({
+  placeHolder,
+  backgroundColor,
+  textColor,
+  iconLeftColor,
+  iconRightColor,
+  placeHolderTextColor = 'muted.400',
+}: Props) => {
   const {t} = useTranslation();
   return (
     <View
@@ -16,7 +34,7 @@ export const Search = () => {
         height={'10'}
         display={'flex'}
         flexDir={'row'}
-        bg={'muted.200'}
+        bg={backgroundColor ?? 'muted.200'}
         width={'100%'}
         alignItems={'center'}
         justifyContent={'space-between'}
@@ -27,31 +45,39 @@ export const Search = () => {
           display={'flex'}
           flexDir={'row'}
           alignItems={'center'}
-          // bgColor={'amber.400'}
           _web={{
             width: '95%',
           }}
-          // width={'100%'}
         >
-          <SearchIcon color={'warning.500'} />
+          <SearchIcon color={iconRightColor ?? 'warning.500'} />
           <Box width={2} />
           <Input
             // outlineStyle="none"
-            focusOutlineColor={'muted.200'}
+            focusOutlineColor={backgroundColor ?? 'muted.200'}
             width={'80%'}
-            backgroundColor={'muted.200'}
+            backgroundColor={backgroundColor ?? 'muted.200'}
             borderWidth={'0'}
-            placeholder={t(Localization.search) ?? ''}
-            color={'muted.800'}
+            placeholder={placeHolder ?? t(Localization.search)!}
+            placeholderTextColor={placeHolderTextColor}
+            color={textColor ?? 'muted.800'}
             _web={{
-              // marginLeft: 10,
               width: '90%',
             }}
           />
         </View>
-        <Box height={'80%'} width={'0.1'} backgroundColor={'muted.400'} />
-        <View display={'flex'} flexDir={'row'} alignItems={'center'}>
-          <ChevronDownIcon />
+        <Box
+          height={'80%'}
+          width={'0.1'}
+          backgroundColor={iconLeftColor ?? 'muted.400'}
+        />
+        <View
+          display={'flex'}
+          flexDir={'row'}
+          alignItems={'center'}
+          justifyContent={'center'}
+          pl={2}
+        >
+          <ChevronDownIcon color={iconLeftColor ?? 'muted.400'} />
         </View>
       </View>
     </View>
