@@ -1,4 +1,4 @@
-import {Search} from '@src/components/Search';
+import {Search} from '@src/components/commons/search';
 import {ComponentMeta, ComponentStory} from '@storybook/react';
 import React from 'react';
 

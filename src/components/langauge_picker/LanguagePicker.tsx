@@ -2,7 +2,7 @@ import {Localization} from '@src/i18n/languages';
 import {Button, Modal, VStack, Pressable} from 'native-base';
 import React from 'react';
 import {useTranslation} from 'react-i18next';
-import {MyText} from './commons/my_text/MyText';
+import {MyText} from '../commons/my_text';
 
 export const LanguagePicker = () => {
   const [modalVisible, setModalVisible] = React.useState(false);

@@ -7,8 +7,8 @@ import {
   ForgotPasswordScreen,
   TestAPiServerRequestScreen,
 } from '@screens/index';
-import {MyText} from '@src/components/commons/my_text/MyText';
-import {LanguagePicker} from '@src/components/LanguagePicker';
+import {MyText} from '@src/components/commons/my_text';
+import {LanguagePicker} from '@src/components/langauge_picker';
 import HeaderLeft from '@src/components/navigations/HeaderLeft';
 import {Localization} from '@src/i18n/languages';
 import {LandingScreen} from '@src/screens/sample_ui';

@@ -9,6 +9,8 @@ import {
   Statistics,
   Training,
 } from './svg';
+import {SvgView} from './SvgView';
+import {SvgViewProps} from './type';
 
 export {
   WorkFromHome,
@@ -20,4 +22,6 @@ export {
   OfficeSupplies,
   Statistics,
   Training,
+  SvgView,
+  SvgViewProps,
 };

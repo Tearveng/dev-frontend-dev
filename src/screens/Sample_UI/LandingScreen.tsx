@@ -1,15 +1,19 @@
-import {Search} from '@src/components/Search';
 import {
   Avatar,
   Box,
+  FormControl,
+  HStack,
+  Input,
   Pressable,
   ScrollView,
   useBreakpointValue,
   View,
+  Modal,
+  Button,
 } from 'native-base';
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import {HeroSectionSampleUI, LatestCourses} from './components';
-import SvgView from '@src/components/commons/SVGView';
+import {SvgView} from '@src/components/svgs';
 import {Training} from '@src/components/svgs';
 import TrainingWeb from '@src/assets/logo/training.svg';
 import {Platform} from 'react-native';
@@ -23,8 +27,10 @@ import {ParamListBase, useNavigation} from '@react-navigation/native';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {NavigatorRoute} from '@src/navigation/NavigatorRouteConstant';
 import {Localization} from '@src/i18n/languages';
-import {MyText} from '@src/components/commons/my_text/MyText';
+import {MyText} from '@src/components/commons/my_text';
 import {Layout} from '@src/components/layout';
+import {Search} from '@src/components/commons/search';
+import {LoadingButton} from '@src/components/commons/loading_btn';
 
 const LandingScreen = () => {
   const navigation =
@@ -141,9 +147,81 @@ const LandingScreen = () => {
             ))}
           </View>
         </ScrollView>
+        {/* <Example /> */}
       </View>
     </Layout>
   );
 };
 
 export default LandingScreen;
+
+export function Example() {
+  const [modalVisible, setModalVisible] = useState(false);
+  const initialRef = React.useRef(null);
+  const finalRef = React.useRef(null);
+  return (
+    <>
+      <Modal
+        isOpen={modalVisible}
+        onClose={() => setModalVisible(false)}
+        initialFocusRef={initialRef}
+        finalFocusRef={finalRef}
+      >
+        <Modal.Content>
+          <Modal.CloseButton />
+          <Modal.Header>Contact Us</Modal.Header>
+          <Modal.Body>
+            <FormControl>
+              <FormControl.Label>Name</FormControl.Label>
+              <Input ref={initialRef} />
+            </FormControl>
+            <FormControl mt="3">
+              <FormControl.Label>Email</FormControl.Label>
+              <Input />
+            </FormControl>
+          </Modal.Body>
+          <Modal.Footer>
+            <Button.Group space={2}>
+              <LoadingButton
+                isLoading={false}
+                text="Cancel"
+                onPress={() => {
+                  setModalVisible(false);
+                }}
+              />
+
+              <LoadingButton
+                isLoading={false}
+                text="Save"
+                onPress={() => {
+                  alert('Hello');
+                  setModalVisible(false);
+                }}
+              />
+            </Button.Group>
+          </Modal.Footer>
+        </Modal.Content>
+      </Modal>
+      <HStack space="4" justifyContent="center" alignItems="center">
+        <LoadingButton
+          isLoading={false}
+          text="Open Modal"
+          onPress={() => {
+            setModalVisible(!modalVisible);
+          }}
+        />
+        <Input
+          w="32"
+          ref={finalRef}
+          placeholder="Enter the OTP"
+          _light={{
+            placeholderTextColor: 'blueGray.700',
+          }}
+          _dark={{
+            placeholderTextColor: 'blueGray.100',
+          }}
+        />
+      </HStack>
+    </>
+  );
+}

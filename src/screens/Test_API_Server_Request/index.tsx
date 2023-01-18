@@ -15,11 +15,12 @@ import {Platform, View} from 'react-native';
 // import SvgView from './SVGLogo';
 import {Brainstorming} from '@src/components/svgs';
 import BrainstormingWeb from '@src/assets/logo/brainstorming.svg';
-import SvgView from '../../components/commons/SVGView';
+import {SvgView} from '../../components/svgs';
 import {MyText} from '@src/components/commons/my_text/MyText';
 import {Layout} from '@src/components/layout';
 import {useNavigation, ParamListBase} from '@react-navigation/native';
 import {StackNavigationProp} from '@react-navigation/stack';
+import {LoadingButton} from '@src/components/commons/loading_btn';
 
 export interface PingModel {
   requestId: string;
@@ -143,6 +144,7 @@ export const TestAPiServerRequestScreen = () => {
   };
 
   const getPing = async () => {
+    alert('Hello');
     try {
       const data = await api.ngrequest(
         '/api/v1/dev/ping',
@@ -205,6 +207,14 @@ export const TestAPiServerRequestScreen = () => {
           <Button colorScheme="primary" onPress={getPing}>
             Test Get API
           </Button>
+          <Divider height={5} bg={'white:alpha.0'} />
+          <LoadingButton
+            colorScheme="primary"
+            onPress={getPing}
+            text={'Test Get API from loading button'}
+            isLoading={false}
+          />
+
           <MyText padding={'5'} type={'dark'}>
             TestAPiServerRequest
           </MyText>

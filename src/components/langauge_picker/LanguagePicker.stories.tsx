@@ -1,4 +1,4 @@
-import {LanguagePicker} from '@src/components/LanguagePicker';
+import {LanguagePicker} from '@src/components/langauge_picker';
 import {ComponentMeta, ComponentStory} from '@storybook/react';
 import {View} from 'native-base';
 import React from 'react';

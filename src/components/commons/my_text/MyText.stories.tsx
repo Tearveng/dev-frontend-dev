@@ -1,4 +1,4 @@
-import {MyText} from '@src/components/commons/my_text/MyText';
+import {MyText} from '@src/components/commons/my_text';
 import {ComponentMeta, ComponentStory} from '@storybook/react';
 import React from 'react';
 

@@ -11,6 +11,7 @@ import {
 import {faUser, faBars} from '@fortawesome/free-solid-svg-icons';
 import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
 import {style} from '@styles/style';
+import {LanguagePicker} from './langauge_picker';
 
 // interface Props {
 //   navigation: StackNavigationProp<ParamListBase, string, undefined>;
@@ -86,6 +87,7 @@ export function Header({navigation}: any) {
             icon={<FontAwesomeIcon icon={faUser} color="white" />}
             name="menu"
           />
+          <LanguagePicker />
         </HStack>
       </HStack>
     </>

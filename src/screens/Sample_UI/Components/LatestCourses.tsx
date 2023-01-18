@@ -1,4 +1,4 @@
-import {MyText} from '@src/components/commons/my_text/MyText';
+import {MyText} from '@src/components/commons/my_text';
 import {Box, View} from 'native-base';
 import {IViewProps} from 'native-base/lib/typescript/components/basic/View/types';
 import {ColorType} from 'native-base/lib/typescript/components/types';

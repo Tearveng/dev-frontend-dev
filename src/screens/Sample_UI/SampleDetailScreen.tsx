@@ -1,4 +1,4 @@
-import SvgView from '@src/components/commons/SVGView';
+import {SvgView} from '@src/components/svgs';
 import {Box, View} from 'native-base';
 import React from 'react';
 import {Image, Platform} from 'react-native';

@@ -18,7 +18,7 @@ import {
 } from 'native-base/lib/typescript/components/basic/View/types';
 import {useTranslation} from 'react-i18next';
 import {Localization} from '@src/i18n/languages';
-import {MyText} from '@src/components/commons/my_text/MyText';
+import {MyText} from '@src/components/commons/my_text';
 
 interface Props extends PropsWithChildren {
   width?: string | number;

@@ -1,18 +1,8 @@
 import {Localization} from '@src/i18n/languages';
 import {Box, ChevronDownIcon, Input, SearchIcon, View} from 'native-base';
-import {ColorType} from 'native-base/lib/typescript/components/types';
 import React from 'react';
 import {useTranslation} from 'react-i18next';
-import {ColorValue} from 'react-native';
-
-interface Props {
-  placeHolder?: string;
-  placeHolderTextColor?: ColorValue;
-  backgroundColor?: ColorType;
-  textColor?: ColorType;
-  iconLeftColor?: ColorType;
-  iconRightColor?: ColorType;
-}
+import {SearchProps} from './';
 
 export const Search = ({
   placeHolder,
@@ -21,7 +11,7 @@ export const Search = ({
   iconLeftColor,
   iconRightColor,
   placeHolderTextColor = 'muted.400',
-}: Props) => {
+}: SearchProps) => {
   const {t} = useTranslation();
   return (
     <View

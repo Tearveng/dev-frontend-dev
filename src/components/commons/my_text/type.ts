@@ -104,7 +104,7 @@ export interface TypeMap {
   white: ColorType;
 }
 
-export interface Props extends ITextProps {
+export interface MyTextProps extends ITextProps {
   type?: Type;
   fontWeight?: FontWeight;
   children?: string | null | undefined;
@@ -127,3 +127,14 @@ export interface Props extends ITextProps {
   marginX?: PaddingMargin;
   marginY?: PaddingMargin;
 }
+
+export const typeMap: TypeMap = {
+  primary: 'primary.500',
+  secondary: 'secondary.500',
+  danger: 'danger.700',
+  success: 'success.500',
+  warning: 'warning.500',
+  info: 'info.500',
+  dark: 'black',
+  white: 'white',
+};

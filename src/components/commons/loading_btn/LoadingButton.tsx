@@ -1,10 +1,17 @@
 import {Button, View} from 'native-base';
 import React from 'react';
 import {ActivityIndicator} from 'react-native';
-import {MyText} from '../my_text/MyText';
-import {LoadingButtonProps} from './type';
+import {LoadingButtonProps} from '.';
+import {MyText} from '../my_text';
 
-const LoadingButton = ({text, isLoading, ...props}: LoadingButtonProps) => {
+export const LoadingButton = ({
+  text,
+  isLoading,
+  fontSize,
+  type = 'white',
+  indecatorColor = 'white',
+  ...props
+}: LoadingButtonProps) => {
   return (
     <Button {...props} disabled={isLoading}>
       <View
@@ -14,15 +21,15 @@ const LoadingButton = ({text, isLoading, ...props}: LoadingButtonProps) => {
         justifyContent={isLoading ? 'space-between' : 'center'}
         alignItems="center"
       >
-        <MyText>{text}</MyText>
+        <MyText type={type} fontSize={fontSize}>
+          {text}
+        </MyText>
         {isLoading && (
           <View pl={5}>
-            <ActivityIndicator animating />
+            <ActivityIndicator animating color={indecatorColor} />
           </View>
         )}
       </View>
     </Button>
   );
 };
-
-export default LoadingButton;

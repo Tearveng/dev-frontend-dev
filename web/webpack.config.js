@@ -4,16 +4,6 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const rootDir = path.join(__dirname, '..');
 const webpackEnv = process.env.NODE_ENV || 'development';
 const Dotenv = require('dotenv-webpack');
-const imageLoaderConfiguration = {
-  test: /\.(gif|jpe?g|png|svg)$/,
-  use: {
-    loader: 'url-loader',
-    options: {
-      name: '[name].[ext]',
-      esModule: false,
-    },
-  },
-};
 
 module.exports = {
   mode: webpackEnv,
@@ -32,8 +22,18 @@ module.exports = {
         exclude: /node_modules/,
         loader: 'ts-loader',
       },
-      {test: /\.png$/, use: 'raw-loader'},
-      imageLoaderConfiguration,
+
+      {
+        test: /\.(gif|jpe?g|png|svg)$/,
+        use: {
+          loader: 'url-loader',
+          options: {
+            name: '[name].[ext]',
+            esModule: false,
+          },
+        },
+      },
+
       {
         test: /\.css$/,
         loader: 'css-loader',

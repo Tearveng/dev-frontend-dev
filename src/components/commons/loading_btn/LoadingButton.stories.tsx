@@ -1,6 +1,6 @@
-import LoadingButton from '@src/components/commons/loading_btn/LoadingButton';
 import {ComponentMeta, ComponentStory} from '@storybook/react';
 import React from 'react';
+import {LoadingButton} from './';
 
 export default {
   title: 'Commons/LoadingButton',
