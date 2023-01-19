@@ -1,15 +1,15 @@
-import {Button, View} from 'native-base';
+import {Button, Spinner, View} from 'native-base';
 import React from 'react';
-import {ActivityIndicator} from 'react-native';
-import {LoadingButtonProps} from '.';
+import {ColorValue} from 'react-native';
+import {LoadingButtonProps, spinnerIconColorMap} from '.';
 import {MyText} from '../my_text';
 
 export const LoadingButton = ({
   text,
-  isLoading,
+  isLoading = false,
   fontSize,
   type = 'white',
-  indecatorColor = 'white',
+  spinnerSize = 'sm',
   ...props
 }: LoadingButtonProps) => {
   return (
@@ -26,7 +26,10 @@ export const LoadingButton = ({
         </MyText>
         {isLoading && (
           <View pl={5}>
-            <ActivityIndicator animating color={indecatorColor} />
+            <Spinner
+              color={spinnerIconColorMap[type] as ColorValue}
+              size={spinnerSize}
+            />
           </View>
         )}
       </View>
