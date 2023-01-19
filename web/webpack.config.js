@@ -8,9 +8,8 @@ const Dotenv = require('dotenv-webpack');
 module.exports = {
   mode: webpackEnv,
 
-  entry: {
-    app: path.join(rootDir, './index.web.ts'),
-  },
+  entry: ['babel-polyfill', '../index'],
+
   output: {
     path: path.resolve(rootDir, 'dist'),
     filename: 'app-[hash].bundle.js',
@@ -19,17 +18,44 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.(tsx|ts|jsx|js|mjs)$/,
+        test: /\.(tsx|ts|mjs)$/,
         exclude: /node_modules/,
         loader: 'ts-loader',
       },
-      {test: /\.png$/, use: 'raw-loader'},
+
+      {
+        test: /\.(gif|jpe?g|png|svg)$/,
+        use: {
+          loader: 'url-loader',
+          options: {
+            name: '[name].[ext]',
+            esModule: false,
+          },
+        },
+      },
 
       {
         test: /\.css$/,
         loader: 'css-loader',
         options: {
           url: true,
+        },
+      },
+      {
+        test: /\.(js|jsx)$/,
+        use: {
+          loader: 'babel-loader',
+          options: {
+            presets: [
+              '@babel/preset-react',
+              {
+                plugins: [
+                  '@babel/plugin-proposal-class-properties',
+                  '@babel/plugin-proposal-private-methods',
+                ],
+              },
+            ],
+          },
         },
       },
     ],
@@ -40,11 +66,13 @@ module.exports = {
     }),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.IgnorePlugin({
-      resourceRegExp:/react-native-pdf/
+      resourceRegExp: /react-native-pdf/,
     }),
     new Dotenv({
-      path: path.join(rootDir, './.env')
-    })
+      path: path.join(rootDir, './.env'),
+    }),
+    new webpack.EnvironmentPlugin({JEST_WORKER_ID: null}),
+    new webpack.DefinePlugin({__DEV__: process.env.NODE_ENV === 'development'}),
   ],
   resolve: {
     extensions: [
@@ -59,12 +87,11 @@ module.exports = {
     ], // read files in fillowing order
     alias: {
       'react-native$': 'react-native-web',
-      '@styles':path.resolve(__dirname,"../src/styles"),
-      '@screens':path.resolve(__dirname,"../src/screens"),
-      '@components':path.resolve(__dirname,"../src/components"),
-      '@src':path.resolve(__dirname,"../src"),
-      '@utils':path.resolve(__dirname,"../utils")
-
+      '@styles': path.resolve(__dirname, '../src/styles'),
+      '@screens': path.resolve(__dirname, '../src/screens'),
+      '@components': path.resolve(__dirname, '../src/components'),
+      '@src': path.resolve(__dirname, '../src'),
+      '@utils': path.resolve(__dirname, '../utils'),
     },
   },
   devServer: {
