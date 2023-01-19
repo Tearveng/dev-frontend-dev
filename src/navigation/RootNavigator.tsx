@@ -28,6 +28,14 @@ export function DrawerNavigator() {
     <>
       <Drawer.Navigator useLegacyImplementation initialRouteName="Home">
         <Drawer.Screen
+          name={NavigatorRoute.TEST_COMPONENT}
+          component={TestComponent}
+          options={{
+            headerShown: false,
+            title: 'Test Components',
+          }}
+        />
+        <Drawer.Screen
           name="Login"
           component={LoginScreen}
           options={{
@@ -63,14 +71,6 @@ export function DrawerNavigator() {
           options={{
             headerShown: false,
             title: 'Sample UI Landing Screen',
-          }}
-        />
-        <Drawer.Screen
-          name={NavigatorRoute.TEST_COMPONENT}
-          component={TestComponent}
-          options={{
-            headerShown: false,
-            title: 'Test Components',
           }}
         />
       </Drawer.Navigator>

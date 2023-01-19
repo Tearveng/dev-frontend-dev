@@ -4,7 +4,7 @@ module.exports = {
     '@babel/plugin-proposal-export-namespace-from', // for react-native-reanimated works on web
     'react-native-reanimated/plugin', // for react-native-reanimated works on mobile
     '@babel/plugin-proposal-private-methods', // transform private methods
-    '@babel/plugin-proposal-class-properties', // transform private methods
+    '@babel/plugin-proposal-class-properties',
     [
       'module-resolver',
       {

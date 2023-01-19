@@ -1,4 +1,4 @@
 import {LoadingButton} from './LoadingButton';
-import {LoadingButtonProps, spinnerIconColorMap} from './type';
+import {LoadingButtonProps, spinnerIconColorMap, Variant} from './type';
 
-export {LoadingButton, LoadingButtonProps, spinnerIconColorMap};
+export {LoadingButton, LoadingButtonProps, spinnerIconColorMap, Variant};

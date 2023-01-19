@@ -10,13 +10,20 @@ export interface LoadingButtonProps extends IButtonProps {
   fontSize?: FontSize;
   spinnerSize?: 'sm' | 'lg';
 }
+export declare type Variant =
+  | 'link'
+  | 'subtle'
+  | 'solid'
+  | 'ghost'
+  | 'outline'
+  | 'unstyled';
 export const spinnerIconColorMap: TypeMap = {
-  primary: '#06b6d4',
-  secondary: '#ec4899',
-  danger: '#be123c',
-  success: '#22c55e',
-  warning: '#f97316',
-  info: '#0ea5e9',
+  primary: '#ecfeff',
+  secondary: '#ecfeff',
+  danger: '#ecfeff',
+  success: '#ecfeff',
+  warning: '#ecfeff',
+  info: '#ecfeff',
   dark: 'black',
-  white: 'white',
+  white: 'black',
 };

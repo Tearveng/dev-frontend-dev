@@ -8,29 +8,37 @@ export const LoadingButton = ({
   text,
   isLoading = false,
   fontSize,
-  type = 'white',
+  type = 'primary',
   spinnerSize = 'sm',
+  variant,
   ...props
 }: LoadingButtonProps) => {
+  const color =
+    variant === 'ghost' ||
+    variant === 'link' ||
+    variant === 'subtle' ||
+    variant === 'unstyled'
+      ? spinnerIconColorMap['dark']
+      : spinnerIconColorMap[type];
   return (
-    <Button {...props} disabled={isLoading}>
+    <Button
+      {...props}
+      variant={variant}
+      colorScheme={type}
+      disabled={isLoading}
+    >
       <View
         width={'100%'}
         display={'flex'}
         flexDir="row"
-        justifyContent={isLoading ? 'space-between' : 'center'}
+        justifyContent={isLoading ? 'space-evenly' : 'center'}
         alignItems="center"
       >
-        <MyText type={type} fontSize={fontSize}>
+        <MyText color={color} fontSize={fontSize} textAlign="center">
           {text}
         </MyText>
         {isLoading && (
-          <View pl={5}>
-            <Spinner
-              color={spinnerIconColorMap[type] as ColorValue}
-              size={spinnerSize}
-            />
-          </View>
+          <Spinner color={color as ColorValue} size={spinnerSize} />
         )}
       </View>
     </Button>
