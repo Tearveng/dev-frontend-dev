@@ -18,6 +18,7 @@ import {Box, View} from 'native-base';
 import {NavigatorRoute} from './NavigatorRouteConstant';
 import {Image} from 'react-native';
 import BookmarkOutline from '@src/assets/logo/outline_bookmark.png';
+import TestComponent from '@src/screens/test_commponents';
 const Stack = createStackNavigator();
 
 const Drawer = createDrawerNavigator();
@@ -64,14 +65,14 @@ export function DrawerNavigator() {
             title: 'Sample UI Landing Screen',
           }}
         />
-        {/* <Drawer.Screen
-          name={NavigatorRoute.SAMPLE_UI.LANDING_SCREEN}
-          component={LandingScreen}
+        <Drawer.Screen
+          name={NavigatorRoute.TEST_COMPONENT}
+          component={TestComponent}
           options={{
             headerShown: false,
-            title: 'Sample UI Landing Screen',
+            title: 'Test Components',
           }}
-        /> */}
+        />
       </Drawer.Navigator>
     </>
   );
