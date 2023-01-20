@@ -36,7 +36,7 @@ export const LoadingButton = ({
       >
         <MyText
           _web={{
-            marginRight: '3',
+            marginRight: isLoading ? '3' : '0',
           }}
           color={color}
           fontSize={fontSize}

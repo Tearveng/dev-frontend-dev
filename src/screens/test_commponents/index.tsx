@@ -1,3 +1,4 @@
+import {MyForm} from '@src/components/commons/my_form';
 import {Box, Divider, ScrollView, View} from 'native-base';
 import React from 'react';
 import {ViewButton} from './ViewButton';
@@ -6,7 +7,7 @@ import {ViewText} from './ViewText';
 
 const TestComponent = () => {
   return (
-    <ScrollView height="100%">
+    <ScrollView height="100%" _web={{height: '100%'}}>
       <View
         width="95%"
         height="100%"
@@ -37,6 +38,13 @@ const TestComponent = () => {
           my="3"
         />
         <ViewButton />
+        <Divider
+          width={'100%'}
+          height="px"
+          backgroundColor={'amber.600'}
+          mb="3"
+        />
+        <MyForm />
         <Box height={30} />
       </View>
     </ScrollView>
