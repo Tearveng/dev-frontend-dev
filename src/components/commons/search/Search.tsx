@@ -52,6 +52,7 @@ export const Search = ({
             color={textColor ?? 'muted.800'}
             _web={{
               width: '90%',
+              height: '98%',
             }}
           />
         </View>

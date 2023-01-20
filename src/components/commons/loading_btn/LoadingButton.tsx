@@ -25,7 +25,7 @@ export const LoadingButton = ({
       {...props}
       variant={variant}
       colorScheme={type}
-      disabled={isLoading}
+      isDisabled={isLoading}
     >
       <View
         width={'100%'}
@@ -34,7 +34,14 @@ export const LoadingButton = ({
         justifyContent={isLoading ? 'space-evenly' : 'center'}
         alignItems="center"
       >
-        <MyText color={color} fontSize={fontSize} textAlign="center">
+        <MyText
+          _web={{
+            marginRight: '3',
+          }}
+          color={color}
+          fontSize={fontSize}
+          textAlign="center"
+        >
           {text}
         </MyText>
         {isLoading && (
