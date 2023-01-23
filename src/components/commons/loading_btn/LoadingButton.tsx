@@ -27,27 +27,29 @@ export const LoadingButton = ({
       colorScheme={type}
       isDisabled={isLoading}
     >
-      <View
-        width={'100%'}
-        display={'flex'}
-        flexDir="row"
-        justifyContent={isLoading ? 'space-evenly' : 'center'}
-        alignItems="center"
-      >
-        <MyText
-          _web={{
-            marginRight: isLoading ? '3' : '0',
-          }}
-          color={color}
-          fontSize={fontSize}
-          textAlign="center"
+      {isLoading ? (
+        <View
+          width={'100%'}
+          display={'flex'}
+          flexDir="row"
+          justifyContent={'space-evenly'}
+          alignItems="center"
         >
-          {text}
-        </MyText>
-        {isLoading && (
+          <MyText
+            _web={{
+              marginRight: '3',
+            }}
+            color={color}
+            fontSize={fontSize}
+            textAlign="center"
+          >
+            {text}
+          </MyText>
           <Spinner color={color as ColorValue} size={spinnerSize} />
-        )}
-      </View>
+        </View>
+      ) : (
+        `${text}`
+      )}
     </Button>
   );
 };

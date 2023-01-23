@@ -68,6 +68,12 @@ module.exports = {
     new webpack.IgnorePlugin({
       resourceRegExp: /react-native-pdf/,
     }),
+    new webpack.IgnorePlugin({
+      resourceRegExp: /react-native-document-picker/,
+    }),
+    new webpack.IgnorePlugin({
+      resourceRegExp: /rn-fetch-blob/,
+    }),
     new Dotenv({
       path: path.join(rootDir, './.env'),
     }),

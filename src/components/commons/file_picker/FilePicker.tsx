@@ -1,0 +1,117 @@
+import {ViewPdf} from '@src/components/templates/pdf';
+import {$ok} from '@src/utils/commons';
+import {Box, Image, View} from 'native-base';
+import React, {useState} from 'react';
+import {Platform} from 'react-native';
+
+import {base64} from 'rfc4648';
+import {LoadingButton} from '@src/components/commons/loading_btn';
+import {useTranslation} from 'react-i18next';
+import {Localization} from '@src/i18n/languages';
+
+interface Props {
+  onFileChange?: (
+    pickerResult: any,
+    arrayBuffer: ArrayBuffer | undefined,
+    result: string | undefined,
+  ) => void;
+}
+export const FilePicker = ({onFileChange}: Props) => {
+  if (Platform.OS === 'web') return <></>;
+  const RNFetchBlob = require('rn-fetch-blob');
+  const DocumentPicker = require('react-native-document-picker');
+  const {t} = useTranslation();
+
+  const [strBase64, setStrBase64] = useState<string | undefined>();
+  const [typeFile, setTypeFile] = useState('');
+  const [_, setBuffer] = useState<ArrayBuffer | undefined>();
+  const chooseFile = async () => {
+    try {
+      const pickerResult = await DocumentPicker.pickSingle({
+        presentationStyle: 'fullScreen',
+        copyTo: 'cachesDirectory',
+        type: [DocumentPicker.types.allFiles],
+      });
+      const path = await normalizePath(pickerResult.fileCopyUri ?? '');
+      const result = await RNFetchBlob.fs.readFile(path, 'base64');
+      const arrayBuffer = base64.parse(result);
+      setBuffer(arrayBuffer);
+      setStrBase64(result);
+      setTypeFile(pickerResult.type ?? '');
+      onFileChange!(pickerResult, arrayBuffer, result);
+    } catch (e) {
+      handleError(e);
+    }
+  };
+
+  const normalizePath = async (path: string) => {
+    if (Platform.OS === 'android' || Platform.OS === 'ios') {
+      const filePrefix = 'file://';
+      if (path.startsWith(filePrefix)) {
+        path = path.substring(filePrefix.length);
+        try {
+          path = decodeURI(path);
+        } catch (error) {}
+      }
+    }
+    return path;
+  };
+
+  const handleError = (err: unknown) => {
+    if (DocumentPicker.isCancel(err)) {
+      console.warn('cancelled');
+      // User cancelled the picker, exit any dialogs or menus and move on
+    } else if (DocumentPicker.isInProgress(err)) {
+      console.warn(
+        'multiple pickers were opened, only the last will be considered',
+      );
+    } else {
+      throw err;
+    }
+  };
+
+  return (
+    <View
+      display={'flex'}
+      flexDir={'column'}
+      justifyContent={'space-between'}
+      alignItems={'center'}
+      width={'100%'}
+      height={'100%'}
+    >
+      {$ok(strBase64) ? (
+        typeFile.startsWith('image') ? (
+          <Image
+            width={'100%'}
+            height={'100%'}
+            borderRadius={10}
+            source={{
+              uri: `data:${typeFile};base64,${strBase64}`,
+            }}
+            alt="Hello"
+          />
+        ) : (
+          <View width={'100%'} height={'100%'}>
+            <ViewPdf uri={`data:${typeFile};base64,${strBase64}`} />
+          </View>
+        )
+      ) : (
+        <Image
+          borderRadius={10}
+          bgColor={'white'}
+          width={'100%'}
+          height={'100%'}
+          source={require('@src/assets/images/empty_doc.jpg')}
+          alt="Hello"
+        />
+      )}
+      <Box height={4} />
+      <LoadingButton
+        onPress={chooseFile}
+        text={t(Localization.browseFile)}
+        isLoading={false}
+      />
+      <Box height={2} />
+    </View>
+  );
+};

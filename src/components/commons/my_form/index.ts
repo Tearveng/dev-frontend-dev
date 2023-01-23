@@ -1,3 +1,4 @@
 import {MyForm} from './MyForm';
+import {MyFormProps} from './type';
 
-export {MyForm};
+export {MyForm, MyFormProps};

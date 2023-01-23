@@ -13,6 +13,7 @@ const Localization: LanguageObjectType = {
   whatDoYouWantToLearnToday: 'whatDoYouWantToLearnToday',
   getStarted: 'getStarted',
   lastSeenCourses: 'lastSeenCourses',
+  browseFile: 'browseFile',
 };
 
 export {en, fr, Localization};

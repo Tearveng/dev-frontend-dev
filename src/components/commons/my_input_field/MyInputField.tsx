@@ -18,14 +18,12 @@ export const MyInputField = ({
       }}
     >
       <Input
-        height={'100%'}
+        height={'140%'}
         _web={{
           _focus: {
             outlineStyle: 'none',
-            borderColor: '',
           },
           _hover: {
-            borderColor: '',
             outlineStyle: 'none',
           },
         }}
@@ -33,6 +31,8 @@ export const MyInputField = ({
         onChangeText={onChangeText}
         value={value}
         color="black"
+        backgroundColor={'white'}
+        pt={2}
         {...props}
       />
     </View>

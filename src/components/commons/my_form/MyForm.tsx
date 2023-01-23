@@ -1,82 +1,35 @@
 import {$ok} from '@src/utils/commons';
-import {FormControl, View, VStack} from 'native-base';
-import {SpaceType} from 'native-base/lib/typescript/components/types';
-import React from 'react';
-import {
-  Controller,
-  FieldValues,
-  RegisterOptions,
-  SubmitHandler,
-  useForm,
-} from 'react-hook-form';
+import {Box, FormControl, View} from 'native-base';
+import React, {useState} from 'react';
+import {Controller, FieldValues, SubmitHandler, useForm} from 'react-hook-form';
+import {Platform} from 'react-native';
+import {MyFormProps} from '.';
+import {FilePicker} from '../file_picker';
 import {LoadingButton} from '../loading_btn';
 import {MyInputField} from '../my_input_field';
 import {MyText} from '../my_text';
-//rules type Omit<RegisterOptions<TFieldValues, TName>, 'valueAsNumber' | 'valueAsDate' | 'setValueAs' | 'disabled'>;
 
-interface MyFormProps {
-  form: MyFormFromProps;
-  input: MyFormInputProps[];
-  button: MyFormButtonProps;
-}
-
-interface MyFormInputProps {
-  label: string;
-  name: string;
-  defaultValue?: string;
-  placeholder?: string;
-  rules?: Omit<
-    RegisterOptions,
-    'valueAsNumber' | 'valueAsDate' | 'setValueAs' | 'disabled'
-  >;
-}
-
-interface MyFormFromProps {
-  width?: number | string;
-  space?:
-    | 'gutter'
-    | '2xs'
-    | 'xs'
-    | 'sm'
-    | 'md'
-    | 'lg'
-    | 'xl'
-    | '2xl'
-    | SpaceType;
-}
-interface MyFormButtonProps {
-  container?: MyFormButtonContainerProps;
-  buttons: MyFormButtonButtonsProps[];
-}
-interface MyFormButtonContainerProps {}
-interface MyFormButtonButtonsProps {
-  text: string;
-  type: 'submit' | 'button';
-  onPress?: (data: SubmitHandler<FieldValues> | any) => void;
-}
-// function delay(milliseconds: number) {
-//   return new Promise(resolve => setTimeout(resolve, milliseconds));
-// }
 export const MyForm = () => {
+  const [data, setData] = useState();
+  const [imageBuffer, setImageBuffer] = useState<ArrayBuffer | undefined>();
   const {
     control,
     handleSubmit,
     formState: {errors, isSubmitting},
   } = useForm();
-  console.log('isSubmitting=>', isSubmitting);
-  console.log('errors', errors);
-  // const onSubmit = (data: any) => {
-  //   delay(5000).then(() => console.log('submiting with ', data));
-  // };
+
   const obj: MyFormProps = {
     form: {
-      width: '90%',
+      width: '100%',
+      height: '100%',
       space: 7,
     },
     input: [
       {
+        isRequired: true,
         label: 'First Name',
         name: 'firstname',
+        color: 'black',
         defaultValue: '',
         placeholder: 'Your first name here...',
         rules: {
@@ -89,8 +42,10 @@ export const MyForm = () => {
         },
       },
       {
+        isRequired: true,
         label: 'Last Name',
         name: 'lastname',
+        color: 'black',
         defaultValue: '',
         placeholder: 'Your last name here...',
         rules: {
@@ -103,8 +58,10 @@ export const MyForm = () => {
         },
       },
       {
+        isRequired: true,
         label: 'Email',
         name: 'email',
+        color: 'black',
         defaultValue: '',
         placeholder: 'Your email here...',
         rules: {
@@ -118,60 +75,117 @@ export const MyForm = () => {
         },
       },
       {
+        label: 'Document',
+        name: 'file',
+        type: 'file',
+        onFileChange: (_, buffer) => setImageBuffer(buffer),
+      },
+      {
         label: 'Phone Number',
         name: 'phonenumber',
+        color: 'black',
         defaultValue: '',
         placeholder: 'Your phone number is here...',
-        rules: {
-          required: 'Phone number is required',
-        },
       },
     ],
     button: {
       container: {},
-      buttons: [{text: 'Save', type: 'submit', onPress: () => {}}],
+      buttons: [
+        {
+          text: 'Save',
+          type: 'submit',
+          onPress: dataobj => {
+            setData({...dataobj, file: imageBuffer});
+            console.warn(imageBuffer);
+            console.log(data);
+          },
+        },
+      ],
     },
   };
   return (
-    <VStack width={obj.form.width} space={obj.form.space}>
+    <View
+      width={obj.form.width}
+      height={obj.form.height}
+      display={'flex'}
+      flexDir={'column'}
+      justifyContent={'space-between'}
+    >
       {$ok(obj) && obj.input.length > 0 ? (
         obj.input.map((val, index) => (
           <FormControl
-            isRequired
+            isRequired={val.isRequired}
             isInvalid={val.name in errors}
             key={index}
-            height={50}
+            height={val.type !== 'file' ? 60 : 250}
+            mb={obj.form.space}
           >
-            <FormControl.Label>{val.label}</FormControl.Label>
+            {$ok(val.label) ? (
+              <FormControl.Label>{val.label}</FormControl.Label>
+            ) : (
+              <></>
+            )}
             <Controller
               control={control}
-              render={({field: {onBlur, onChange, value}}) => (
-                <MyInputField
-                  height={'100%'}
-                  _web={{
-                    _focus: {
-                      outlineStyle: 'none',
-                    },
-                    _hover: {
-                      outlineStyle: 'none',
-                    },
-                  }}
-                  p={0}
-                  borderBottomColor={$ok(errors[val.name]) ? 'danger.500' : ''}
-                  borderColor={$ok(errors[val.name]) ? 'danger.500' : ''}
-                  onBlur={onBlur}
-                  placeholder={$ok(val.placeholder) ? val.placeholder : 'John'}
-                  onChangeText={(text: string) => onChange(text)}
-                  value={value}
-                  color="black"
-                />
-              )}
+              render={({field: {onBlur, onChange, value}}) =>
+                val.type !== 'file' ? (
+                  <MyInputField
+                    height={Platform.OS !== 'web' ? '100%' : '100%'}
+                    // borderBottomColor={
+                    //   errors[val.name]?.message?.toString()?.length! > 0
+                    //     ? 'danger.500'
+                    //     : ''
+                    // }
+                    borderWidth={0}
+                    // p={2}
+                    borderColor={
+                      $ok(errors[val.name]?.message) ? 'danger.500' : ''
+                    }
+                    onBlur={onBlur}
+                    placeholder={
+                      $ok(val.placeholder) ? val.placeholder : 'John'
+                    }
+                    onChangeText={(text: string) => onChange(text)}
+                    value={value}
+                    color={val.color}
+                    placeholderTextColor={val.placeholderTextColor}
+                    type={val.type}
+                    keyboardType={val.keyboardType ?? 'default'}
+                  />
+                ) : (
+                  <View height={'80%'} width={'100%'}>
+                    {Platform.OS !== 'web' ? (
+                      <FilePicker
+                        onFileChange={(
+                          pickerResult,
+                          fileBuffer,
+                          fileBase64,
+                        ) => {
+                          $ok(val.onFileChange) &&
+                            val.onFileChange!(
+                              pickerResult,
+                              fileBuffer,
+                              fileBase64,
+                            );
+                        }}
+                      />
+                    ) : (
+                      <input type={'file'} />
+                    )}
+                  </View>
+                )
+              }
               name={val.name}
               rules={val.rules}
               defaultValue={val.defaultValue}
             />
             {$ok(errors[val.name]?.message) && (
-              <MyText type="danger" fontSize="sm" mb={'2'}>
+              <MyText
+                type="danger"
+                fontSize="xs"
+                _web={{fontSize: 'md', my: 2}}
+                mt={-2}
+              >
                 {errors[val.name]?.message as string}
               </MyText>
             )}
@@ -180,25 +194,25 @@ export const MyForm = () => {
       ) : (
         <></>
       )}
-      <View mt={5}>
-        {obj.button.buttons.length > 0 ? (
-          obj.button.buttons.map((val, index) => (
-            <LoadingButton
-              width={40}
-              isLoading={isSubmitting}
-              key={index}
-              onPress={
-                val.type === 'submit'
-                  ? handleSubmit(val.onPress as SubmitHandler<FieldValues>)
-                  : val.onPress
-              }
-              text={$ok(val.text) ? val.text : 'Submit'}
-            />
-          ))
-        ) : (
-          <></>
-        )}
-      </View>
-    </VStack>
+      {obj.button.buttons.length > 0 ? (
+        obj.button.buttons.map((val, index) => (
+          <LoadingButton
+            mt={4}
+            width={40}
+            isLoading={isSubmitting}
+            key={index}
+            onPress={
+              val.type === 'submit'
+                ? handleSubmit(val.onPress as SubmitHandler<FieldValues>)
+                : val.onPress
+            }
+            text={$ok(val.text) ? val.text : 'Submit'}
+          />
+        ))
+      ) : (
+        <></>
+      )}
+      <Box height={500} />
+    </View>
   );
 };
