@@ -1,3 +1,10 @@
-import {FilePicker} from './FilePicker';
+import {FilePickerMobile} from './FilePickerMobile';
+import {FilePickerWeb} from './FilePickerWeb';
+import {FilePickerMobileProps, FilePickerWebProps} from './type';
 
-export {FilePicker};
+export {
+  FilePickerMobile,
+  FilePickerWeb,
+  FilePickerMobileProps,
+  FilePickerWebProps,
+};

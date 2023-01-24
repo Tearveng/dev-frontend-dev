@@ -4,27 +4,20 @@ import {Box, Image, View} from 'native-base';
 import React, {useState} from 'react';
 import {Platform} from 'react-native';
 
-import {base64} from 'rfc4648';
 import {LoadingButton} from '@src/components/commons/loading_btn';
 import {useTranslation} from 'react-i18next';
 import {Localization} from '@src/i18n/languages';
+import {FilePickerMobileProps} from '.';
+import {decode} from '@src/utils/base64_arraybuffer';
 
-interface Props {
-  onFileChange?: (
-    pickerResult: any,
-    arrayBuffer: ArrayBuffer | undefined,
-    result: string | undefined,
-  ) => void;
-}
-export const FilePicker = ({onFileChange}: Props) => {
+export const FilePickerMobile = ({onFileChange}: FilePickerMobileProps) => {
   if (Platform.OS === 'web') return <></>;
-  const RNFetchBlob = require('rn-fetch-blob');
+  const RNFetchBlob = require('rn-fetch-blob').default;
   const DocumentPicker = require('react-native-document-picker');
   const {t} = useTranslation();
 
   const [strBase64, setStrBase64] = useState<string | undefined>();
   const [typeFile, setTypeFile] = useState('');
-  const [_, setBuffer] = useState<ArrayBuffer | undefined>();
   const chooseFile = async () => {
     try {
       const pickerResult = await DocumentPicker.pickSingle({
@@ -34,11 +27,10 @@ export const FilePicker = ({onFileChange}: Props) => {
       });
       const path = await normalizePath(pickerResult.fileCopyUri ?? '');
       const result = await RNFetchBlob.fs.readFile(path, 'base64');
-      const arrayBuffer = base64.parse(result);
-      setBuffer(arrayBuffer);
+      const arrayBuffer = decode(result);
       setStrBase64(result);
       setTypeFile(pickerResult.type ?? '');
-      onFileChange!(pickerResult, arrayBuffer, result);
+      $ok(onFileChange) && onFileChange!(pickerResult, arrayBuffer, result);
     } catch (e) {
       handleError(e);
     }
@@ -82,8 +74,8 @@ export const FilePicker = ({onFileChange}: Props) => {
       {$ok(strBase64) ? (
         typeFile.startsWith('image') ? (
           <Image
-            width={'100%'}
-            height={'100%'}
+            width={'90%'}
+            height={'95%'}
             borderRadius={10}
             source={{
               uri: `data:${typeFile};base64,${strBase64}`,
@@ -91,7 +83,7 @@ export const FilePicker = ({onFileChange}: Props) => {
             alt="Hello"
           />
         ) : (
-          <View width={'100%'} height={'100%'}>
+          <View width={'90%'} height={'95%'}>
             <ViewPdf uri={`data:${typeFile};base64,${strBase64}`} />
           </View>
         )
@@ -99,19 +91,23 @@ export const FilePicker = ({onFileChange}: Props) => {
         <Image
           borderRadius={10}
           bgColor={'white'}
-          width={'100%'}
-          height={'100%'}
+          width={'90%'}
+          height={'95%'}
           source={require('@src/assets/images/empty_doc.jpg')}
           alt="Hello"
         />
       )}
       <Box height={4} />
       <LoadingButton
+        lineHeight={8}
+        fontSize={'sm'}
+        p={2}
+        height={9}
         onPress={chooseFile}
         text={t(Localization.browseFile)}
         isLoading={false}
       />
-      <Box height={2} />
+      <Box height={4} />
     </View>
   );
 };

@@ -16,7 +16,7 @@ interface MyFormInputProps {
   label?: string;
   name: string;
   color?: ColorType | undefined;
-  type?: 'text' | 'password' | 'file' | undefined;
+  type?: 'text' | 'password' | 'file' | 'select' | undefined;
   onFileChange?:
     | ((
         pickerResult: any,
