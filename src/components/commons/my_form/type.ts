@@ -1,9 +1,12 @@
+import {IRadioValue} from 'native-base';
 import {
   ColorType,
   SpaceType,
 } from 'native-base/lib/typescript/components/types';
 import {RegisterOptions, SubmitHandler, FieldValues} from 'react-hook-form';
 import {KeyboardTypeOptions, ColorValue} from 'react-native';
+import {IRadioData} from '../my_radio_button';
+import {Type} from '../my_text/type';
 
 export interface MyFormProps {
   form: MyFormFromProps;
@@ -16,7 +19,10 @@ interface MyFormInputProps {
   label?: string;
   name: string;
   color?: ColorType | undefined;
-  type?: 'text' | 'password' | 'file' | 'select' | undefined;
+  type?: 'text' | 'password' | 'file' | 'select' | 'radio' | undefined;
+  selectData?: any[]; //this is for type 'select'
+  radioData?: IRadioData[]; //this is for type 'radio'
+  onSelectChange?: ((itemValue: string) => void) | undefined; //this is for type 'select'
   onFileChange?:
     | ((
         pickerResult: any,
@@ -24,7 +30,11 @@ interface MyFormInputProps {
         result: string | undefined,
       ) => void)
     | null
-    | undefined;
+    | undefined; //this is for type 'file'
+  onRadioChange?:
+    | ((itemValue: IRadioValue, data: IRadioData[]) => void)
+    | null
+    | undefined; //IRadioGroupOnChangeHandler | undefined; //this is for type 'radio'
   keyboardType?: KeyboardTypeOptions | undefined;
   placeholderTextColor?: ColorValue | undefined;
   defaultValue?: string | undefined;
@@ -49,7 +59,6 @@ interface MyFormFromProps {
     | '2xl'
     | SpaceType;
 }
-////android:requestLagacyExternalStorage="true"
 interface MyFormButtonProps {
   container?: MyFormButtonContainerProps;
   buttons: MyFormButtonButtonsProps[];
@@ -58,5 +67,7 @@ interface MyFormButtonContainerProps {}
 interface MyFormButtonButtonsProps {
   text: string;
   type: 'submit' | 'button';
+  colorScheme?: Type | undefined;
+  space?: number | undefined;
   onPress?: (data: SubmitHandler<FieldValues> | any) => void;
 }

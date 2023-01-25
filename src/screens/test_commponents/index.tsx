@@ -3,15 +3,20 @@ import {StackNavigationProp} from '@react-navigation/stack';
 import {MyForm, MyFormProps} from '@src/components/commons/my_form';
 import {Layout} from '@src/components/layout';
 import {$ok} from '@src/utils/commons';
-import {ScrollView, View} from 'native-base';
+import {Divider, ScrollView, View} from 'native-base';
 import React, {useState} from 'react';
+import {ViewButton} from './ViewButton';
+import {ViewSearch} from './ViewSearch';
+import {ViewText} from './ViewText';
 
 const TestComponent = () => {
   const navigation =
     useNavigation<StackNavigationProp<ParamListBase, string, undefined>>();
 
-  const [_, setData] = useState<any | undefined>();
+  const [data, setData] = useState<any | undefined>();
   const [imageBuffer, setImageBuffer] = useState<ArrayBuffer | undefined>();
+  const [selectedValue, setSelectedValue] = useState('');
+  const [radioValue, setRadioValue] = useState('');
   const obj: MyFormProps = {
     form: {
       width: '100%',
@@ -88,6 +93,30 @@ const TestComponent = () => {
         name: 'select',
         color: 'black',
         type: 'select',
+        selectData: [
+          {id: 2, value: '2', text: 'hello'},
+          {id: 3, value: '3', text: 'Hello World'},
+          {id: 4, value: '4', text: 'Print Me Out'},
+        ],
+        onSelectChange: itemValue => {
+          setSelectedValue(itemValue);
+          console.log(itemValue);
+        },
+      },
+      {
+        label: 'Gender',
+        name: 'gender',
+        color: 'black',
+        type: 'radio',
+        radioData: [
+          {text: 'Male', value: 'male'},
+          {text: 'Female', value: 'female', isSelected: true},
+          {text: 'Other', value: 'other'},
+        ],
+        onRadioChange: (itemValue, data) => {
+          setRadioValue(itemValue);
+          console.log(data);
+        },
       },
     ],
     button: {
@@ -97,8 +126,18 @@ const TestComponent = () => {
           text: 'Save',
           type: 'submit',
           onPress: dataobj => {
-            setData({...dataobj, file: imageBuffer});
+            setData({...dataobj, file: imageBuffer, selectedValue, radioValue});
+            console.log(data);
           },
+        },
+        {
+          text: 'Reset',
+          type: 'button',
+          colorScheme: 'danger',
+          // onPress: dataobj => {
+          //   setData({...dataobj, file: imageBuffer, selectedValue, radioValue});
+          //   console.log(data);
+          // },
         },
       ],
     },
@@ -108,7 +147,7 @@ const TestComponent = () => {
     <Layout navigation={navigation}>
       <ScrollView height="100%" _web={{height: '200vh'}}>
         <View width="95%" height="100%" pl="4">
-          {/* <ViewText />
+          <ViewText />
           <Divider
             width={'100%'}
             height="px"
@@ -128,7 +167,7 @@ const TestComponent = () => {
             height="px"
             backgroundColor={'amber.600'}
             my="3"
-          /> */}
+          />
           {/* <KeyboardAvoidingView
             h={{
               base: '400px',
@@ -137,9 +176,11 @@ const TestComponent = () => {
             width={'100%'}
             behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
           > */}
-          <MyForm button={obj.button} form={obj.form} input={obj.input} />
+          <View height={'50%'}>
+            <MyForm button={obj.button} form={obj.form} input={obj.input} />
+          </View>
           {/* </KeyboardAvoidingView> */}
-
+          {/* <MyText>{JSON.stringify(data, undefined, 2)}</MyText> */}
           {/* <Box height={300} /> */}
         </View>
       </ScrollView>

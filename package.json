@@ -32,7 +32,7 @@
     "babel-polyfill": "^6.26.0",
     "dotenv-webpack": "^8.0.1",
     "i18next": "^22.4.9",
-    "native-base": "^3.4.23",
+    "native-base": "^3.4.25",
     "raw-loader": "^4.0.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
@@ -52,12 +52,12 @@
     "react-native-web": "^0.18.10",
     "react-pdf": "^6.2.1",
     "react-redux": "^8.0.5",
-    "rn-fetch-blob": "0.13.0-beta.2",
     "typescript": "^4.9.3"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",
     "@babel/plugin-proposal-class-properties": "^7.18.6",
+    "@babel/plugin-transform-flow-strip-types": "^7.19.0",
     "@babel/preset-react": "^7.18.6",
     "@babel/runtime": "^7.12.5",
     "@react-native-community/eslint-config": "^2.0.0",

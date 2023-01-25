@@ -1,32 +1,56 @@
-import {CheckIcon, Select} from 'native-base';
-import React from 'react';
+import {CheckIcon, Select, View} from 'native-base';
+import React, {useState} from 'react';
 import {MySelectProps} from '.';
 
-export const MySelect = ({select, selectItem}: MySelectProps) => {
+export const MySelect = ({
+  data,
+  valueProp,
+  labelProp,
+  select,
+  selectItem,
+  onValueChange,
+  _webContainer,
+}: MySelectProps) => {
+  const [selectedValue, setSelectedValue] = useState('');
   return (
-    <Select
-      selectedValue={'Hello'}
-      minWidth="200"
-      accessibilityLabel="Choose Service"
-      placeholder="Choose Service"
-      _selectedItem={{
-        bg: 'teal.600',
-        endIcon: <CheckIcon size="5" />,
+    <View
+      _web={{
+        width: '100%',
+        ..._webContainer,
       }}
-      mt={1}
-      onValueChange={() => {}}
-      {...select}
     >
-      {[1, 3, 5, 6].map((i: number) => {
-        return (
-          <Select.Item
-            label={i.toString()}
-            value={i.toString()}
-            key={i}
-            {...selectItem}
-          />
-        );
-      })}
-    </Select>
+      <Select
+        selectedValue={selectedValue}
+        borderWidth={0}
+        color="black"
+        backgroundColor={'white'}
+        minWidth="200"
+        accessibilityLabel="Choose Service"
+        placeholder="Choose Service"
+        _selectedItem={{
+          bgColor: 'muted.200',
+          endIcon: <CheckIcon size="5" />,
+          borderRadius: 'md',
+        }}
+        mt={1}
+        {...select}
+        onValueChange={itemValue => {
+          setSelectedValue(itemValue);
+          onValueChange && onValueChange(itemValue);
+        }}
+      >
+        {data.length > 0 &&
+          data.map(i => {
+            return (
+              <Select.Item
+                label={i[labelProp ?? 'label']}
+                value={i[valueProp ?? 'value']}
+                key={i[valueProp ?? 'value']}
+                {...selectItem}
+              />
+            );
+          })}
+      </Select>
+    </View>
   );
 };

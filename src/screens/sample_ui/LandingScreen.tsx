@@ -31,7 +31,6 @@ import {MyText} from '@src/components/commons/my_text';
 import {Layout} from '@src/components/layout';
 import {Search} from '@src/components/commons/search';
 import {LoadingButton} from '@src/components/commons/loading_btn';
-import Modal_scenario from '@src/Test';
 
 const LandingScreen = () => {
   const navigation =
@@ -55,7 +54,6 @@ const LandingScreen = () => {
   return (
     <Layout navigation={navigation}>
       <View p={4}>
-        <Modal_scenario />
         <View
           display={'flex'}
           flexDir={'row'}

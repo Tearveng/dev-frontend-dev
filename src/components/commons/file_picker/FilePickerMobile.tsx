@@ -12,7 +12,7 @@ import {decode} from '@src/utils/base64_arraybuffer';
 
 export const FilePickerMobile = ({onFileChange}: FilePickerMobileProps) => {
   if (Platform.OS === 'web') return <></>;
-  const RNFetchBlob = require('rn-fetch-blob').default;
+  const RNFetchBlob = require('react-native-blob-util').default;
   const DocumentPicker = require('react-native-document-picker');
   const {t} = useTranslation();
 

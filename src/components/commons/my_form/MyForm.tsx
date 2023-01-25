@@ -7,6 +7,7 @@ import {MyFormProps} from '.';
 import {FilePickerMobile, FilePickerWeb} from '../file_picker';
 import {LoadingButton} from '../loading_btn';
 import {MyInputField} from '../my_input_field';
+import {MyRadioButton} from '../my_radio_button';
 import {MySelect} from '../my_select';
 import {MyText} from '../my_text';
 
@@ -70,7 +71,14 @@ export const MyForm = (props: MyFormProps) => {
                     keyboardType={val.keyboardType ?? 'default'}
                   />
                 ) : val.type === 'select' ? (
-                  <MySelect />
+                  <MySelect
+                    data={val.selectData!}
+                    labelProp="text"
+                    valueProp="value"
+                    onValueChange={itemValue =>
+                      val.onSelectChange && val.onSelectChange!(itemValue)
+                    }
+                  />
                 ) : val.type === 'file' ? (
                   <View height={'90%'} width={'100%'}>
                     {Platform.OS !== 'web' ? (
@@ -105,6 +113,14 @@ export const MyForm = (props: MyFormProps) => {
                       />
                     )}
                   </View>
+                ) : val.type === 'radio' ? (
+                  <MyRadioButton
+                    data={val.radioData!}
+                    onChange={(itemValue, data) => {
+                      console.log(data);
+                      val.onRadioChange && val.onRadioChange(itemValue, data);
+                    }}
+                  />
                 ) : (
                   <></>
                 )
@@ -129,20 +145,24 @@ export const MyForm = (props: MyFormProps) => {
         <></>
       )}
       {props.button.buttons.length > 0 ? (
-        props.button.buttons.map((val, index) => (
-          <LoadingButton
-            mt={4}
-            width={40}
-            isLoading={isSubmitting}
-            key={index}
-            onPress={
-              val.type === 'submit'
-                ? handleSubmit(val.onPress as SubmitHandler<FieldValues>)
-                : val.onPress
-            }
-            text={$ok(val.text) ? val.text : 'Submit'}
-          />
-        ))
+        <View display={'flex'} flexDir="row">
+          {props.button.buttons.map((val, index) => (
+            <View key={index} px={val.space ?? 3}>
+              <LoadingButton
+                type={val.colorScheme}
+                mt={4}
+                width={40}
+                isLoading={isSubmitting}
+                onPress={
+                  val.type === 'submit'
+                    ? handleSubmit(val.onPress as SubmitHandler<FieldValues>)
+                    : val.onPress
+                }
+                text={$ok(val.text) ? val.text : 'Submit'}
+              />
+            </View>
+          ))}
+        </View>
       ) : (
         <></>
       )}

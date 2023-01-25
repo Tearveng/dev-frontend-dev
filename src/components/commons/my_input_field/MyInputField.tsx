@@ -13,7 +13,7 @@ export const MyInputField = ({
   return (
     <View
       _web={{
-        width: '95%',
+        width: '100%',
         ..._webContainer,
       }}
     >

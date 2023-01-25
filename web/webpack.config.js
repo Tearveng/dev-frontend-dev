@@ -72,7 +72,7 @@ module.exports = {
       resourceRegExp: /react-native-document-picker/,
     }),
     new webpack.IgnorePlugin({
-      resourceRegExp: /rn-fetch-blob/,
+      resourceRegExp: /react-native-blob-util/,
     }),
     new Dotenv({
       path: path.join(rootDir, './.env'),
