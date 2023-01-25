@@ -3,7 +3,7 @@ import {ComponentMeta, ComponentStory} from '@storybook/react';
 import React from 'react';
 
 export default {
-  title: 'Commons/MyText',
+  title: 'Commons/Text Typography',
   component: MyText,
 } as ComponentMeta<typeof MyText>;
 
