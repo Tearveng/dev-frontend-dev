@@ -13,7 +13,7 @@ export default {
 // const [selectedValue, setSelectedValue] = useState('');
 // const [radioValue, setRadioValue] = useState('');
 const Template: ComponentStory<typeof MyForm> = args => (
-  <View width={'80%'} height={'500px'}>
+  <View width={'50%'} height={'500px'}>
     <MyForm {...args} />
     <Box height={10} />
   </View>

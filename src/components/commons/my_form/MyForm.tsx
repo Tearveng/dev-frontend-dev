@@ -1,5 +1,5 @@
 import {$ok} from '@src/utils/commons';
-import {Box, FormControl, View} from 'native-base';
+import {FormControl, View} from 'native-base';
 import React from 'react';
 import {Controller, FieldValues, SubmitHandler, useForm} from 'react-hook-form';
 import {Platform} from 'react-native';
@@ -166,7 +166,6 @@ export const MyForm = (props: MyFormProps) => {
       ) : (
         <></>
       )}
-      <Box height={500} />
     </View>
   );
 };
