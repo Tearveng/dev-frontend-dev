@@ -107,7 +107,7 @@ export interface TypeMap {
 export interface MyTextProps extends ITextProps {
   type?: Type;
   fontWeight?: FontWeight;
-  children?: string | null | undefined;
+  children?: string[] | string | null | undefined;
   fontSize?: FontSize;
   backgroundColor?: ColorType;
 

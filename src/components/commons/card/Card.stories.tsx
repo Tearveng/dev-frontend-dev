@@ -3,7 +3,7 @@ import React from 'react';
 import {Card} from './';
 
 export default {
-  title: 'Commons/LoadingButton',
+  title: 'Commons/Card',
   component: Card,
 } as ComponentMeta<typeof Card>;
 

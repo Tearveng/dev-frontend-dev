@@ -19,6 +19,7 @@ import {NavigatorRoute} from './NavigatorRouteConstant';
 import {Image} from 'react-native';
 import BookmarkOutline from '@src/assets/logo/outline_bookmark.png';
 import TestComponent from '@src/screens/test_commponents';
+import {SlideScreen} from '@src/screens/slide';
 const Stack = createStackNavigator();
 
 const Drawer = createDrawerNavigator();
@@ -26,7 +27,18 @@ const Drawer = createDrawerNavigator();
 export function DrawerNavigator() {
   return (
     <>
-      <Drawer.Navigator useLegacyImplementation initialRouteName="Home">
+      <Drawer.Navigator
+        useLegacyImplementation
+        initialRouteName={NavigatorRoute.SLIDE_SCREEN}
+      >
+        <Drawer.Screen
+          name={NavigatorRoute.SLIDE_SCREEN}
+          component={SlideScreen}
+          options={{
+            headerShown: false,
+            title: 'Slide Screen',
+          }}
+        />
         <Drawer.Screen
           name={NavigatorRoute.TEST_COMPONENT}
           component={TestComponent}
@@ -176,6 +188,14 @@ export function RootNavigator() {
           headerStyle: {
             backgroundColor: '#0891b2',
           },
+        }}
+      />
+      <Drawer.Screen
+        name={NavigatorRoute.SLIDE_SCREEN}
+        component={SlideScreen}
+        options={{
+          headerShown: false,
+          title: 'Slide Screen',
         }}
       />
     </Stack.Navigator>
