@@ -9,6 +9,7 @@ module.exports = {
     '@storybook/addon-essentials',
     '@storybook/addon-interactions',
     '@storybook/addon-react-native-web',
+    'storybook-axios/register',
   ],
   framework: '@storybook/react',
   core: {

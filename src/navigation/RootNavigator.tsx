@@ -20,6 +20,7 @@ import {Image} from 'react-native';
 import BookmarkOutline from '@src/assets/logo/outline_bookmark.png';
 import TestComponent from '@src/screens/test_commponents';
 import {SlideScreen} from '@src/screens/slide';
+import {PaginationScreen} from '@src/screens/pagination';
 const Stack = createStackNavigator();
 
 const Drawer = createDrawerNavigator();
@@ -29,8 +30,16 @@ export function DrawerNavigator() {
     <>
       <Drawer.Navigator
         useLegacyImplementation
-        initialRouteName={NavigatorRoute.SLIDE_SCREEN}
+        initialRouteName={NavigatorRoute.PAGINATION_SCREEN}
       >
+        <Drawer.Screen
+          name={NavigatorRoute.PAGINATION_SCREEN}
+          component={PaginationScreen}
+          options={{
+            headerShown: false,
+            title: 'Pagination Screen',
+          }}
+        />
         <Drawer.Screen
           name={NavigatorRoute.SLIDE_SCREEN}
           component={SlideScreen}
