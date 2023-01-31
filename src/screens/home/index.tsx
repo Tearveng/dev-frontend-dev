@@ -4,7 +4,6 @@ import {View, Text} from 'native-base';
 import {style} from '@styles/style';
 
 import {ViewPdf} from '@src/components/templates/pdf';
-import {API_URL} from '@src/config/env';
 import {Pressable} from 'react-native';
 import {ParamListBase, useNavigation} from '@react-navigation/native';
 import {NavigatorRoute} from '@src/navigation/NavigatorRouteConstant';
@@ -17,12 +16,9 @@ export function HomeScreen() {
   return (
     <Layout navigation={navigation}>
       <View style={style.container}>
-        <Text color="blue">env variables: {API_URL}</Text>
         <ViewPdf />
         <Pressable
-          onPress={() =>
-            navigation.navigate(NavigatorRoute.SAMPLE_UI.LANDING_SCREEN)
-          }
+          onPress={() => navigation.navigate(NavigatorRoute.SAMPLE_UI.LANDING)}
         >
           <Text>Go to Sample UI</Text>
         </Pressable>

@@ -7,7 +7,7 @@ import {ParamListBase, useNavigation} from '@react-navigation/native';
 import {StackNavigationProp} from '@react-navigation/stack';
 
 export function ForgotPasswordScreen() {
-  const [users, _] = useState([]);
+  const [users] = useState([]);
   const navigation =
     useNavigation<StackNavigationProp<ParamListBase, string, undefined>>();
   return (

@@ -1,5 +1,3 @@
-import ViewPdf from "./ViewPdf";
+import ViewPdf from './ViewPdf';
 
-export {
-  ViewPdf
-}
+export {ViewPdf};

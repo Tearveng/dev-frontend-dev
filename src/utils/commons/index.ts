@@ -1,4 +1,4 @@
-import {$icast} from './number';
+import {$iCast} from './number';
 import {INT_MAX, INT_MIN, Nullable, uint, UINT_MAX, UINT_MIN} from './type';
 
 export function $ok(o: any): boolean {
@@ -16,7 +16,7 @@ export function $isint(o: any): boolean {
     o <= INT_MAX
   );
 }
-export function $tounsigned(v: Nullable<string | number>, defaultValue?: uint) {
+export function $toUnsigned(v: Nullable<string | number>, defaultValue?: uint) {
   if (!$ok(v)) {
     return defaultValue;
   }
@@ -25,10 +25,10 @@ export function $tounsigned(v: Nullable<string | number>, defaultValue?: uint) {
   }
   return isNaN(v!)
     ? defaultValue
-    : Math.max(UINT_MIN, $icast(Math.min(v!, UINT_MAX)));
+    : Math.max(UINT_MIN, $iCast(Math.min(v!, UINT_MAX)));
 }
 
-export function $timeout(
+export function $timeOut(
   promise: Promise<any>,
   time: number,
   exception: any,

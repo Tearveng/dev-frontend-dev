@@ -30,8 +30,6 @@ export const MyInputField = ({
         onBlur={onBlur}
         onChangeText={onChangeText}
         value={value}
-        color="black"
-        backgroundColor={'white'}
         pt={2}
         {...props}
       />

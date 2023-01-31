@@ -17,7 +17,9 @@ const HeaderLeft = () => {
     >
       <Pressable
         onPress={() => {
-          if (navigation.canGoBack()) navigation.goBack();
+          if (navigation.canGoBack()) {
+            navigation.goBack();
+          }
         }}
       >
         <Image

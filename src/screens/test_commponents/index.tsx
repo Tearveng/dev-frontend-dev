@@ -47,7 +47,7 @@ const TestComponent = () => {
           required: 'Field is required',
           validate: (value: string) => {
             return value.length < 3
-              ? `firstname must has more than 3 charactors`
+              ? 'firstname must has more than 3 charactors'
               : undefined;
           },
         },
@@ -63,7 +63,7 @@ const TestComponent = () => {
           required: 'Field is required',
           validate: (value: string) => {
             return value.length < 5
-              ? `lastname must has more than 5 charactors`
+              ? 'lastname must has more than 5 charactors'
               : undefined;
           },
         },
@@ -78,9 +78,9 @@ const TestComponent = () => {
         rules: {
           required: 'Email is required!',
           validate: (val: string) => {
-            let pattern =
+            const pattern =
               /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
-            let result = val.match(pattern);
+            const result = val.match(pattern);
             return $ok(result) ? undefined : 'Email is invalid!';
           },
         },
@@ -277,7 +277,7 @@ const TestComponent = () => {
               </HStack>
             </Center>
           </View>
-          <View height={'10%'}></View>
+          <View height={'10%'} />
         </View>
       </ScrollView>
     </Layout>

@@ -6,7 +6,7 @@ import {
   LoginScreen,
   ForgotPasswordScreen,
   TestAPiServerRequestScreen,
-} from '@screens/index';
+} from '@src/screens';
 import {MyText} from '@src/components/commons/my_text';
 import {LanguagePicker} from '@src/components/langauge_picker';
 import HeaderLeft from '@src/components/navigations/HeaderLeft';
@@ -29,10 +29,10 @@ export function DrawerNavigator() {
     <>
       <Drawer.Navigator
         useLegacyImplementation
-        initialRouteName={NavigatorRoute.SLIDE_SCREEN}
+        initialRouteName={NavigatorRoute.LOGIN}
       >
         <Drawer.Screen
-          name={NavigatorRoute.SLIDE_SCREEN}
+          name={NavigatorRoute.SLIDE}
           component={SlideScreen}
           options={{
             headerShown: false,
@@ -48,7 +48,7 @@ export function DrawerNavigator() {
           }}
         />
         <Drawer.Screen
-          name="Login"
+          name={NavigatorRoute.LOGIN}
           component={LoginScreen}
           options={{
             headerShown: false,
@@ -63,7 +63,7 @@ export function DrawerNavigator() {
           }}
         />
         <Drawer.Screen
-          name="ForgotPassword"
+          name={NavigatorRoute.FORGOT_PASSWORD}
           component={ForgotPasswordScreen}
           options={{
             headerShown: false,
@@ -78,7 +78,7 @@ export function DrawerNavigator() {
           }}
         />
         <Drawer.Screen
-          name={NavigatorRoute.SAMPLE_UI.LANDING_SCREEN}
+          name={NavigatorRoute.SAMPLE_UI.LANDING}
           component={LandingScreen}
           options={{
             headerShown: false,
@@ -93,7 +93,7 @@ export function RootNavigator() {
   return (
     <Stack.Navigator
       screenOptions={{headerShown: false}}
-      initialRouteName={NavigatorRoute.SAMPLE_UI.LANDING_SCREEN}
+      initialRouteName={NavigatorRoute.SAMPLE_UI.LANDING}
     >
       <Stack.Screen
         name={NavigatorRoute.TEST_API}
@@ -134,7 +134,7 @@ export function RootNavigator() {
         }}
       />
       <Stack.Screen
-        name={NavigatorRoute.SAMPLE_UI.LANDING_SCREEN}
+        name={NavigatorRoute.SAMPLE_UI.LANDING}
         component={LandingScreen}
         options={{
           headerShown: true,
@@ -171,7 +171,7 @@ export function RootNavigator() {
         }}
       />
       <Stack.Screen
-        name={NavigatorRoute.SAMPLE_UI.SAMPLE_DETAIL_SCREEN}
+        name={NavigatorRoute.SAMPLE_UI.SAMPLE_DETAIL}
         component={SampleDetailScreen}
         options={{
           headerShown: true,
@@ -191,7 +191,7 @@ export function RootNavigator() {
         }}
       />
       <Drawer.Screen
-        name={NavigatorRoute.SLIDE_SCREEN}
+        name={NavigatorRoute.SLIDE}
         component={SlideScreen}
         options={{
           headerShown: false,

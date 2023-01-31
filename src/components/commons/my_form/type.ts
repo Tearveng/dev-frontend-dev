@@ -43,6 +43,10 @@ interface MyFormInputProps {
     RegisterOptions,
     'valueAsNumber' | 'valueAsDate' | 'setValueAs' | 'disabled'
   >;
+  variant?: 'outline' | 'rounded' | 'underlined' | undefined;
+  leftElement?: JSX.Element | undefined;
+  rightElement?: JSX.Element | undefined;
+  secureTextEntry?: boolean | undefined;
 }
 
 interface MyFormFromProps {

@@ -141,11 +141,21 @@ export const SlideScreen = () => {
           }}
           onDone={a => console.log(a)}
           onNext={a => {
-            if (a?.index === 1) console.log('on Next 01', a);
-            if (a?.index === 2) console.log('on Next 02', a);
-            if (a?.index === 3) console.log('on Next 03', a);
-            if (a?.index === 4) console.log('on Next 04', a);
-            if (a?.index === 0) console.log('on Next 0', a);
+            if (a?.index === 1) {
+              console.log('on Next 01', a);
+            }
+            if (a?.index === 2) {
+              console.log('on Next 02', a);
+            }
+            if (a?.index === 3) {
+              console.log('on Next 03', a);
+            }
+            if (a?.index === 4) {
+              console.log('on Next 04', a);
+            }
+            if (a?.index === 0) {
+              console.log('on Next 0', a);
+            }
           }}
           onBack={a => console.log('on Back', a)}
         />

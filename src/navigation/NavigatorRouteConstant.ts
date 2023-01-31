@@ -1,11 +1,13 @@
 export const NavigatorRoute = {
   HOME: 'home',
+  LOGIN: 'login',
+  FORGOT_PASSWORD: 'forgot-password',
   TEST_API: 'test-api-server',
   TEST_COMPONENT: 'test_component',
-  SLIDE_SCREEN: 'slide_screen',
+  SLIDE: 'slide',
   FILE_PICKER: 'file_picker',
   SAMPLE_UI: {
-    LANDING_SCREEN: 'landing_screen',
-    SAMPLE_DETAIL_SCREEN: 'sample_detail_screen',
+    LANDING: 'landing',
+    SAMPLE_DETAIL: 'sample_detail',
   },
 };

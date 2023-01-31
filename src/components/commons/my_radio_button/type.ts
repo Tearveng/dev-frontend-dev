@@ -16,5 +16,5 @@ export interface IRadioData {
   value: string;
   isSelected?: boolean;
 }
-interface MyRadioProps extends IRadioProps {}
-interface MyRadioGroupProps extends IRadioGroupProps {}
+type MyRadioProps = IRadioProps;
+type MyRadioGroupProps = IRadioGroupProps;

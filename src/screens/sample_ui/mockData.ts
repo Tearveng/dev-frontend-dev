@@ -2,7 +2,7 @@ import {Training} from '@src/components/svgs';
 import TrainingWeb from '@src/assets/logo/training.svg';
 import PlayIcon from '@src/assets/logo/play.png';
 import {ImageSourcePropType} from 'react-native';
-import {Course} from '@src/redux/reducers/course';
+import {Course} from '@src/redux/features/courses/course';
 
 export interface LastestCourse {
   id: number;
