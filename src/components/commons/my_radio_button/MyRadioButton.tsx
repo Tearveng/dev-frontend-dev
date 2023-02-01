@@ -37,12 +37,7 @@ export const MyRadioButton = ({
         {data.length > 0 &&
           data.map((item, index) => (
             <View key={index} px={2}>
-              <Radio
-                // colorScheme={'black'}
-                value={item.value}
-                my="2"
-                {...RadioProps}
-              >
+              <Radio value={item.value} my="2" {...RadioProps}>
                 <MyText type="dark">{item.text}</MyText>
               </Radio>
             </View>

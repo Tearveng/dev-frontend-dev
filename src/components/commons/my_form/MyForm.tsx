@@ -82,6 +82,7 @@ export const MyForm = (props: MyFormProps) => {
                     onValueChange={itemValue =>
                       val.onSelectChange && val.onSelectChange!(itemValue)
                     }
+                    defaultSelect={val.defaultValue}
                   />
                 ) : val.type === 'file' ? (
                   <View height={'90%'} width={'100%'}>

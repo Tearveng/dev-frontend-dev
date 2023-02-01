@@ -1,3 +1,4 @@
+import {$isObject} from '@src/utils/commons';
 import {CheckIcon, Select, View} from 'native-base';
 import React, {useState} from 'react';
 import {MySelectProps} from '.';
@@ -8,10 +9,11 @@ export const MySelect = ({
   labelProp,
   select,
   selectItem,
+  defaultSelect,
   onValueChange,
   _webContainer,
 }: MySelectProps) => {
-  const [selectedValue, setSelectedValue] = useState('');
+  const [selectedValue, setSelectedValue] = useState(defaultSelect ?? '');
   return (
     <View
       _web={{
@@ -41,13 +43,15 @@ export const MySelect = ({
       >
         {data.length > 0 &&
           data.map(i => {
-            return (
+            return $isObject(i) ? (
               <Select.Item
                 label={i[labelProp ?? 'label']}
                 value={i[valueProp ?? 'value']}
                 key={i[valueProp ?? 'value']}
                 {...selectItem}
               />
+            ) : (
+              <Select.Item label={i} value={i} key={i} {...selectItem} />
             );
           })}
       </Select>

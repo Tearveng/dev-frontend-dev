@@ -106,10 +106,14 @@ const TestComponent = () => {
         color: 'black',
         type: 'select',
         selectData: [
-          {id: 2, value: '2', text: 'hello'},
-          {id: 3, value: '3', text: 'Hello World'},
-          {id: 4, value: '4', text: 'Print Me Out'},
+          // {id: 2, value: '2', text: 'hello'},
+          // {id: 3, value: '3', text: 'Hello World'},
+          // {id: 4, value: '4', text: 'Print Me Out'},
+          'hello',
+          'Hello World',
+          'Print Me Out',
         ],
+        defaultValue: 'hello',
         onSelectChange: itemValue => {
           setSelectedValue(itemValue);
           console.log(itemValue);
