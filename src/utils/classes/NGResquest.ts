@@ -1,6 +1,6 @@
 import axios, {AxiosInstance} from 'axios';
-import {$ok, $timeout, $tounsigned} from '../commons';
-import {$isnumber} from '../commons/number';
+import {$ok, $timeOut, $toUnsigned} from '../commons';
+import {$isNumber} from '../commons/number';
 import {Nullable} from '../commons/type';
 import {NGError, NGUniqueError} from '../Errors/NGError';
 import {RespType, Resp} from './interfaces/APIConstants';
@@ -39,7 +39,7 @@ export class NGRequest {
     method?: string,
     responseType?: string,
     body?: Nullable<object>,
-    suplHeaders?: RequestHeaders,
+    supportHeaders?: RequestHeaders,
     timeout?: number,
   ): Promise<TSResponse> {
     const config: any = {
@@ -48,13 +48,13 @@ export class NGRequest {
       responseType: responseType,
       headers: Object.assign(
         Object.assign({}, this.commonHeaders),
-        suplHeaders,
+        supportHeaders,
       ),
       data: undefined,
     };
 
     if ($ok(this.token)) {
-      config.headers['Authorization'] = this.token!;
+      config.headers.Authorization = this.token!;
     }
     if ($ok(body)) {
       config.data = body;
@@ -64,16 +64,16 @@ export class NGRequest {
         'NGRequest.req(): if set, timeout parameter should be positive or 0',
       );
     }
-    timeout = $tounsigned(timeout)!;
+    timeout = $toUnsigned(timeout)!;
     if (!timeout) {
       timeout = this.defaultTimeOut;
     }
-    let ret: any = undefined;
+    let ret: any;
     let status = 0;
     let headers: RequestHeaders = {};
-    const timeoutError = NGUniqueError.timeoutError();
+    const timeoutError = NGUniqueError.timeOutError();
     try {
-      const response = await $timeout(
+      const response = await $timeOut(
         this.channel(config),
         timeout,
         timeoutError,
@@ -93,10 +93,10 @@ export class NGRequest {
         // AxiosError contains a 'code' field
         ret = null;
         status = Resp.TimeOut;
-      } else if ($isnumber(e.statusCode)) {
+      } else if ($isNumber(e.statusCode)) {
         ret = null;
         status = e.statusCode;
-      } else if ($isnumber(e.status)) {
+      } else if ($isNumber(e.status)) {
         ret = null;
         status = e.status;
       } else {

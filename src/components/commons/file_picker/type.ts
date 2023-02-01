@@ -6,6 +6,6 @@ interface BaseProps {
   ) => void;
 }
 
-export interface FilePickerMobileProps extends BaseProps {}
+export type FilePickerMobileProps = BaseProps;
 
-export interface FilePickerWebProps extends BaseProps {}
+export type FilePickerWebProps = BaseProps;

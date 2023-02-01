@@ -1,11 +1,8 @@
 import {
   Box,
-  Button,
   Center,
   Checkbox,
-  FormControl,
   HStack,
-  Input,
   Pressable,
   Text,
   useBreakpointValue,
@@ -19,27 +16,28 @@ import {
   faLock,
   faEyeSlash,
   faEye,
-  faWarning,
 } from '@fortawesome/free-solid-svg-icons';
 import {
   TouchableOpacity,
-  KeyboardAvoidingView /*, Platform*/,
+  KeyboardAvoidingView,
   Platform,
   TextInput,
   TouchableWithoutFeedback,
   Keyboard,
 } from 'react-native';
 import {style} from '@styles/style';
-import {useAppSelector} from '@src/redux/config/hooks';
 import {useFocusEffect} from '@react-navigation/native';
+import {login, LoginForm, validate} from '@src/redux/features/user/actions';
+import {NavigatorRoute} from '@src/navigation/NavigatorRouteConstant';
+import {useAppSelector} from '@src/redux/config/hooks';
+import {MyForm} from '@components/commons/my_form';
 
 export interface Props {
   navigation: any;
 }
 
 export function LoginScreen({navigation}: Props) {
-  const [isSubmit, setIsSubmit] = React.useState(false);
-  const [userForm, setUserForm] = React.useState({
+  const [userForm, setUserForm] = React.useState<LoginForm>({
     email: '',
     password: '',
     isEmailValid: true,
@@ -48,7 +46,7 @@ export function LoginScreen({navigation}: Props) {
     emailMessage: '',
     passwordMessage: '',
   });
-
+  const user = useAppSelector(state => state.user);
   useFocusEffect(
     React.useCallback(() => {
       setUserForm({
@@ -63,8 +61,6 @@ export function LoginScreen({navigation}: Props) {
     }, []),
   );
 
-  const user = useAppSelector(state => state.user);
-
   const refEmail = React.useRef<TextInput>(null);
   const refPassword = React.useRef<TextInput>(null);
 
@@ -72,73 +68,18 @@ export function LoginScreen({navigation}: Props) {
     base: 'row',
   });
 
-  const login = () => {
-    setIsSubmit(true);
-    navigation.navigate('home');
-    if (validate()) {
-      if (userForm.email != user.email && userForm.password != user.password) {
-        setUserForm(prevState => ({
-          ...prevState,
-          isEmailValid: false,
-          emailMessage:
-            'Adresse email et mot de passe non reconnus, merci de vérifier leur exactitude.',
-        }));
+  const submit = () => {
+    validate(userForm);
+    if (userForm.isEmailValid && userForm.isPasswordValid) {
+      if (login(userForm, user)) {
+        navigation.navigate(NavigatorRoute.HOME);
+      } else if (!userForm.isEmailValid) {
         refEmail.current?.focus();
-      } else if (userForm.email != user.email) {
-        setUserForm(prevState => ({
-          ...prevState,
-          isEmailValid: false,
-          emailMessage:
-            'Adresse email non reconnue, merci de vérifier leur exactitude.',
-        }));
-        refEmail.current?.focus();
-      } else if (userForm.password != user.password) {
-        setUserForm(prevState => ({
-          ...prevState,
-          isPasswordValid: false,
-          passwordMessage:
-            'Mot de passe non reconnu, merci de vérifier leur exactitude.',
-        }));
+      } else if (!userForm.isPasswordValid) {
         refPassword.current?.focus();
-      } else {
-        navigation.navigate('home');
       }
     }
-    setTimeout(() => {
-      setIsSubmit(false);
-    }, 500);
-  };
-  const validate = () => {
-    let validForm = true;
-    if (!userForm.email.includes('@')) {
-      validForm = false;
-      setUserForm(prevState => ({
-        ...prevState,
-        isEmailValid: false,
-        emailMessage: "Valid email must be has '@'.",
-      }));
-    } else {
-      setUserForm(prevState => ({
-        ...prevState,
-        isEmailValid: false,
-        emailMessage: '',
-      }));
-    }
-    if (userForm.password.length < 6) {
-      validForm = false;
-      setUserForm(prevState => ({
-        ...prevState,
-        isPasswordValid: false,
-        passwordMessage: 'Must be atleast 6 characters.',
-      }));
-    } else {
-      setUserForm(prevState => ({
-        ...prevState,
-        isPasswordValid: true,
-        passwordMessage: '',
-      }));
-    }
-    return validForm;
+    setTimeout(() => {}, 500);
   };
 
   return (
@@ -160,69 +101,80 @@ export function LoginScreen({navigation}: Props) {
                 <Text size={'md'}>{'CUSTOMER LOGIN'}</Text>
               </Center>
             </Box>
-            <VStack p={10} pt={5} space={6}>
-              <FormControl isInvalid={!userForm.isEmailValid} isRequired={true}>
-                <Input
-                  value={userForm.email}
-                  type="text"
-                  onChangeText={e =>
-                    setUserForm(prevState => ({
-                      ...prevState,
-                      email: e,
-                    }))
-                  }
-                  ref={refEmail}
-                  variant="underlined"
-                  placeholder="Adresse email"
-                  leftElement={<FontAwesomeIcon icon={faUser} color="white" />}
-                />
-                <FormControl.ErrorMessage
-                  leftIcon={<FontAwesomeIcon icon={faWarning} color="red" />}
-                >
-                  {userForm.emailMessage}
-                </FormControl.ErrorMessage>
-              </FormControl>
-              <FormControl isInvalid={!userForm.isPasswordValid}>
-                <Input
-                  value={userForm.password}
-                  secureTextEntry={userForm.isSecure}
-                  onChangeText={e =>
-                    setUserForm(prevState => ({
-                      ...prevState,
-                      password: e,
-                    }))
-                  }
-                  ref={refPassword}
-                  variant="underlined"
-                  placeholder="Mot de passe"
-                  leftElement={
-                    <FontAwesomeIcon icon={faLock} color="lightgray" />
-                  }
-                  rightElement={
-                    <Pressable
-                      onPress={() =>
-                        setUserForm(prevState => ({
-                          ...prevState,
-                          isSecure: !userForm.isSecure,
-                        }))
-                      }
-                    >
-                      <FontAwesomeIcon
-                        icon={userForm.isSecure ? faEyeSlash : faEye}
-                        color="lightgray"
-                      />
-                    </Pressable>
-                  }
-                />
-                <FormControl.HelperText display="none">
-                  Must be atleast 6 characters.
-                </FormControl.HelperText>
-                <FormControl.ErrorMessage
-                  leftIcon={<FontAwesomeIcon icon={faWarning} color="red" />}
-                >
-                  {userForm.passwordMessage}
-                </FormControl.ErrorMessage>
-              </FormControl>
+
+            <VStack p={10} pt={5}>
+              <MyForm
+                form={{space: 1}}
+                input={[
+                  {
+                    leftElement: (
+                      <FontAwesomeIcon icon={faUser} color="white" />
+                    ),
+                    variant: 'underlined',
+                    name: 'email',
+                    color: 'white',
+                    isRequired: true,
+                    placeholder: 'Your email here...',
+                    rules: {
+                      required: 'Email is required!',
+                      validate: (val: string) => {
+                        const pattern =
+                          /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+                        const result = val.match(pattern);
+                        return result ? undefined : 'Email is invalid!';
+                      },
+                    },
+                  },
+                  {
+                    secureTextEntry: userForm.isSecure,
+                    name: 'password',
+                    color: 'white',
+                    isRequired: true,
+                    type: 'password',
+                    placeholder: 'Your password here...',
+                    variant: 'underlined',
+                    // message: 'overwrite of all messages.',
+                    // messageType: 'error | success | warning',
+                    rules: {
+                      required: 'Email is required!',
+                      validate: (val: string) => {
+                        if (val.length < 6) {
+                          return 'Password at least 6 characters.';
+                        }
+                      },
+                    },
+                    leftElement: (
+                      <FontAwesomeIcon icon={faLock} color="lightgray" />
+                    ),
+                    rightElement: (
+                      <Pressable
+                        onPress={() =>
+                          setUserForm(prevState => ({
+                            ...prevState,
+                            isSecure: !userForm.isSecure,
+                          }))
+                        }
+                      >
+                        <FontAwesomeIcon
+                          icon={userForm.isSecure ? faEyeSlash : faEye}
+                          color="lightgray"
+                        />
+                      </Pressable>
+                    ),
+                  },
+                ]}
+                button={{
+                  buttons: [
+                    {
+                      text: 'Se connecter',
+                      type: 'submit',
+                      colorScheme: 'success',
+                      onPress: submit,
+                    },
+                  ],
+                }}
+              />
+
               <HStack
                 style={{
                   flexDirection: flexDir,
@@ -244,16 +196,6 @@ export function LoginScreen({navigation}: Props) {
                   </Text>
                 </TouchableOpacity>
               </HStack>
-              <Button
-                isLoading={isSubmit}
-                isLoadingText={'Se connectering...'}
-                style={style.button}
-                mx="auto"
-                w={{base: '75%'}}
-                onPress={login}
-              >
-                Se connecter
-              </Button>
             </VStack>
           </Box>
         </View>

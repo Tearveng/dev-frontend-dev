@@ -11,5 +11,5 @@ export interface MySelectProps {
   onValueChange?: ((itemValue: string) => void) | undefined;
 }
 
-interface MySelectProp extends ISelectProps {}
-interface MySelectItemProp extends ISelectItemProps {}
+type MySelectProp = ISelectProps;
+type MySelectItemProp = ISelectItemProps;

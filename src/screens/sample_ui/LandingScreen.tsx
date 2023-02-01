@@ -19,10 +19,10 @@ import TrainingWeb from '@src/assets/logo/training.svg';
 import {Platform} from 'react-native';
 import PlayIcon from '@src/assets/logo/play.png';
 import {WorkFromHome} from '@src/components/svgs';
-import {courses, lastestCourses} from './mockdata';
+import {courses, lastestCourses} from './mockData';
 import {useTranslation} from 'react-i18next';
 import {useDispatch} from 'react-redux';
-import {setCourses} from '@src/redux/reducers/course';
+import {setCourses} from '@src/redux/features/courses/course';
 import {ParamListBase, useNavigation} from '@react-navigation/native';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {NavigatorRoute} from '@src/navigation/NavigatorRouteConstant';
@@ -50,7 +50,7 @@ const LandingScreen = () => {
 
   useEffect(() => {
     dispatch(setCourses(courses));
-  }, []);
+  }, [dispatch]);
   return (
     <Layout navigation={navigation}>
       <View p={4}>
@@ -120,12 +120,9 @@ const LandingScreen = () => {
                 _web={lastestCoursesBreakPoint}
                 key={data.id}
                 onPress={() =>
-                  navigation.navigate(
-                    NavigatorRoute.SAMPLE_UI.SAMPLE_DETAIL_SCREEN,
-                    {
-                      params: {id: data.id},
-                    },
-                  )
+                  navigation.navigate(NavigatorRoute.SAMPLE_UI.SAMPLE_DETAIL, {
+                    params: {id: data.id},
+                  })
                 }
               >
                 <LatestCourses

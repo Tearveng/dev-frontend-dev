@@ -12,6 +12,7 @@
     "web:build": "cd web && webpack ",
     "test": "jest",
     "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook"
   },
@@ -81,7 +82,8 @@
     "babel-plugin-module-resolver": "^4.1.0",
     "babel-plugin-react-native-web": "^0.18.10",
     "eslint": "^7.32.0",
-    "eslint-plugin-storybook": "^0.6.10",
+    "eslint-plugin-storybook": "^0.6.7",
+    "eslint-plugin-prettier": "^4.2.1",
     "html-webpack-plugin": "^5.5.0",
     "jest": "^26.6.3",
     "metro-react-native-babel-preset": "0.72.3",

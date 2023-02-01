@@ -24,8 +24,11 @@ export const MyRadioButton = ({
       onChange={nextValue => {
         setValue(nextValue);
         data.forEach(i => {
-          if (i.value === nextValue) i.isSelected = true;
-          else i.isSelected = false;
+          if (i.value === nextValue) {
+            i.isSelected = true;
+          } else {
+            i.isSelected = false;
+          }
         });
         onChange && onChange(nextValue, data);
       }}

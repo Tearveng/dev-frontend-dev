@@ -13,7 +13,7 @@ export class NGUniqueError extends Error {
   constructor(message: string) {
     super(message);
   }
-  static timeoutError() {
+  static timeOutError() {
     if (!$ok(this.__timeoutError)) {
       this.__timeoutError = new NGUniqueError('TimeoutSingletonError');
     }

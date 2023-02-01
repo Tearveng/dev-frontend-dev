@@ -15,7 +15,7 @@ import {Platform, View} from 'react-native';
 // import SvgView from './SVGLogo';
 import {Brainstorming} from '@src/components/svgs';
 import BrainstormingWeb from '@src/assets/logo/brainstorming.svg';
-import {SvgView} from '../../components/svgs';
+import {SvgView} from '@components/svgs';
 import {MyText} from '@src/components/commons/my_text/MyText';
 import {Layout} from '@src/components/layout';
 import {useNavigation, ParamListBase} from '@react-navigation/native';
@@ -84,7 +84,8 @@ export const TestAPiServerRequestScreen = () => {
 
   const post = async () => {
     try {
-      const url = `/api/v1/dev/sign-document?file-name=hello&format=1&level=1&type1=1&certificate=generate`;
+      const url =
+        '/api/v1/dev/sign-document?file-name=hello&format=1&level=1&type1=1&certificate=generate';
       const data = await api.ngrequest(url, Verb.Post, RespType.Json);
       console.log(data);
     } catch (error: any) {
@@ -94,7 +95,7 @@ export const TestAPiServerRequestScreen = () => {
 
   const postSessions = async () => {
     try {
-      const url = `/api/v1/sessions`;
+      const url = '/api/v1/sessions';
       const data = await api.ngrequest(
         url,
         Verb.Post,
@@ -118,7 +119,7 @@ export const TestAPiServerRequestScreen = () => {
         reason: 'string',
         force: true,
       };
-      const url = `/api/v1/session/2/close`;
+      const url = '/api/v1/session/2/close';
       const data = await api.ngrequest(
         url,
         Verb.Put,
@@ -134,7 +135,7 @@ export const TestAPiServerRequestScreen = () => {
 
   const deleteApi = async () => {
     try {
-      const url = `/api/v1/session/2/scenario/1`;
+      const url = '/api/v1/session/2/scenario/1';
       const data = await api.ngrequest(url, Verb.Delete, RespType.Json, [
         Resp.OK,
         Resp.Forbidden,

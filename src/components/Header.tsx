@@ -12,6 +12,7 @@ import {faUser, faBars} from '@fortawesome/free-solid-svg-icons';
 import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
 import {style} from '@styles/style';
 import {LanguagePicker} from './langauge_picker';
+import {NavigatorRoute} from '@src/navigation/NavigatorRouteConstant';
 
 // interface Props {
 //   navigation: StackNavigationProp<ParamListBase, string, undefined>;
@@ -41,16 +42,22 @@ export function Header({navigation}: any) {
           ) : (
             <></>
           )}
-          <Text color="white" fontSize="20" fontWeight="bold">
-            Home
-          </Text>
+          <Pressable
+            onPress={() => {
+              navigation.navigate(NavigatorRoute.HOME);
+            }}
+          >
+            <Text color="white" fontSize="20" fontWeight="bold">
+              Home
+            </Text>
+          </Pressable>
         </HStack>
         <HStack space={2}>
           {isNavItem ? (
             <>
               <Pressable
                 onPress={() => {
-                  navigation.navigate('forgot_password');
+                  navigation.navigate(NavigatorRoute.HOME);
                 }}
               >
                 <Text bold={true} paddingTop={2}>
@@ -59,7 +66,7 @@ export function Header({navigation}: any) {
               </Pressable>
               <Pressable
                 onPress={() => {
-                  navigation.navigate('forgot_password');
+                  navigation.navigate(NavigatorRoute.HOME);
                 }}
               >
                 <Text bold={true} paddingTop={2}>
@@ -69,11 +76,11 @@ export function Header({navigation}: any) {
 
               <Pressable
                 onPress={() => {
-                  navigation.navigate('forgot_password');
+                  navigation.navigate(NavigatorRoute.SLIDE);
                 }}
               >
                 <Text bold={true} paddingTop={2}>
-                  ABOUT
+                  SLIDE
                 </Text>
               </Pressable>
             </>
@@ -82,7 +89,7 @@ export function Header({navigation}: any) {
           )}
           <IconButton
             onPress={() => {
-              navigation.navigate('login');
+              navigation.navigate(NavigatorRoute.LOGIN);
             }}
             icon={<FontAwesomeIcon icon={faUser} color="white" />}
             name="menu"

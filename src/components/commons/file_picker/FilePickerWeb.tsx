@@ -78,7 +78,9 @@ export const FilePickerWeb = ({onFileChange}: FilePickerWebProps) => {
         accept="*"
         onChange={e => {
           const length = e.target.files?.length ?? 0;
-          if (length <= 0) return;
+          if (length <= 0) {
+            return;
+          }
           chooseFile(e);
         }}
       />

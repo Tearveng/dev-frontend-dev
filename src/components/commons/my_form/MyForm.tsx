@@ -69,6 +69,10 @@ export const MyForm = (props: MyFormProps) => {
                     placeholderTextColor={val.placeholderTextColor}
                     type={val.type ?? 'text'}
                     keyboardType={val.keyboardType ?? 'default'}
+                    variant={val.variant}
+                    secureTextEntry={val.secureTextEntry}
+                    leftElement={val.leftElement}
+                    rightElement={val.rightElement}
                   />
                 ) : val.type === 'select' ? (
                   <MySelect

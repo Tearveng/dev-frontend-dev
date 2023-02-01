@@ -10,7 +10,7 @@ interface Props extends PropsWithChildren {
 export const Layout = ({children, navigation}: Props) => {
   return (
     <>
-      <Header navigation={navigation}></Header>
+      <Header navigation={navigation} />
       {children}
     </>
   );

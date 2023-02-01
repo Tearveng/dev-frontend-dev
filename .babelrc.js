@@ -3,16 +3,9 @@ module.exports = {
   plugins: [
     '@babel/plugin-proposal-export-namespace-from', // for react-native-reanimated works on web
     'react-native-reanimated/plugin', // for react-native-reanimated works on mobile
-    '@babel/plugin-transform-flow-strip-types',
-
-    /// mobile
-    // ['@babel/plugin-proposal-private-methods', {loose: true}], // transform private methods
-    // ['@babel/plugin-proposal-class-properties', {loose: true}],
-
-    //storybook
-    '@babel/plugin-proposal-private-methods', // transform private methods
+    '@babel/plugin-transform-flow-strip-types', // fix flatList
+    '@babel/plugin-proposal-private-methods', // transform private methods to support pdfjs
     '@babel/plugin-proposal-class-properties',
-
     [
       'module-resolver',
       {
