@@ -19,7 +19,7 @@ export function Pagination({
   const [dataServer, setDataServer] = useState<[] | undefined>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
-  const api = new APIServer(baseUrl ?? 'http://10.2.50.13:3000', {
+  const api = new APIServer(baseUrl ?? 'http://10.2.50.26:3000', {
     certignahash: 'ySsPUR23',
     certignarole: 2,
     certignauser: 'pps#test',
@@ -35,14 +35,33 @@ export function Pagination({
   useEffect(() => {
     const fecthPosts = async () => {
       setLoading(true);
+
       const url = urlFormat();
       try {
+        // for (let i = 1; i <= 1000; i++) {
+        //   const body = {
+        //     title: 'A cool product ' + i,
+        //     price: 14.99 * i,
+        //     content: 'This is actually an sick product' + 14.99 * i,
+        //   };
+        //   await api.ngrequest(
+        //     '/api/products',
+        //     Verb.Post,
+        //     RespType.Json,
+        //     [Resp.OK],
+        //     body,
+        //     {
+        //       Authorization:
+        //         'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJ0aGVvLmNyYWlnQGV4YW1wbGUuY29tIiwibmFtZSI6IlRoZW8gQ3JhaWciLCJpYXQiOjE2NzUyMTc3MzF9.iI0Zlr-O7DovN162xyUgEmPxMFj0mbNjUfbpzg3i81k',
+        //     },
+        //   );
+        // }
         const {items, totalPages} = await api.ngrequest(url);
         setPages(totalPages);
         setDataServer(items);
         setLoading(false);
-      } catch (error) {
-        console.log(error);
+      } catch (error: any) {
+        console.log(error.message);
         setLoading(false);
         setError('Some error occured');
       }
