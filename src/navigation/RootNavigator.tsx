@@ -21,6 +21,7 @@ import BookmarkOutline from '@src/assets/logo/outline_bookmark.png';
 import TestComponent from '@src/screens/test_commponents';
 import {SlideScreen} from '@src/screens/slide';
 import {PaginationScreen} from '@src/screens/pagination';
+import {DailogScreen} from '@src/screens/dialog';
 const Stack = createStackNavigator();
 
 const Drawer = createDrawerNavigator();
@@ -30,7 +31,7 @@ export function DrawerNavigator() {
     <>
       <Drawer.Navigator
         useLegacyImplementation
-        initialRouteName={NavigatorRoute.PAGINATION_SCREEN}
+        initialRouteName={NavigatorRoute.DIALOG_SCREEN}
       >
         <Drawer.Screen
           name={NavigatorRoute.PAGINATION_SCREEN}
@@ -38,6 +39,15 @@ export function DrawerNavigator() {
           options={{
             headerShown: false,
             title: 'Pagination Screen',
+          }}
+        />
+
+        <Drawer.Screen
+          name={NavigatorRoute.DIALOG_SCREEN}
+          component={DailogScreen}
+          options={{
+            headerShown: false,
+            title: 'Dialog Screen',
           }}
         />
         <Drawer.Screen

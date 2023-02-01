@@ -1,0 +1,18 @@
+import { ReactNode } from "react";
+
+export declare type SizeDialog = "xs" | "sm" | "md" | "lg" | "xl" | "full";
+
+export interface DialogProps{
+    body?: string | number | ReactNode | ReactNode[] | undefined
+    header?: string | number | ReactNode | ReactNode[] | undefined
+    size?: SizeDialog | undefined
+    isOpen: boolean
+    onClose?: () => void | undefined
+}
+
+export interface DialogHook{
+    isOpen: boolean;
+    onClose: () => void;
+    onOpen: () => void;
+    onToggle: () => void;
+}

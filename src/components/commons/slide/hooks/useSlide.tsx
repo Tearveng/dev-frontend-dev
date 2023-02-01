@@ -64,9 +64,6 @@ function useSlideManager(initialSlide: Slide): {
     });
   }, []);
 
-  // const done = useCallback((callback: any) => {
-  //   typeof callback === 'function' && $ok(callback) && callback();
-  // }, []);
   return {slide, next, back};
 }
 
