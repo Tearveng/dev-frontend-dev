@@ -34,14 +34,6 @@ export function DrawerNavigator() {
         initialRouteName={NavigatorRoute.DIALOG_SCREEN}
       >
         <Drawer.Screen
-          name={NavigatorRoute.DIALOG_SCREEN}
-          component={DailogScreen}
-          options={{
-            headerShown: false,
-            title: 'Dialog Screen',
-          }}
-        />
-        <Drawer.Screen
           name={NavigatorRoute.PAGINATION_SCREEN}
           component={PaginationScreen}
           options={{

@@ -5,6 +5,7 @@ import {LoadingButton} from '@src/components/commons/loading_btn';
 import {Layout} from '@src/components/layout';
 import {Center, VStack} from 'native-base';
 import React, {useState} from 'react';
+import {ViewButton} from '../test_commponents/ViewButton';
 
 export const DailogScreen = () => {
   const navigation =
@@ -21,6 +22,25 @@ export const DailogScreen = () => {
           header={
             "This is not just a string or number or ReactNode or ReactNode[] but it's all."
           }
+          buttons={
+            <>
+              <LoadingButton
+                variant="ghost"
+                colorScheme="blueGray"
+                onPress={() => {
+                  dialog.onClose();
+                }}
+                text={'Cancel'}
+              />
+              <LoadingButton
+                onPress={() => {
+                  dialog.onClose();
+                }}
+                text={'Save'}
+              />
+            </>
+          }
+          body={<ViewButton />}
         />
         {/* <Dialog
           size={size2 as SizeDialog}
@@ -32,6 +52,7 @@ export const DailogScreen = () => {
             <LoadingButton
               text={`Dailog ${size} Size`}
               key={size}
+              type={'success'}
               onPress={() => {
                 setSize(size);
                 dialog.onOpen();
@@ -43,6 +64,7 @@ export const DailogScreen = () => {
           {['lg', 'xl', 'full'].map(size => (
             <LoadingButton
               text={`Dailog ${size} Size`}
+              type={'info'}
               key={size}
               onPress={() => {
                 setSize(size);

@@ -3,7 +3,7 @@ import React from 'react';
 import {ColorValue} from 'react-native';
 import {LoadingButtonProps, spinnerIconColorMap} from '.';
 import {MyText} from '../my_text';
-import {style} from '@styles/style';
+// import {style} from '@styles/style';
 
 export const LoadingButton = ({
   text,
@@ -24,7 +24,7 @@ export const LoadingButton = ({
   return (
     <Button
       {...props}
-      style={style.button}
+      // style={style.button}
       variant={variant}
       colorScheme={type}
       isDisabled={isLoading}
