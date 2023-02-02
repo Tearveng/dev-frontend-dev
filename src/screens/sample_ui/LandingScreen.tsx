@@ -23,18 +23,16 @@ import {courses, lastestCourses} from './mockData';
 import {useTranslation} from 'react-i18next';
 import {useDispatch} from 'react-redux';
 import {setCourses} from '@src/redux/features/courses/course';
-import {ParamListBase, useNavigation} from '@react-navigation/native';
-import {StackNavigationProp} from '@react-navigation/stack';
-import {NavigatorRoute} from '@src/navigation/NavigatorRouteConstant';
+import {NavigatorRoute} from '@src/navigation';
 import {Localization} from '@src/i18n/languages';
 import {MyText} from '@src/components/commons/my_text';
 import {Layout} from '@src/components/layout';
 import {Search} from '@src/components/commons/search';
 import {LoadingButton} from '@src/components/commons/loading_btn';
+import {useNavigation} from '@src/navigation';
 
 const LandingScreen = () => {
-  const navigation =
-    useNavigation<StackNavigationProp<ParamListBase, string, undefined>>();
+  const navigation = useNavigation();
   const dispatch = useDispatch();
   const {t} = useTranslation();
   const flexDir = useBreakpointValue({
@@ -120,7 +118,9 @@ const LandingScreen = () => {
                 _web={lastestCoursesBreakPoint}
                 key={data.id}
                 onPress={() =>
-                  navigation.navigate(NavigatorRoute.SAMPLE_UI.SAMPLE_DETAIL, {
+                  navigation.navigate(NavigatorRoute.SAMPLE_UI.MAIN, {
+                    screen: NavigatorRoute.SAMPLE_UI.SAMPLE_DETAIL,
+                    initial: false,
                     params: {id: data.id},
                   })
                 }

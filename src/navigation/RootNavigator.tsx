@@ -7,21 +7,14 @@ import {
   ForgotPasswordScreen,
   TestAPiServerRequestScreen,
 } from '@src/screens';
-import {MyText} from '@src/components/commons/my_text';
-import {LanguagePicker} from '@src/components/langauge_picker';
-import HeaderLeft from '@src/components/navigations/HeaderLeft';
-import {Localization} from '@src/i18n/languages';
 import {LandingScreen} from '@src/screens/sample_ui';
-import {SampleDetailScreen} from '@src/screens/sample_ui/SampleDetailScreen';
-import {t} from 'i18next';
-import {Box, View} from 'native-base';
+// import {SampleDetailScreen} from '@src/screens/sample_ui/SampleDetailScreen';
 import {NavigatorRoute} from './NavigatorRouteConstant';
-import {Image} from 'react-native';
-import BookmarkOutline from '@src/assets/logo/outline_bookmark.png';
 import TestComponent from '@src/screens/test_commponents';
 import {SlideScreen} from '@src/screens/slide';
 import {PaginationScreen} from '@src/screens/pagination';
 import {DailogScreen} from '@src/screens/dialog';
+import {SampleDetailScreen} from '@src/screens/sample_ui/SampleDetailScreen';
 const Stack = createStackNavigator();
 
 const Drawer = createDrawerNavigator();
@@ -31,7 +24,7 @@ export function DrawerNavigator() {
     <>
       <Drawer.Navigator
         useLegacyImplementation
-        initialRouteName={NavigatorRoute.DIALOG_SCREEN}
+        initialRouteName={NavigatorRoute.HOME}
       >
         <Drawer.Screen
           name={NavigatorRoute.PAGINATION_SCREEN}
@@ -97,8 +90,8 @@ export function DrawerNavigator() {
           }}
         />
         <Drawer.Screen
-          name={NavigatorRoute.SAMPLE_UI.LANDING}
-          component={LandingScreen}
+          name={NavigatorRoute.SAMPLE_UI.MAIN}
+          component={SampleUINavigation}
           options={{
             headerShown: false,
             title: 'Sample UI Landing Screen',
@@ -108,6 +101,23 @@ export function DrawerNavigator() {
     </>
   );
 }
+
+const SampleUINavigation = () => (
+  <Stack.Navigator
+    screenOptions={{headerShown: false}}
+    initialRouteName={NavigatorRoute.SAMPLE_UI.LANDING}
+  >
+    <Stack.Screen
+      name={NavigatorRoute.SAMPLE_UI.LANDING}
+      component={LandingScreen}
+    />
+    <Stack.Screen
+      name={NavigatorRoute.SAMPLE_UI.SAMPLE_DETAIL}
+      component={SampleDetailScreen}
+    />
+  </Stack.Navigator>
+);
+
 export function RootNavigator() {
   return (
     <Stack.Navigator
@@ -152,63 +162,7 @@ export function RootNavigator() {
           // },
         }}
       />
-      <Stack.Screen
-        name={NavigatorRoute.SAMPLE_UI.LANDING}
-        component={LandingScreen}
-        options={{
-          headerShown: true,
-          title: '',
-          headerTitle: () => (
-            <View
-              width="100%"
-              display={'flex'}
-              alignItems={'center'}
-              justifyContent={'space-between'}
-            >
-              <MyText fontSize={'sm'} fontWeight={'semibold'} type="white">
-                {t(Localization.sampleUI)}
-              </MyText>
-            </View>
-          ),
-          headerLeft: () => <HeaderLeft />,
-          headerRight: () => (
-            <Box
-              _text={{
-                color: 'amber.50',
-              }}
-              pr={1}
-              display={'flex'}
-              flexDir={'row'}
-              justifyContent={'space-between'}
-            >
-              <LanguagePicker />
-            </Box>
-          ),
-          headerStyle: {
-            backgroundColor: '#0891b2',
-          },
-        }}
-      />
-      <Stack.Screen
-        name={NavigatorRoute.SAMPLE_UI.SAMPLE_DETAIL}
-        component={SampleDetailScreen}
-        options={{
-          headerShown: true,
-          title: '',
-          headerLeft: () => <HeaderLeft />,
-          headerRight: () => (
-            <View mr={3}>
-              <Image
-                source={BookmarkOutline}
-                style={{width: 25, height: 25, tintColor: 'white'}}
-              />
-            </View>
-          ),
-          headerStyle: {
-            backgroundColor: '#0891b2',
-          },
-        }}
-      />
+
       <Drawer.Screen
         name={NavigatorRoute.SLIDE_SCREEN}
         component={SlideScreen}
@@ -220,9 +174,3 @@ export function RootNavigator() {
     </Stack.Navigator>
   );
 }
-
-export type RootStackParamList = {
-  Home: undefined;
-  Profile: {userId: string};
-  Feed: {sort: 'latest' | 'top'} | undefined;
-};

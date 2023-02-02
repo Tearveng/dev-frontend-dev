@@ -1,13 +1,11 @@
-import {ParamListBase, useNavigation} from '@react-navigation/native';
-import {StackNavigationProp} from '@react-navigation/stack';
 import {Box, Pressable} from 'native-base';
 import ChevronLeft from '@src/assets/logo/chevronLeft.png';
 import React from 'react';
 import {Image} from 'react-native';
+import {useNavigation} from '@src/navigation';
 
 const HeaderLeft = () => {
-  const navigation =
-    useNavigation<StackNavigationProp<ParamListBase, string, undefined>>();
+  const navigation = useNavigation();
   return (
     <Box
       _text={{

@@ -18,9 +18,8 @@ import BrainstormingWeb from '@src/assets/logo/brainstorming.svg';
 import {SvgView} from '@components/svgs';
 import {MyText} from '@src/components/commons/my_text/MyText';
 import {Layout} from '@src/components/layout';
-import {useNavigation, ParamListBase} from '@react-navigation/native';
-import {StackNavigationProp} from '@react-navigation/stack';
 import {LoadingButton} from '@src/components/commons/loading_btn';
+import {useNavigation} from '@src/navigation';
 
 export interface PingModel {
   requestId: string;
@@ -178,8 +177,7 @@ export const TestAPiServerRequestScreen = () => {
       console.log(error);
     }
   };
-  const navigation =
-    useNavigation<StackNavigationProp<ParamListBase, string, undefined>>();
+  const navigation = useNavigation();
   return (
     <Layout navigation={navigation}>
       <Box safeArea px={3}>

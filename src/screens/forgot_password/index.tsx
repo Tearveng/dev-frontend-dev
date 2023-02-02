@@ -3,13 +3,11 @@ import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
 import React, {useState} from 'react';
 import {faUser} from '@fortawesome/free-solid-svg-icons';
 import {Layout} from '@src/components/layout';
-import {ParamListBase, useNavigation} from '@react-navigation/native';
-import {StackNavigationProp} from '@react-navigation/stack';
+import {useNavigation} from '@src/navigation';
 
 export function ForgotPasswordScreen() {
   const [users] = useState([]);
-  const navigation =
-    useNavigation<StackNavigationProp<ParamListBase, string, undefined>>();
+  const navigation = useNavigation();
   return (
     <Layout navigation={navigation}>
       <View

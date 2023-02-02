@@ -1,15 +1,13 @@
-import {useNavigation, ParamListBase} from '@react-navigation/native';
-import {StackNavigationProp} from '@react-navigation/stack';
 import {Dialog, SizeDialog, useDialog} from '@src/components/commons/dailog';
 import {LoadingButton} from '@src/components/commons/loading_btn';
 import {Layout} from '@src/components/layout';
+import {useNavigation} from '@src/navigation';
 import {Center, VStack} from 'native-base';
 import React, {useState} from 'react';
 import {ViewButton} from '../test_commponents/ViewButton';
 
 export const DailogScreen = () => {
-  const navigation =
-    useNavigation<StackNavigationProp<ParamListBase, string, undefined>>();
+  const navigation = useNavigation();
   const dialog = useDialog();
   const [size, setSize] = useState('');
   return (

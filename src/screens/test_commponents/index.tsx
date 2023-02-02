@@ -1,5 +1,3 @@
-import {ParamListBase, useNavigation} from '@react-navigation/native';
-import {StackNavigationProp} from '@react-navigation/stack';
 import {Card} from '@src/components/commons/card';
 import {MyForm, MyFormProps} from '@src/components/commons/my_form';
 import {Layout} from '@src/components/layout';
@@ -20,10 +18,10 @@ import {ViewSearch} from './ViewSearch';
 import {ViewText} from './ViewText';
 import {Size, MyIconButton} from '@src/components/commons/my_icon_button';
 import {IToastData, MyToast} from '@src/components/commons/my_toast';
+import {useNavigation} from '@src/navigation';
 
 const TestComponent = () => {
-  const navigation =
-    useNavigation<StackNavigationProp<ParamListBase, string, undefined>>();
+  const navigation = useNavigation();
 
   const [data, setData] = useState<any | undefined>();
   const [imageBuffer, setImageBuffer] = useState<ArrayBuffer | undefined>();

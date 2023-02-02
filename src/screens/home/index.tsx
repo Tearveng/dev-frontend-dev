@@ -5,14 +5,11 @@ import {style} from '@styles/style';
 
 import {ViewPdf} from '@src/components/templates/pdf';
 import {Pressable} from 'react-native';
-import {ParamListBase, useNavigation} from '@react-navigation/native';
-import {NavigatorRoute} from '@src/navigation/NavigatorRouteConstant';
-import {StackNavigationProp} from '@react-navigation/stack';
 import {Layout} from '@src/components/layout';
+import {NavigatorRoute, useNavigation} from '@src/navigation';
 
 export function HomeScreen() {
-  const navigation =
-    useNavigation<StackNavigationProp<ParamListBase, string, undefined>>();
+  const navigation = useNavigation();
   return (
     <Layout navigation={navigation}>
       <View style={style.container}>

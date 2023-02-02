@@ -1,10 +1,9 @@
-import {ParamListBase, useNavigation} from '@react-navigation/native';
-import {StackNavigationProp} from '@react-navigation/stack';
 import {MyForm} from '@src/components/commons/my_form';
 import {MyRadioButton} from '@src/components/commons/my_radio_button';
 import {MyText} from '@src/components/commons/my_text';
 import {Slide, SlideProvider} from '@src/components/commons/slide';
 import {Layout} from '@src/components/layout';
+import {useNavigation} from '@src/navigation';
 import {View} from 'native-base';
 import React from 'react';
 
@@ -119,8 +118,7 @@ export const SlideScreen = () => {
     ],
   };
 
-  const navigation =
-    useNavigation<StackNavigationProp<ParamListBase, string, undefined>>();
+  const navigation = useNavigation();
 
   return (
     <Layout navigation={navigation}>

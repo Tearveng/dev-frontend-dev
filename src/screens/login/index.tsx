@@ -28,7 +28,7 @@ import {
 import {style} from '@styles/style';
 import {useFocusEffect} from '@react-navigation/native';
 import {login, LoginForm, validate} from '@src/redux/features/user/actions';
-import {NavigatorRoute} from '@src/navigation/NavigatorRouteConstant';
+import {NavigatorRoute} from '@src/navigation';
 import {useAppSelector} from '@src/redux/config/hooks';
 import {MyForm} from '@components/commons/my_form';
 

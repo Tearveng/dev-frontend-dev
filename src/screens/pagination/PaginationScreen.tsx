@@ -1,8 +1,7 @@
-import {ParamListBase, useNavigation} from '@react-navigation/native';
-import {StackNavigationProp} from '@react-navigation/stack';
 import {MyText} from '@src/components/commons/my_text';
 import {Pagination} from '@src/components/commons/pagination';
 import {Layout} from '@src/components/layout';
+import {useNavigation} from '@src/navigation';
 import {View} from 'native-base';
 import React from 'react';
 
@@ -15,8 +14,7 @@ interface Product {
   updatedAt: Date;
 }
 export const PaginationScreen = () => {
-  const navigation =
-    useNavigation<StackNavigationProp<ParamListBase, string, undefined>>();
+  const navigation = useNavigation();
   return (
     <Layout navigation={navigation}>
       <View height={'100%'}>
