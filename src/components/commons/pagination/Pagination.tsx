@@ -3,6 +3,7 @@ import {APIServer} from '@src/utils/classes/APIService';
 import {Box, HStack, View, ScrollView} from 'native-base';
 import React, {useEffect, useState} from 'react';
 import {PaginationProps} from '.';
+import {Loading} from '../loading';
 import {LoadingButton} from '../loading_btn';
 import {MyText} from '../my_text';
 
@@ -187,7 +188,12 @@ export function Pagination({
         {position === 'top' && <Page />}
         <View height={'92%'} width="100%">
           {loading ? (
-            <MyText type="success">Loading...</MyText>
+            <Loading
+              spinnerStyle={{
+                size: 'lg',
+                colorScheme: 'cyan',
+              }}
+            />
           ) : error ? (
             <MyText type="danger">{error}</MyText>
           ) : (
