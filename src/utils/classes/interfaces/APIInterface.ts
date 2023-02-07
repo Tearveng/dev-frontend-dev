@@ -1,3 +1,4 @@
+import {AxiosProgressEvent} from 'axios';
 import {AcceptedLanguages, UserRole} from './APIConstants';
 
 export interface APIHeaders {
@@ -20,4 +21,21 @@ export interface TSRequestOptions {
   headers?: RequestHeaders;
   timeout?: number;
   managesCredentials?: boolean;
+}
+
+export type ResponseType =
+  | 'buffer'
+  | 'blob'
+  | 'document'
+  | 'json'
+  | 'text'
+  | 'stream';
+
+export interface OtherCommonAxiosEvent {
+  onUploadProgress?: (progressEvent: AxiosProgressEvent) => void;
+  onDownloadProgress?: (progressEvent: AxiosProgressEvent) => void;
+  beforeRedirect?: (
+    options: Record<string, any>,
+    responseDetails: {headers: Record<string, string>},
+  ) => void;
 }

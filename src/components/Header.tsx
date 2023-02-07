@@ -13,12 +13,11 @@ import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
 import {style} from '@styles/style';
 import {LanguagePicker} from './langauge_picker';
 import {NavigatorRoute} from '@src/navigation';
-
-// interface Props {
-//   navigation: StackNavigationProp<ParamListBase, string, undefined>;
-// }
+import {useTranslation} from 'react-i18next';
+import {Localization} from '@src/i18n/languages';
 
 export function Header({navigation}: any) {
+  const {t} = useTranslation();
   const isNavItem = useBreakpointValue({
     base: false,
     sm: false,
@@ -48,7 +47,7 @@ export function Header({navigation}: any) {
             }}
           >
             <Text color="white" fontSize="20" fontWeight="bold">
-              Home
+              {t(Localization.home)}
             </Text>
           </Pressable>
         </HStack>
@@ -57,20 +56,20 @@ export function Header({navigation}: any) {
             <>
               <Pressable
                 onPress={() => {
-                  navigation.navigate(NavigatorRoute.HOME);
+                  navigation.navigate(NavigatorRoute.PAGINATION_SCREEN);
                 }}
               >
                 <Text bold={true} paddingTop={2}>
-                  DOCUMENT
+                  {t(Localization.paginationScreen)}
                 </Text>
               </Pressable>
               <Pressable
                 onPress={() => {
-                  navigation.navigate(NavigatorRoute.HOME);
+                  navigation.navigate(NavigatorRoute.DIALOG_SCREEN);
                 }}
               >
                 <Text bold={true} paddingTop={2}>
-                  CONTACT
+                  {t(Localization.dialogScreen)}
                 </Text>
               </Pressable>
 
@@ -80,7 +79,34 @@ export function Header({navigation}: any) {
                 }}
               >
                 <Text bold={true} paddingTop={2}>
-                  SLIDE
+                  {t(Localization.slideScreen)}
+                </Text>
+              </Pressable>
+              <Pressable
+                onPress={() => {
+                  navigation.navigate(NavigatorRoute.TEST_COMPONENT);
+                }}
+              >
+                <Text bold={true} paddingTop={2}>
+                  {t(Localization.testComponents)}
+                </Text>
+              </Pressable>
+              <Pressable
+                onPress={() => {
+                  navigation.navigate(NavigatorRoute.SAMPLE_UI.MAIN);
+                }}
+              >
+                <Text bold={true} paddingTop={2}>
+                  {t(Localization.sampleUILandingScreen)}
+                </Text>
+              </Pressable>
+              <Pressable
+                onPress={() => {
+                  navigation.navigate(NavigatorRoute.TEST_API);
+                }}
+              >
+                <Text bold={true} paddingTop={2}>
+                  {t(Localization.testAPIServerRequestScreen)}
                 </Text>
               </Pressable>
             </>

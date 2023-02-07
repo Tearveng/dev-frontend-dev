@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {API_URL} from '@src/config/env';
 import {APIServer} from '@src/utils/classes/APIService';
-import {Verb, RespType, Resp} from '@src/utils/classes/interfaces/APIConstants';
+import {Verb, Resp} from '@src/utils/classes/interfaces/APIConstants';
 import {
   Button,
   Divider,
@@ -72,7 +72,7 @@ export class Convert {
 
 export const TestAPiServerRequestScreen = () => {
   console.log('API_URL => ', API_URL);
-  const api = new APIServer(API_URL || 'http://127.0.0.1:8080', {
+  const api = new APIServer('http://10.2.50.26:8080', {
     certignahash: 'ySsPUR23',
     certignarole: 2,
     certignauser: 'pps#test',
@@ -85,7 +85,20 @@ export const TestAPiServerRequestScreen = () => {
     try {
       const url =
         '/api/v1/dev/sign-document?file-name=hello&format=1&level=1&type1=1&certificate=generate';
-      const data = await api.ngrequest(url, Verb.Post, RespType.Json);
+      const data = await api.ngrequest(
+        url,
+        Verb.Post,
+        'json',
+        [Resp.Accepted],
+        undefined,
+        undefined,
+        undefined,
+        {
+          onUploadProgress(progressEvent) {
+            console.log(progressEvent);
+          },
+        },
+      );
       console.log(data);
     } catch (error: any) {
       console.log(error);
@@ -95,15 +108,9 @@ export const TestAPiServerRequestScreen = () => {
   const postSessions = async () => {
     try {
       const url = '/api/v1/sessions';
-      const data = await api.ngrequest(
-        url,
-        Verb.Post,
-        RespType.Json,
-        [Resp.Created],
-        {
-          ttl: 900,
-        },
-      );
+      const data = await api.ngrequest(url, Verb.Post, 'json', [Resp.Created], {
+        ttl: 900,
+      });
       getSessions();
       console.log(data);
     } catch (error: any) {
@@ -122,7 +129,7 @@ export const TestAPiServerRequestScreen = () => {
       const data = await api.ngrequest(
         url,
         Verb.Put,
-        RespType.Json,
+        'json',
         [Resp.OK, Resp.Created],
         body,
       );
@@ -135,7 +142,7 @@ export const TestAPiServerRequestScreen = () => {
   const deleteApi = async () => {
     try {
       const url = '/api/v1/session/2/scenario/1';
-      const data = await api.ngrequest(url, Verb.Delete, RespType.Json, [
+      const data = await api.ngrequest(url, Verb.Delete, 'json', [
         Resp.OK,
         Resp.Forbidden,
       ]);
@@ -146,12 +153,10 @@ export const TestAPiServerRequestScreen = () => {
   const getPing = async () => {
     alert('Hello');
     try {
-      const data = await api.ngrequest(
-        '/api/v1/dev/ping',
-        Verb.Get,
-        RespType.Json,
-        [Resp.OK, Resp.TimeOut],
-      );
+      const data = await api.ngrequest('/api/v1/dev/ping', Verb.Get, 'json', [
+        Resp.OK,
+        Resp.TimeOut,
+      ]);
       setDataGet(data);
       console.log(data);
     } catch (error: any) {
@@ -164,7 +169,7 @@ export const TestAPiServerRequestScreen = () => {
       const data = await api.ngrequest<Session>(
         '/api/v1/sessions',
         Verb.Get,
-        RespType.Json,
+        'json',
         [Resp.OK],
         undefined,
         {

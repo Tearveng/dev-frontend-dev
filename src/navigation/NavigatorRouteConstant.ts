@@ -1,4 +1,5 @@
 export const NavigatorRoute = {
+  INDEX: 'index',
   HOME: 'home',
   LOGIN: 'login',
   FORGOT_PASSWORD: 'forgot_password',
@@ -8,6 +9,7 @@ export const NavigatorRoute = {
   PAGINATION_SCREEN: 'Pagination_Screen',
   DIALOG_SCREEN: 'dialog_Screen',
   FILE_PICKER: 'file_picker',
+  PROGRESS_BAR: 'progress_bar',
   SAMPLE_UI: {
     LANDING: 'landing',
     MAIN: 'main_landing',

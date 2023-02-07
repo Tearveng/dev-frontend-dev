@@ -1,4 +1,5 @@
 import {APIServer} from '@src/utils/classes/APIService';
+import {Verb} from '@src/utils/classes/interfaces/APIConstants';
 // import {Resp, RespType, Verb} from '@src/utils/classes/interfaces/APIConstants';
 import {Box, HStack, View, ScrollView} from 'native-base';
 import React, {useEffect, useState} from 'react';
@@ -57,7 +58,7 @@ export function Pagination({
         //     },
         //   );
         // }
-        const {items, totalPages} = await api.ngrequest(url);
+        const {items, totalPages} = await api.ngrequest(url, Verb.Get, 'json');
         setPages(totalPages);
         setDataServer(items);
         setLoading(false);

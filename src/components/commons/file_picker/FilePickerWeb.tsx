@@ -7,6 +7,7 @@ import React, {ChangeEvent, useRef, useState} from 'react';
 import {useTranslation} from 'react-i18next';
 import {FilePickerWebProps} from '.';
 import {LoadingButton} from '../loading_btn';
+// import {MyText} from '../my_text';
 // import {base64} from 'rfc4648';
 
 export const FilePickerWeb = ({onFileChange}: FilePickerWebProps) => {
@@ -24,11 +25,9 @@ export const FilePickerWeb = ({onFileChange}: FilePickerWebProps) => {
       buffer = $ok(buffer) ? new Uint8Array(buffer!) : undefined;
 
       const strBase64 = $ok(buffer) ? encode(buffer!) : undefined;
-
       setStrBase64(strBase64);
 
       setTypeFile(file?.type ?? '');
-
       onFileChange!(file, buffer, strBase64);
     } catch (err) {
       console.log(err);

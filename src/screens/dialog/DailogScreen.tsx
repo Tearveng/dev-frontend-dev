@@ -10,6 +10,7 @@ export const DailogScreen = () => {
   const navigation = useNavigation();
   const dialog = useDialog();
   const [size, setSize] = useState('');
+
   return (
     <Layout navigation={navigation}>
       <Center height={'100%'} bgColor={'black'}>
@@ -45,6 +46,7 @@ export const DailogScreen = () => {
           isOpen={dialog2.isOpen}
           onClose={dialog2.onClose}
         /> */}
+
         <VStack space={4}>
           {['xs', 'sm', 'md'].map(size => (
             <LoadingButton

@@ -88,9 +88,9 @@ export const Verb = {
   Delete: 'DELETE',
   Patch: 'PATCH',
 };
-export const RespType = {
-  Json: 'json',
-  Buffer: 'arraybuffer',
-  String: 'text',
-  Stream: 'stream',
-};
+// export const RespType = {
+//   Json: 'json',
+//   Buffer: 'arraybuffer',
+//   String: 'text',
+//   Stream: 'stream',
+// };

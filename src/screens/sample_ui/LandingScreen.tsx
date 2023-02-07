@@ -118,7 +118,7 @@ const LandingScreen = () => {
                 _web={lastestCoursesBreakPoint}
                 key={data.id}
                 onPress={() =>
-                  navigation.navigate(NavigatorRoute.SAMPLE_UI.MAIN, {
+                  navigation.navigate(NavigatorRoute.SAMPLE_UI.SAMPLE_DETAIL, {
                     screen: NavigatorRoute.SAMPLE_UI.SAMPLE_DETAIL,
                     initial: false,
                     params: {id: data.id},

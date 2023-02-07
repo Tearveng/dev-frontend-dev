@@ -8,5 +8,13 @@
   "whatDoYouWantToLearnToday": "What do you want to learn today?",
   "getStarted": "Get Started",
   "lastSeenCourses": "Last Seen Courses",
-  "browseFile": "Browse File"
+  "browseFile": "Browse File",
+  "paginationScreen": "Pagination Screen",
+  "home": "Home",
+  "dialogScreen": "Dialog Screen",
+  "slideScreen": "Slide Screen",
+  "testComponents": "Test Components",
+  "testAPIServerRequestScreen": "Test API Server Request Screen",
+  "sampleUILandingScreen": "Sample UI Landing Screen",
+  "forgotPassword": "Forgot Password"
 }

@@ -14,6 +14,14 @@ const Localization: LanguageObjectType = {
   getStarted: 'getStarted',
   lastSeenCourses: 'lastSeenCourses',
   browseFile: 'browseFile',
+  paginationScreen: 'paginationScreen',
+  home: 'home',
+  dialogScreen: 'dialogScreen',
+  slideScreen: 'slideScreen',
+  testComponents: 'testComponents',
+  sampleUILandingScreen: 'sampleUILandingScreen',
+  testAPIServerRequestScreen: 'testAPIServerRequestScreen',
+  forgotPassword: 'forgotPassword'
 };
 
 export {en, fr, Localization};

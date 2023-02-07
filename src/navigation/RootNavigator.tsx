@@ -15,23 +15,40 @@ import {SlideScreen} from '@src/screens/slide';
 import {PaginationScreen} from '@src/screens/pagination';
 import {DailogScreen} from '@src/screens/dialog';
 import {SampleDetailScreen} from '@src/screens/sample_ui/SampleDetailScreen';
+import {Localization} from '@src/i18n/languages';
+import {useTranslation} from 'react-i18next';
+import HeaderLeft from '@src/components/navigations/HeaderLeft';
+import {View} from 'native-base';
+import {ProgressBarScreen} from '@src/screens/progress_bar';
 const Stack = createStackNavigator();
 
 const Drawer = createDrawerNavigator();
 
 export function DrawerNavigator() {
+  const {t} = useTranslation();
   return (
     <>
       <Drawer.Navigator
         useLegacyImplementation
         initialRouteName={NavigatorRoute.HOME}
       >
+        {/* ProgressBarScreen */}
+
+        <Drawer.Screen
+          name={NavigatorRoute.PROGRESS_BAR}
+          component={ProgressBarScreen}
+          options={{
+            headerShown: false,
+            title: 'Progress Bar',
+          }}
+        />
+
         <Drawer.Screen
           name={NavigatorRoute.PAGINATION_SCREEN}
           component={PaginationScreen}
           options={{
             headerShown: false,
-            title: 'Pagination Screen',
+            title: t(Localization.paginationScreen) ?? '',
           }}
         />
 
@@ -40,7 +57,7 @@ export function DrawerNavigator() {
           component={DailogScreen}
           options={{
             headerShown: false,
-            title: 'Dialog Screen',
+            title: t(Localization.dialogScreen) ?? '',
           }}
         />
         <Drawer.Screen
@@ -48,7 +65,7 @@ export function DrawerNavigator() {
           component={SlideScreen}
           options={{
             headerShown: false,
-            title: 'Slide Screen',
+            title: t(Localization.slideScreen) ?? '',
           }}
         />
         <Drawer.Screen
@@ -56,7 +73,7 @@ export function DrawerNavigator() {
           component={TestComponent}
           options={{
             headerShown: false,
-            title: 'Test Components',
+            title: t(Localization.testComponents) ?? '',
           }}
         />
         <Drawer.Screen
@@ -79,6 +96,7 @@ export function DrawerNavigator() {
           component={ForgotPasswordScreen}
           options={{
             headerShown: false,
+            title: t(Localization.forgotPassword) ?? '',
           }}
         />
         <Drawer.Screen
@@ -86,15 +104,38 @@ export function DrawerNavigator() {
           component={TestAPiServerRequestScreen}
           options={{
             headerShown: false,
-            title: 'Test API Server Request Screen',
+            title: t(Localization.testAPIServerRequestScreen) ?? '',
           }}
         />
         <Drawer.Screen
           name={NavigatorRoute.SAMPLE_UI.MAIN}
-          component={SampleUINavigation}
+          component={() => (
+            <Stack.Navigator
+              screenOptions={{headerShown: false}}
+              initialRouteName={NavigatorRoute.SAMPLE_UI.LANDING}
+            >
+              <Stack.Screen
+                name={NavigatorRoute.SAMPLE_UI.LANDING}
+                component={LandingScreen}
+              />
+              <Stack.Screen
+                name={NavigatorRoute.SAMPLE_UI.SAMPLE_DETAIL}
+                component={SampleDetailScreen}
+                options={{
+                  headerShown: true,
+                  // headerLeft: () => <HeaderLeft />,
+                  header: () => (
+                    <View backgroundColor={'#3700B3'}>
+                      <HeaderLeft />
+                    </View>
+                  ),
+                }}
+              />
+            </Stack.Navigator>
+          )}
           options={{
             headerShown: false,
-            title: 'Sample UI Landing Screen',
+            title: t(Localization.sampleUILandingScreen) ?? '',
           }}
         />
       </Drawer.Navigator>
@@ -102,35 +143,18 @@ export function DrawerNavigator() {
   );
 }
 
-const SampleUINavigation = () => (
-  <Stack.Navigator
-    screenOptions={{headerShown: false}}
-    initialRouteName={NavigatorRoute.SAMPLE_UI.LANDING}
-  >
-    <Stack.Screen
-      name={NavigatorRoute.SAMPLE_UI.LANDING}
-      component={LandingScreen}
-    />
-    <Stack.Screen
-      name={NavigatorRoute.SAMPLE_UI.SAMPLE_DETAIL}
-      component={SampleDetailScreen}
-    />
-  </Stack.Navigator>
-);
-
 export function RootNavigator() {
   return (
     <Stack.Navigator
       screenOptions={{headerShown: false}}
       initialRouteName={NavigatorRoute.SAMPLE_UI.LANDING}
     >
-      <Stack.Screen
+      {/* <Stack.Screen name={NavigatorRoute.INDEX} component={DrawerNavigator} /> */}
+      {/* <>{DrawerNavigator}</> */}
+
+      {/* <Stack.Screen
         name={NavigatorRoute.TEST_API}
         component={TestAPiServerRequestScreen}
-        options={{
-          headerShown: true,
-          title: 'TestAPiServerRequestScreen',
-        }}
       />
       <Stack.Screen
         name="Login"
@@ -138,39 +162,25 @@ export function RootNavigator() {
         options={{
           headerShown: false,
         }}
-      />
-      <Stack.Screen
+      /> */}
+      {/* <Stack.Screen
         name="ForgotPassword"
         component={ForgotPasswordScreen}
         options={{
           headerShown: false,
           title: 'Frogot | Screen',
         }}
-      />
-      <Stack.Screen
-        name={NavigatorRoute.HOME}
-        component={HomeScreen}
-        options={{
-          headerShown: true,
-          title: 'View PDF',
-          // headerStyle: {
-          //   backgroundColor: '#f4511e',
-          // },
-          // headerTintColor: '#fff',
-          // headerTitleStyle: {
-          //   fontWeight: 'bold',
-          // },
-        }}
-      />
+      /> */}
+      <Stack.Screen name={NavigatorRoute.HOME} component={HomeScreen} />
 
-      <Drawer.Screen
+      {/* <Drawer.Screen
         name={NavigatorRoute.SLIDE_SCREEN}
         component={SlideScreen}
         options={{
           headerShown: false,
           title: 'Slide Screen',
         }}
-      />
+      /> */}
     </Stack.Navigator>
   );
 }

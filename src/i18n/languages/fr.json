@@ -8,5 +8,13 @@
   "whatDoYouWantToLearnToday": "Que voulez-vous apprendre aujourd'hui?",
   "getStarted": "Commencer",
   "lastSeenCourses": "Derniers cours vus",
-  "browseFile": "Parcourir le fichier"
+  "browseFile": "Parcourir le fichier",
+  "paginationScreen": "écran de pagination",
+  "home": "Domicile",
+  "dialogScreen": "Écran de dialogue",
+  "slideScreen": "Écran de diapositive",
+  "testComponents": "Composants d'essai",
+  "testAPIServerRequestScreen": "Écran de demande de serveur d'API de test",
+  "sampleUILandingScreen": "Exemple d'écran de destination de l'interface utilisateur",
+  "forgotPassword": "Mot de passe oublié"
 }

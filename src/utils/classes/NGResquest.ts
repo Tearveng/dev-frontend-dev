@@ -3,11 +3,13 @@ import {$ok, $timeOut, $toUnsigned} from '../commons';
 import {$isNumber} from '../commons/number';
 import {Nullable} from '../commons/type';
 import {NGError, NGUniqueError} from '../Errors/NGError';
-import {RespType, Resp} from './interfaces/APIConstants';
+import {Resp} from './interfaces/APIConstants';
 import {
+  OtherCommonAxiosEvent,
   RequestHeaders,
   TSRequestOptions,
   TSResponse,
+  ResponseType,
 } from './interfaces/APIInterface';
 
 export function $barerauth(base64token: string): string {
@@ -20,6 +22,7 @@ export class NGRequest {
   defaultTimeOut: number;
   baseURL?: string;
   commonHeaders: RequestHeaders;
+
   constructor(baseURL?: string, opt?: TSRequestOptions) {
     this.baseURL = baseURL;
     this.channel = axios.create({
@@ -37,10 +40,11 @@ export class NGRequest {
   async req(
     relativeURL: string,
     method?: string,
-    responseType?: string,
+    responseType?: ResponseType,
     body?: Nullable<object>,
     supportHeaders?: RequestHeaders,
     timeout?: number,
+    otherCommonAxiosEvent?: OtherCommonAxiosEvent,
   ): Promise<TSResponse> {
     const config: any = {
       url: relativeURL,
@@ -51,6 +55,7 @@ export class NGRequest {
         supportHeaders,
       ),
       data: undefined,
+      ...otherCommonAxiosEvent,
     };
 
     if ($ok(this.token)) {
@@ -79,9 +84,7 @@ export class NGRequest {
         timeoutError,
       );
       ret =
-        responseType === RespType.Buffer
-          ? Buffer.from(response.data)
-          : response.data;
+        responseType === 'buffer' ? Buffer.from(response.data) : response.data;
       status = response.status;
       headers = response.headers as RequestHeaders;
     } catch (e: any) {

@@ -1,7 +1,12 @@
 import {$count, $ok} from '../commons';
 import {Nullable} from '../commons/type';
 import {Resp} from './interfaces/APIConstants';
-import {APIHeaders, RequestHeaders} from './interfaces/APIInterface';
+import {
+  APIHeaders,
+  OtherCommonAxiosEvent,
+  RequestHeaders,
+  ResponseType,
+} from './interfaces/APIInterface';
 import {NGRequest} from './NGResquest';
 
 export class APIServer extends NGRequest {
@@ -19,11 +24,12 @@ export class APIServer extends NGRequest {
   public async ngrequest<T = any>(
     relativeURL: string,
     method?: string,
-    responseType?: string,
+    responseType?: ResponseType,
     statuses?: number[],
     body?: Nullable<object>,
     suplHeaders?: RequestHeaders,
     timeout?: number,
+    otherCommonAxiosEvent?: OtherCommonAxiosEvent,
   ): Promise<T | null> {
     suplHeaders = $ok(suplHeaders)
       ? {...this.authentication, ...suplHeaders}
@@ -36,6 +42,7 @@ export class APIServer extends NGRequest {
       body,
       suplHeaders,
       timeout,
+      otherCommonAxiosEvent,
     );
 
     return statuses.includes(resp.status) && $ok(resp.response)
