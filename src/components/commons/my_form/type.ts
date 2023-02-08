@@ -18,35 +18,27 @@ interface MyFormInputProps {
   isRequired?: boolean;
   label?: string;
   name: string;
-  color?: ColorType | undefined;
-  type?: 'text' | 'password' | 'file' | 'select' | 'radio' | undefined;
+  color?: ColorType;
+  type?: 'text' | 'password' | 'file' | 'select' | 'radio';
   selectData?: any[]; //this is for type 'select'
   radioData?: IRadioData[]; //this is for type 'radio'
-  onSelectChange?: ((itemValue: string) => void) | undefined; //this is for type 'select'
+  onSelectChange?: (itemValue: string) => void; //this is for type 'select'
   onFileChange?:
-    | ((
-        pickerResult: any,
-        arrayBuffer: ArrayBuffer | undefined,
-        result: string | undefined,
-      ) => void)
-    | null
-    | undefined; //this is for type 'file'
-  onRadioChange?:
-    | ((itemValue: IRadioValue, data: IRadioData[]) => void)
-    | null
-    | undefined; //IRadioGroupOnChangeHandler | undefined; //this is for type 'radio'
-  keyboardType?: KeyboardTypeOptions | undefined;
-  placeholderTextColor?: ColorValue | undefined;
-  defaultValue?: string | undefined;
-  placeholder?: string | undefined;
+    | ((pickerResult: any, arrayBuffer: ArrayBuffer, result: string) => void)
+    | null; //this is for type 'file'
+  onRadioChange?: ((itemValue: IRadioValue, data: IRadioData[]) => void) | null; //IRadioGroupOnChangeHandler; //this is for type 'radio'
+  keyboardType?: KeyboardTypeOptions;
+  placeholderTextColor?: ColorValue;
+  defaultValue?: string;
+  placeholder?: string;
   rules?: Omit<
     RegisterOptions,
     'valueAsNumber' | 'valueAsDate' | 'setValueAs' | 'disabled'
   >;
-  variant?: 'outline' | 'rounded' | 'underlined' | undefined;
-  leftElement?: JSX.Element | undefined;
-  rightElement?: JSX.Element | undefined;
-  secureTextEntry?: boolean | undefined;
+  variant?: 'outline' | 'rounded' | 'underlined';
+  leftElement?: JSX.Element;
+  rightElement?: JSX.Element;
+  secureTextEntry?: boolean;
 }
 
 interface MyFormFromProps {
@@ -71,7 +63,7 @@ interface MyFormButtonContainerProps {}
 interface MyFormButtonButtonsProps {
   text: string;
   type: 'submit' | 'button';
-  colorScheme?: Type | undefined;
-  space?: number | undefined;
+  colorScheme?: Type;
+  space?: number;
   onPress?: (data: SubmitHandler<FieldValues> | any) => void;
 }

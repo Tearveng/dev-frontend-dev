@@ -1,15 +1,15 @@
-import { ISpinnerProps, } from "native-base";
-import { IHStackProps } from "native-base/lib/typescript/components/primitives/Stack/HStack";
-import { ReactNode } from "react";
+import {ISpinnerProps} from 'native-base';
+import {IHStackProps} from 'native-base/lib/typescript/components/primitives/Stack/HStack';
+import {ReactNode} from 'react';
 
 export interface LoadingProps {
-    containerStyle?: IHStackProps;
-    spinnerStyle?: ISpinnerProps;
-    heading?: Heading | undefined;
+  containerStyle?: IHStackProps;
+  spinnerStyle?: ISpinnerProps;
+  heading?: Heading;
 }
 
 interface Heading {
-    left?: boolean | undefined;
-    right?: boolean | undefined;
-    text?: ReactNode | ReactNode[] | string | number | undefined;
+  left?: boolean;
+  right?: boolean;
+  text?: ReactNode | ReactNode[] | string | number;
 }

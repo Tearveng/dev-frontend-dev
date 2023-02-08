@@ -2,17 +2,17 @@ import {LoadingButtonProps} from '../loading_btn';
 import {MyTextProps} from '../my_text';
 
 export interface CardProps {
-  headerText?: string | undefined;
-  header?: JSX.Element | undefined;
-  headerStyle?: MyTextProps | undefined;
-  uri?: string | undefined;
-  contentText?: string | undefined;
-  contentStyle?: MyTextProps | undefined;
-  content?: JSX.Element | undefined;
-  button?: JSX.Element | undefined;
-  leftButtonText?: string | undefined;
-  rightButtonText?: string | undefined;
-  leftButtonStyle?: LoadingButtonProps | undefined;
-  rightButtonStyle?: LoadingButtonProps | undefined;
+  headerText?: string;
+  header?: JSX.Element;
+  headerStyle?: MyTextProps;
+  uri?: string;
+  contentText?: string;
+  contentStyle?: MyTextProps;
+  content?: JSX.Element;
+  button?: JSX.Element;
+  leftButtonText?: string;
+  rightButtonText?: string;
+  leftButtonStyle?: LoadingButtonProps;
+  rightButtonStyle?: LoadingButtonProps;
   space?: number;
 }

@@ -1,8 +1,8 @@
 interface BaseProps {
   onFileChange?: (
     pickerResult: any,
-    arrayBuffer: ArrayBuffer | undefined,
-    base64: string | undefined,
+    arrayBuffer: ArrayBuffer,
+    base64: string,
   ) => void;
 }
 

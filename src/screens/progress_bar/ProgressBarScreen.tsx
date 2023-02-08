@@ -9,6 +9,7 @@ import {Layout} from '@src/components/layout';
 import {useNavigation} from '@src/navigation';
 import {APIServer} from '@src/utils/classes/APIService';
 import {Resp, Verb} from '@src/utils/classes/interfaces/APIConstants';
+import {NumberRange} from '@src/utils/commons/type';
 import {View} from 'native-base';
 import React, {useState} from 'react';
 import {Platform} from 'react-native';
@@ -55,9 +56,7 @@ export const ProgressBarScreen = () => {
           setTotal(total ?? 0);
           let percent = Math.floor((loaded * 100) / (total ?? 0));
           console.log(`${loaded}kb of ${total}kb | ${percent}%`);
-          // if (percent < 100) {
           setUploadPercentage(percent);
-          // }
         },
       },
     );
@@ -90,9 +89,12 @@ export const ProgressBarScreen = () => {
       />
       {uploadPercentage > 0 && total > 0 && (
         <>
-          <ProgressBar step={uploadPercentage} steps={100} />
           <ProgressBar
-            step={uploadPercentage}
+            step={uploadPercentage as NumberRange<0, 101>}
+            steps={100}
+          />
+          <ProgressBar
+            step={uploadPercentage as NumberRange<0, 101>}
             steps={100}
             duration={500}
             height={10}

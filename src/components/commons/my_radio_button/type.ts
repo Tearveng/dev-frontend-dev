@@ -3,12 +3,9 @@ import {IRadioGroupProps, IRadioProps, IRadioValue} from 'native-base';
 export interface MyRadioButtonProps {
   RadioProps?: MyRadioProps;
   RadioGroupProps?: MyRadioGroupProps;
-  onChange?:
-    | ((value: IRadioValue, data: IRadioData[]) => void)
-    | null
-    | undefined; //IRadioGroupOnChangeHandler | undefined;
+  onChange?: ((value: IRadioValue, data: IRadioData[]) => void) | null; //IRadioGroupOnChangeHandler;
   data: IRadioData[];
-  defaultValue?: string | undefined;
+  defaultValue?: string;
 }
 
 export interface IRadioData {

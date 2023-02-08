@@ -5,8 +5,8 @@ declare type Variant = 'solid' | 'outline';
 export declare type Size = 'xs' | 'sm' | 'md' | 'lg';
 
 export interface MyIconButtonProps extends IButtonProps {
-  colorScheme?: Type | undefined;
-  variant?: Variant | undefined;
-  size?: Size | undefined;
+  colorScheme?: Type;
+  variant?: Variant;
+  size?: Size;
   icon: JSX.Element;
 }

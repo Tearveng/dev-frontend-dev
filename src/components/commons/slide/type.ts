@@ -8,14 +8,14 @@ interface SlideContent {
 }
 export interface SlideProps {
   slideContent: SlideContent[];
-  width?: number | string | undefined;
-  height?: number | string | undefined;
-  backgroundColor?: ColorType | undefined;
+  width?: number | string;
+  height?: number | string;
+  backgroundColor?: ColorType;
   headerStyle?: MyTextProps;
-  button?: Button | undefined;
-  onDone?: ((slide?: Slide) => void) | undefined;
-  onNext?: ((slide?: Slide) => void) | undefined;
-  onBack?: ((slide?: Slide) => void) | undefined;
+  button?: Button;
+  onDone?: (slide?: Slide) => void;
+  onNext?: (slide?: Slide) => void;
+  onBack?: (slide?: Slide) => void;
 }
 
 interface Button {

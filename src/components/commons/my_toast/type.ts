@@ -9,18 +9,18 @@ declare type Variant =
   | 'outline'
   | 'outline-light';
 export interface MyToastProps extends IAlertProps {
-  id?: number | undefined;
-  title?: string | undefined;
-  description?: string | undefined;
+  id?: number;
+  title?: string;
+  description?: string;
   isClosable?: boolean;
-  status?: Status | undefined;
-  variant?: Variant | undefined;
+  status?: Status;
+  variant?: Variant;
 }
 
 export interface IToastData {
-  title?: string | undefined;
-  status?: Status | undefined;
-  variant?: Variant | undefined;
-  description?: string | undefined;
-  isClosable?: boolean | undefined;
+  title?: string;
+  status?: Status;
+  variant?: Variant;
+  description?: string;
+  isClosable?: boolean;
 }

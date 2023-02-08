@@ -1,14 +1,14 @@
 import {ReactNode} from 'react';
 
 export interface PaginationProps {
-  // data?: T[] | undefined;
-  baseUrl?: string | undefined;
-  prefixUrl?: string | undefined;
+  // data?: T[];
+  baseUrl?: string;
+  prefixUrl?: string;
   queryString?: Partial<{
     [key: string]: string | number;
   }> & {pageSize: number};
-  render?: (items: any) => ReactNode | undefined;
+  render?: (items: any) => ReactNode;
   position?: 'top' | 'buttom';
   isScroll?: boolean;
-  // isServer?: boolean | undefined;
+  // isServer?: boolean;
 }
