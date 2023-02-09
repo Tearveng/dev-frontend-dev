@@ -10,7 +10,6 @@ export const DailogScreen = () => {
   const navigation = useNavigation();
   const dialog = useDialog();
   const [size, setSize] = useState('');
-
   return (
     <Layout navigation={navigation}>
       <Center height={'100%'} bgColor={'black'}>

@@ -10,6 +10,8 @@ export const NavigatorRoute = {
   DIALOG_SCREEN: 'dialog_Screen',
   FILE_PICKER: 'file_picker',
   PROGRESS_BAR: 'progress_bar',
+  UPLOAD_SCREEN: 'upload_screen',
+  SESSION_SCREEN: 'session_screen',
   SAMPLE_UI: {
     LANDING: 'landing',
     MAIN: 'main_landing',

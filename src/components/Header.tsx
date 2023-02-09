@@ -47,7 +47,7 @@ export function Header({navigation}: any) {
             }}
           >
             <Text color="white" fontSize="20" fontWeight="bold">
-              {t(Localization.home)}
+              {t(Localization('home'))}
             </Text>
           </Pressable>
         </HStack>
@@ -60,7 +60,7 @@ export function Header({navigation}: any) {
                 }}
               >
                 <Text bold={true} paddingTop={2}>
-                  {t(Localization.paginationScreen)}
+                  {t(Localization('paginationScreen'))}
                 </Text>
               </Pressable>
               <Pressable
@@ -69,7 +69,7 @@ export function Header({navigation}: any) {
                 }}
               >
                 <Text bold={true} paddingTop={2}>
-                  {t(Localization.dialogScreen)}
+                  {t(Localization('dialogScreen'))}
                 </Text>
               </Pressable>
 
@@ -79,7 +79,7 @@ export function Header({navigation}: any) {
                 }}
               >
                 <Text bold={true} paddingTop={2}>
-                  {t(Localization.slideScreen)}
+                  {t(Localization('slideScreen'))}
                 </Text>
               </Pressable>
               <Pressable
@@ -88,7 +88,7 @@ export function Header({navigation}: any) {
                 }}
               >
                 <Text bold={true} paddingTop={2}>
-                  {t(Localization.testComponents)}
+                  {t(Localization('testComponents'))}
                 </Text>
               </Pressable>
               <Pressable
@@ -97,7 +97,7 @@ export function Header({navigation}: any) {
                 }}
               >
                 <Text bold={true} paddingTop={2}>
-                  {t(Localization.sampleUILandingScreen)}
+                  {t(Localization('sampleUILandingScreen'))}
                 </Text>
               </Pressable>
               <Pressable
@@ -106,7 +106,7 @@ export function Header({navigation}: any) {
                 }}
               >
                 <Text bold={true} paddingTop={2}>
-                  {t(Localization.testAPIServerRequestScreen)}
+                  {t(Localization('testAPIServerRequestScreen'))}
                 </Text>
               </Pressable>
             </>

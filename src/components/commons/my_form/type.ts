@@ -24,7 +24,11 @@ interface MyFormInputProps {
   radioData?: IRadioData[]; //this is for type 'radio'
   onSelectChange?: (itemValue: string) => void; //this is for type 'select'
   onFileChange?:
-    | ((pickerResult: any, arrayBuffer: ArrayBuffer, result: string) => void)
+    | ((
+        pickerResult: any,
+        arrayBuffer: ArrayBuffer | undefined,
+        result: string | undefined,
+      ) => void)
     | null; //this is for type 'file'
   onRadioChange?: ((itemValue: IRadioValue, data: IRadioData[]) => void) | null; //IRadioGroupOnChangeHandler; //this is for type 'radio'
   keyboardType?: KeyboardTypeOptions;

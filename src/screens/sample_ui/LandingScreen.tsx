@@ -60,7 +60,7 @@ const LandingScreen = () => {
         >
           <View>
             <MyText color={'muted.500'} fontSize={'md'}>
-              {`${t(Localization.hello)},`}
+              {`${t(Localization('hello'))},`}
             </MyText>
             <Box height={5} />
             <MyText color={'muted.900'} fontSize={'xl'} fontWeight={'bold'}>
@@ -102,7 +102,7 @@ const LandingScreen = () => {
         </View>
         <Box height={5} />
         <MyText color={'muted.900'} fontSize={'lg'} fontWeight={'semibold'}>
-          {t(Localization.lastSeenCourses)}
+          {t(Localization('lastSeenCourses'))}
         </MyText>
         <Box height={5} />
         <ScrollView height={'2/6'} width={'100%'}>

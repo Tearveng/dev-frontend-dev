@@ -16,5 +16,12 @@
   "testComponents": "Test Components",
   "testAPIServerRequestScreen": "Test API Server Request Screen",
   "sampleUILandingScreen": "Sample UI Landing Screen",
-  "forgotPassword": "Forgot Password"
+  "forgotPassword": "Forgot Password",
+  "blankSession": "Blank Session",
+  "sessionUnderContruction": "Session Under Contrunction",
+  "idleSession": "Idle Session",
+  "activeSession": "Active Session",
+  "sessionCorrectlyEnded": "Session Correctly Ended",
+  "deletedSession": "Deleted Session",
+  "abandonedSession": "Abandoned Session"
 }

@@ -1,6 +1,5 @@
 import {APIServer} from '@src/utils/classes/APIService';
 import {Verb} from '@src/utils/classes/interfaces/APIConstants';
-// import {Resp, RespType, Verb} from '@src/utils/classes/interfaces/APIConstants';
 import {Box, HStack, View, ScrollView} from 'native-base';
 import React, {useEffect, useState} from 'react';
 import {PaginationProps} from '.';
@@ -10,11 +9,14 @@ import {MyText} from '../my_text';
 
 export function Pagination({
   render,
+  callback,
   position = 'buttom',
   isScroll,
   baseUrl,
   prefixUrl,
   queryString,
+  header,
+  returnStatus,
 }: PaginationProps) {
   const [pages, setPages] = useState<number>(0);
   const [page, setPage] = useState<number>(1);
@@ -28,7 +30,7 @@ export function Pagination({
   });
   const urlFormat = (): string => {
     let stringQueries = `page=${page}`;
-    for (var key in queryString) {
+    for (let key in queryString) {
       stringQueries += `&${key}=${queryString[key]}`;
     }
     return `${prefixUrl ?? '/api/products'}?${stringQueries}`;
@@ -40,25 +42,14 @@ export function Pagination({
 
       const url = urlFormat();
       try {
-        // for (let i = 1; i <= 1000; i++) {
-        //   const body = {
-        //     title: 'A cool product ' + i,
-        //     price: 14.99 * i,
-        //     content: 'This is actually an sick product' + 14.99 * i,
-        //   };
-        //   await api.ngrequest(
-        //     '/api/products',
-        //     Verb.Post,
-        //     RespType.Json,
-        //     [Resp.OK],
-        //     body,
-        //     {
-        //       Authorization:
-        //         'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJ0aGVvLmNyYWlnQGV4YW1wbGUuY29tIiwibmFtZSI6IlRoZW8gQ3JhaWciLCJpYXQiOjE2NzUyMTc3MzF9.iI0Zlr-O7DovN162xyUgEmPxMFj0mbNjUfbpzg3i81k',
-        //     },
-        //   );
-        // }
-        const {items, totalPages} = await api.ngrequest(url, Verb.Get, 'json');
+        const {items, totalPages} = await api.ngrequest(
+          url,
+          Verb.Get,
+          'json',
+          returnStatus,
+          undefined,
+          header,
+        );
         setPages(totalPages);
         setDataServer(items);
         setLoading(false);
@@ -73,13 +64,12 @@ export function Pagination({
   }, [page]);
 
   let middlePagination: JSX.Element | JSX.Element[];
-
   if (pages <= LENGTH_PAGINATED) {
     middlePagination = (
       <HStack flexWrap={'wrap'} space={1}>
         {[...Array(pages)].map((_, idx) => (
           <LoadingButton
-            key={idx + 1}
+            key={`${idx + 1}`}
             onPress={() => setPage(idx + 1)}
             disabled={page === idx + 1}
             type={page === idx + 1 ? 'dark' : undefined}
@@ -93,9 +83,9 @@ export function Pagination({
       Math.floor((page - 1) / LENGTH_PAGINATED) * LENGTH_PAGINATED;
     middlePagination = (
       <HStack flexWrap={'wrap'} space={1}>
-        {[...Array(LENGTH_PAGINATED + 2)].map((_, idx) => (
+        {[...Array(LENGTH_PAGINATED + pages > 3 && 2)].map((_, idx) => (
           <LoadingButton
-            key={startValue + idx + 1}
+            key={`${startValue + idx + 1}`}
             disabled={page === startValue + idx + 1}
             type={page === startValue + idx + 1 ? 'dark' : undefined}
             onPress={() => setPage(startValue + idx + 1)}
@@ -110,7 +100,6 @@ export function Pagination({
 
     if (page > LENGTH_PAGINATED) {
       if (pages - page >= LENGTH_PAGINATED) {
-        LENGTH_PAGINATED;
         middlePagination = (
           <HStack flexWrap={'wrap'} space={1}>
             <LoadingButton onPress={() => setPage(1)} text="1" />
@@ -121,7 +110,7 @@ export function Pagination({
             />
             {[...Array(LENGTH_PAGINATED)].map((_, idx) => (
               <LoadingButton
-                key={startValue + idx + 1}
+                key={`${startValue + idx + 1}`}
                 disabled={page === startValue + idx + 1}
                 type={page === startValue + idx + 1 ? 'dark' : undefined}
                 onPress={() => setPage(startValue + idx + 1)}
@@ -145,7 +134,7 @@ export function Pagination({
             />
             {[...Array(amountLeft)].map((_, idx) => (
               <LoadingButton
-                key={startValue + idx + 1}
+                key={`${startValue + idx + 1}`}
                 disabled={page === startValue + idx + 1}
                 type={page === startValue + idx + 1 ? 'dark' : undefined}
                 style={pages < startValue + idx + 1 ? {display: 'none'} : null}
@@ -159,24 +148,6 @@ export function Pagination({
     }
   }
 
-  const Page = () =>
-    pages > 1 ? (
-      <HStack flexWrap={'wrap'} space={1}>
-        <LoadingButton
-          text="«"
-          onPress={() => setPage(page => page - 1)}
-          disabled={page === 1}
-        />
-        {middlePagination}
-        <LoadingButton
-          text="»"
-          onPress={() => setPage(page => page + 1)}
-          disabled={page === pages}
-        />
-      </HStack>
-    ) : (
-      <></>
-    );
   return (
     <View height={'100%'} width={'98%'} p={2}>
       <View
@@ -186,7 +157,14 @@ export function Pagination({
         justifyContent={'center'}
         alignItems="center"
       >
-        {position === 'top' && <Page />}
+        {position === 'top' && (
+          <Page
+            pages={pages}
+            page={page}
+            setPage={setPage}
+            middlePagination={middlePagination}
+          />
+        )}
         <View height={'92%'} width="100%">
           {loading ? (
             <Loading
@@ -201,20 +179,58 @@ export function Pagination({
             render &&
             (isScroll ? (
               <ScrollView height={'100%'} width={'100%'}>
-                {dataServer?.map((item, index) => (
-                  <View key={index}>{render(item)}</View>
-                ))}
+                {dataServer?.map((item, index) => {
+                  callback && callback(item);
+                  return <View key={`${index + 1}`}>{render(item)}</View>;
+                })}
               </ScrollView>
             ) : (
               dataServer?.map((item, index) => (
-                <View key={index}>{render(item)}</View>
+                <View key={`${index + 1}`}>{render(item)}</View>
               ))
             ))
           )}
         </View>
         <Box height={'2%'} />
-        {position === 'buttom' && <Page />}
+        {position === 'buttom' && (
+          <Page
+            pages={pages}
+            page={page}
+            setPage={setPage}
+            middlePagination={middlePagination}
+          />
+        )}
       </View>
     </View>
   );
 }
+
+const Page = ({
+  pages,
+  page,
+  setPage,
+  middlePagination,
+}: {
+  pages: number;
+  page: number;
+  setPage: React.Dispatch<React.SetStateAction<number>>;
+  middlePagination: JSX.Element | JSX.Element[];
+}) => {
+  return pages > 1 ? (
+    <HStack flexWrap={'wrap'} space={1}>
+      <LoadingButton
+        text="«"
+        onPress={() => setPage(page => page - 1)}
+        disabled={page === 1}
+      />
+      {middlePagination}
+      <LoadingButton
+        text="»"
+        onPress={() => setPage(page => page + 1)}
+        disabled={page === pages}
+      />
+    </HStack>
+  ) : (
+    <></>
+  );
+};

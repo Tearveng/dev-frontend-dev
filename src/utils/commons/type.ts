@@ -16,7 +16,7 @@ export type Dictionary<T = any> = {
   [k: string]: T;
 };
 export type AnyDictionary = Dictionary;
-export type Nullable<V> = V | null;
+export type Nullable<V> = V | null | undefined;
 export type Enumerate<N extends number, Acc extends number[] = []> =
   Acc['length'] extends N ? Acc[number] : Enumerate<N, [...Acc, Acc['length']]>;
 

@@ -30,8 +30,8 @@ interface Props extends PropsWithChildren {
     | 'lg'
     | 'xl'
     | '2xl'
-    | (string & {})
-    | (number & {})
+    | string
+    | number
     | 'xs'
     | 'full'
     | 'none'
@@ -114,7 +114,7 @@ const HeroSectionSampleUI = (props: Props) => {
           onPress={() => {}}
           _web={buttonBreakPoint}
         >
-          {t(Localization.getStarted)}
+          {t(Localization('getStarted'))}
         </Button>
         <MyText
           position={'absolute'}
@@ -126,7 +126,7 @@ const HeroSectionSampleUI = (props: Props) => {
           fontWeight={'semibold'}
           _web={textBreakPoint}
         >
-          {t(Localization.whatDoYouWantToLearnToday)}
+          {t(Localization('whatDoYouWantToLearnToday'))}
         </MyText>
         <View
           {...props.imageContainer}

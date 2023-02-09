@@ -106,7 +106,7 @@ export const FilePickerMobile = ({onFileChange}: FilePickerMobileProps) => {
         p={2}
         height={9}
         onPress={chooseFile}
-        text={t(Localization.browseFile)}
+        text={t(Localization('browseFile'))}
         isLoading={false}
       />
       <Box height={4} />

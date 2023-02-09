@@ -16,5 +16,12 @@
   "testComponents": "Composants d'essai",
   "testAPIServerRequestScreen": "Écran de demande de serveur d'API de test",
   "sampleUILandingScreen": "Exemple d'écran de destination de l'interface utilisateur",
-  "forgotPassword": "Mot de passe oublié"
+  "forgotPassword": "Mot de passe oublié",
+  "blankSession": "Session vierge",
+  "sessionUnderContruction": "Session en cours de construction",
+  "idleSession": "Session inactive",
+  "activeSession": "Séance active",
+  "sessionCorrectlyEnded": "Session correctement terminée",
+  "deletedSession": "Session supprimée",
+  "abandonedSession": "Session abandonnée"
 }

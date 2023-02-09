@@ -18,6 +18,7 @@ const config = {
           NavigatorRoute.SAMPLE_UI.SAMPLE_DETAIL,
       },
     },
+    [NavigatorRoute.UPLOAD_SCREEN]: NavigatorRoute.UPLOAD_SCREEN,
   },
 };
 

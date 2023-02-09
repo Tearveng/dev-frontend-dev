@@ -58,7 +58,7 @@ export const LanguagePicker = () => {
             setModalVisible(!modalVisible);
           }}
         >
-          {`${t(Localization.language)}`}
+          {`${t(Localization('language'))}`}
         </Button>
       </VStack>
     </>

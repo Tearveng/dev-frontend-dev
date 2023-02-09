@@ -32,7 +32,7 @@ export const MyForm = (props: MyFormProps) => {
           <FormControl
             isRequired={val.isRequired}
             isInvalid={val.name in errors}
-            key={index}
+            key={`${index + 1}`}
             height={
               val.type !== 'file'
                 ? 60
@@ -80,7 +80,7 @@ export const MyForm = (props: MyFormProps) => {
                     labelProp="text"
                     valueProp="value"
                     onValueChange={itemValue =>
-                      val.onSelectChange && val.onSelectChange!(itemValue)
+                      val.onSelectChange && val.onSelectChange(itemValue)
                     }
                     defaultSelect={val.defaultValue}
                   />
@@ -152,7 +152,7 @@ export const MyForm = (props: MyFormProps) => {
       {props.button.buttons.length > 0 ? (
         <View display={'flex'} flexDir="row">
           {props.button.buttons.map((val, index) => (
-            <View key={index} px={val.space ?? 3}>
+            <View key={`${index + (val.space ?? 1)}`} px={val.space ?? 3}>
               <LoadingButton
                 type={val.colorScheme}
                 mt={4}

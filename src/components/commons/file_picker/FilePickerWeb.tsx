@@ -7,8 +7,6 @@ import React, {ChangeEvent, useRef, useState} from 'react';
 import {useTranslation} from 'react-i18next';
 import {FilePickerWebProps} from '.';
 import {LoadingButton} from '../loading_btn';
-// import {MyText} from '../my_text';
-// import {base64} from 'rfc4648';
 
 export const FilePickerWeb = ({onFileChange}: FilePickerWebProps) => {
   const {t} = useTranslation();
@@ -31,7 +29,6 @@ export const FilePickerWeb = ({onFileChange}: FilePickerWebProps) => {
       onFileChange!(file, buffer, strBase64);
     } catch (err) {
       console.log(err);
-      // handleError(e);
     }
   };
   return (
@@ -85,7 +82,7 @@ export const FilePickerWeb = ({onFileChange}: FilePickerWebProps) => {
       />
       <LoadingButton
         onPress={() => fileRef.current?.click()}
-        text={t(Localization.browseFile)}
+        text={t(Localization('browseFile'))}
         isLoading={false}
       />
       <Box height={2} />

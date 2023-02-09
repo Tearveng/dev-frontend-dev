@@ -1,3 +1,4 @@
+import {Dictionary} from '@src/utils/commons/type';
 import {ReactNode} from 'react';
 
 export interface PaginationProps {
@@ -7,8 +8,10 @@ export interface PaginationProps {
   queryString?: Partial<{
     [key: string]: string | number;
   }> & {pageSize: number};
-  render?: (items: any) => ReactNode;
+  render?: (item: any) => ReactNode;
+  callback?: (item: any) => void;
   position?: 'top' | 'buttom';
   isScroll?: boolean;
-  // isServer?: boolean;
+  returnStatus?: number[];
+  header?: Dictionary;
 }

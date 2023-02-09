@@ -8,7 +8,7 @@ import {
   TestAPiServerRequestScreen,
 } from '@src/screens';
 import {LandingScreen} from '@src/screens/sample_ui';
-// import {SampleDetailScreen} from '@src/screens/sample_ui/SampleDetailScreen';
+
 import {NavigatorRoute} from './NavigatorRouteConstant';
 import TestComponent from '@src/screens/test_commponents';
 import {SlideScreen} from '@src/screens/slide';
@@ -20,6 +20,7 @@ import {useTranslation} from 'react-i18next';
 import HeaderLeft from '@src/components/navigations/HeaderLeft';
 import {View} from 'native-base';
 import {ProgressBarScreen} from '@src/screens/progress_bar';
+import {SessionScreen, UploadToBeSignedScreen} from '@src/screens/documents';
 const Stack = createStackNavigator();
 
 const Drawer = createDrawerNavigator();
@@ -32,8 +33,23 @@ export function DrawerNavigator() {
         useLegacyImplementation
         initialRouteName={NavigatorRoute.HOME}
       >
-        {/* ProgressBarScreen */}
-
+        {/* SessionScreen */}
+        <Drawer.Screen
+          name={NavigatorRoute.SESSION_SCREEN}
+          component={SessionScreen}
+          options={{
+            headerShown: false,
+            title: 'Sessions',
+          }}
+        />
+        <Drawer.Screen
+          name={NavigatorRoute.UPLOAD_SCREEN}
+          component={UploadToBeSignedScreen}
+          options={{
+            headerShown: false,
+            title: 'File uploads',
+          }}
+        />
         <Drawer.Screen
           name={NavigatorRoute.PROGRESS_BAR}
           component={ProgressBarScreen}
@@ -48,7 +64,7 @@ export function DrawerNavigator() {
           component={PaginationScreen}
           options={{
             headerShown: false,
-            title: t(Localization.paginationScreen) ?? '',
+            title: t(Localization('paginationScreen')) ?? '',
           }}
         />
 
@@ -57,7 +73,7 @@ export function DrawerNavigator() {
           component={DailogScreen}
           options={{
             headerShown: false,
-            title: t(Localization.dialogScreen) ?? '',
+            title: t(Localization('dialogScreen')) ?? '',
           }}
         />
         <Drawer.Screen
@@ -65,7 +81,7 @@ export function DrawerNavigator() {
           component={SlideScreen}
           options={{
             headerShown: false,
-            title: t(Localization.slideScreen) ?? '',
+            title: t(Localization('slideScreen')) ?? '',
           }}
         />
         <Drawer.Screen
@@ -73,7 +89,7 @@ export function DrawerNavigator() {
           component={TestComponent}
           options={{
             headerShown: false,
-            title: t(Localization.testComponents) ?? '',
+            title: t(Localization('testComponents')) ?? '',
           }}
         />
         <Drawer.Screen
@@ -96,7 +112,7 @@ export function DrawerNavigator() {
           component={ForgotPasswordScreen}
           options={{
             headerShown: false,
-            title: t(Localization.forgotPassword) ?? '',
+            title: t(Localization('forgotPassword')) ?? '',
           }}
         />
         <Drawer.Screen
@@ -104,45 +120,45 @@ export function DrawerNavigator() {
           component={TestAPiServerRequestScreen}
           options={{
             headerShown: false,
-            title: t(Localization.testAPIServerRequestScreen) ?? '',
+            title: t(Localization('testAPIServerRequestScreen')) ?? '',
           }}
         />
         <Drawer.Screen
           name={NavigatorRoute.SAMPLE_UI.MAIN}
-          component={() => (
-            <Stack.Navigator
-              screenOptions={{headerShown: false}}
-              initialRouteName={NavigatorRoute.SAMPLE_UI.LANDING}
-            >
-              <Stack.Screen
-                name={NavigatorRoute.SAMPLE_UI.LANDING}
-                component={LandingScreen}
-              />
-              <Stack.Screen
-                name={NavigatorRoute.SAMPLE_UI.SAMPLE_DETAIL}
-                component={SampleDetailScreen}
-                options={{
-                  headerShown: true,
-                  // headerLeft: () => <HeaderLeft />,
-                  header: () => (
-                    <View backgroundColor={'#3700B3'}>
-                      <HeaderLeft />
-                    </View>
-                  ),
-                }}
-              />
-            </Stack.Navigator>
-          )}
+          component={SampleUI}
           options={{
             headerShown: false,
-            title: t(Localization.sampleUILandingScreen) ?? '',
+            title: t(Localization('sampleUILandingScreen')) ?? '',
           }}
         />
       </Drawer.Navigator>
     </>
   );
 }
-
+const SampleUI = () => (
+  <Stack.Navigator
+    screenOptions={{headerShown: false}}
+    initialRouteName={NavigatorRoute.SAMPLE_UI.LANDING}
+  >
+    <Stack.Screen
+      name={NavigatorRoute.SAMPLE_UI.LANDING}
+      component={LandingScreen}
+    />
+    <Stack.Screen
+      name={NavigatorRoute.SAMPLE_UI.SAMPLE_DETAIL}
+      component={SampleDetailScreen}
+      options={{
+        headerShown: true,
+        // headerLeft: () => <HeaderLeft />,
+        header: () => (
+          <View backgroundColor={'#3700B3'}>
+            <HeaderLeft />
+          </View>
+        ),
+      }}
+    />
+  </Stack.Navigator>
+);
 export function RootNavigator() {
   return (
     <Stack.Navigator
