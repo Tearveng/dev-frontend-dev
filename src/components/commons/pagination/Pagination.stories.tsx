@@ -28,6 +28,6 @@ SamplePagination.args = {
     </View>
   ),
   isScroll: true,
-  position: 'buttom',
-  queryString: {pageSize: 40, sortedBy: 'name', date: 'asdklfsalk'},
+  position: 'bottom',
+  queryString: {pageSize: 40, sortedBy: 'name'},
 };

@@ -25,7 +25,7 @@ export const PaginationScreen = () => {
             </View>
           )}
           isScroll={true}
-          position={'buttom'}
+          position={'bottom'}
           queryString={{pageSize: 40, sortedBy: 'name', date: 'asdklfsalk'}}
         />
       </View>
