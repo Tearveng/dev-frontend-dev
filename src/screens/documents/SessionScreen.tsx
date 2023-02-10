@@ -159,7 +159,6 @@ const Body = ({item, navigation, setReFetch}: {item: Session; navigation: StackN
           buttons={
             <HStack space={3}>
               <LoadingButton width={'40%'} isLoading={deleteLoading} type={'danger'} text={t(Localization('yes'))} onPress={async () => {
-
                 if(!$ok(reasonCloseSession)) {
                   setErrorReasonInput(t(Localization('reasonCannotBeEmpty')))
                   return;
@@ -186,7 +185,6 @@ const Body = ({item, navigation, setReFetch}: {item: Session; navigation: StackN
                   placeholder={t(Localization('reason')) ?? ''}
                   onChangeText={(text) => {
                     setReasonCloseSession(text);
-                    console.log(text)
                     if(text) {
                       setErrorReasonInput(undefined)
                     }else{
