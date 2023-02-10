@@ -30,5 +30,11 @@
   "url": "URL",
   "errorGettingContentFile": "Error with getting content file. Please try again later",
   "fileViewer": "File Viewer",
-  "noDocument": "No Document"
+  "noDocument": "No Document",
+  "yes": "Yes",
+  "no": "No",
+  "reasonCannotBeEmpty": "Reason cannot be empty!",
+  "reason": "reason",
+  "Reason": "Reason",
+  "deleteSession": "Delete Session"
 }

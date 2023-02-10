@@ -5,7 +5,7 @@
   "chooseYourPreferLanguage": "Choisissez votre langue préférée.",
   "hello": "Bonjour",
   "search": "Cherche ici",
-  "whatDoYouWantToLearnToday": "Que voulez-vous apprendre aujourd'hui?",
+  "whatDoYouWantToLearnToday": "Que voulez-vous apprendre aujourd'hui ?",
   "getStarted": "Commencer",
   "lastSeenCourses": "Derniers cours vus",
   "browseFile": "Parcourir le fichier",
@@ -30,5 +30,11 @@
   "url": "URL",
   "errorGettingContentFile": "Erreur lors de l'obtention du fichier de contenu. Veuillez réessayer plus tard",
   "fileViewer": "Visionneuse de fichiers",
-  "noDocument": "Aucun document"
+  "noDocument": "Aucun document",
+  "yes": "Oui",
+  "no": "Non",
+  "reasonCannotBeEmpty": "La raison ne peut pas être vide !",
+  "reason": "raison",
+  "Reason": "Raison",
+  "deleteSession": "Supprimer la session"
 }

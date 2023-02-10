@@ -2,7 +2,6 @@ import {HStack, IconButton, InfoIcon, ScrollView, View, VStack} from 'native-bas
 import React, {useEffect, useState} from 'react';
 import {useRoute} from '@react-navigation/native';
 import {API_URL} from "@src/config/env";
-import {DocumentSession, UploadService} from "@src/services/upload";
 import {Loading} from "@components/commons/loading";
 import {Localization} from "@src/i18n/languages";
 import {useTranslation} from "react-i18next";
@@ -10,6 +9,7 @@ import {LoadingButton} from "@components/commons/loading_btn";
 import {Dialog, useDialog} from "@components/commons/dailog";
 import {ViewPdf} from "@components/templates/pdf";
 import {MyText} from "@src/components/commons/my_text";
+import {DocumentSession, SessionService} from "@src/services/session";
 
 interface Params {
   id: number;
@@ -25,16 +25,20 @@ export const DocumentInProgressScreen = () => {
   const [fileBase64, setFileBase64] = useState<string | undefined| null>();
   const dialog = useDialog();
   const [documentSessions, setDocumentSessions] = useState<DocumentSession[]>([]);
-  const api = new UploadService(API_URL ?? '', {
+
+  const header = {
     certignahash: 'ySsPUR23',
     certignarole: 2,
     certignauser: 'pps#test',
-  });
+  }
+
+  const sessionApi = new SessionService(API_URL ?? '', header);
+
   useEffect(() => {
     setIsLoading(true);
     (async function () {
       try {
-        const data = await api.getDocumentSessions(_params.id);
+        const data = await sessionApi.getDocumentSessions(_params.id);
         setDocumentSessions(data)
         setIsLoading(false)
       } catch (e) {
@@ -65,13 +69,13 @@ export const DocumentInProgressScreen = () => {
               onPress={async () =>{
                 dialog.onOpen();
                 setIsLoadingDialog(true);
-                const data = await api.getDetailDocumentSession(`${item.url}/genuine`);
+                const data = await sessionApi.getDetailDocumentSession(`${item.url}/genuine`);
 
                 if(!data){
                   setErrorDetailDownload(t(Localization('errorGettingContentFile')))
                 }else{
                   try {
-                    const file = await api.getContentDocumentSession(data.url);
+                    const file = await sessionApi.getContentDocumentSession(data.url);
                     setFileBase64(file)
                     console.log(file)
                   }catch (e){

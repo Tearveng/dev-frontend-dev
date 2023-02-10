@@ -16,7 +16,10 @@ export const Child = ({text}: {text: string}) => {
       <MyText fontSize="3xl" type="primary">
         Hello From {text}
       </MyText>
-      <Button onPress={next}>Hello</Button>
+      <Button onPress={() => {
+        next();
+        next();
+      }}>Hello</Button>
     </View>
   );
 }

@@ -16,6 +16,7 @@ export function Pagination({
   header,
   returnStatus,
   position = 'bottom',
+  refetch = false,
 }: PaginationProps) {
   const [pages, setPages] = useState<number>(0);
   const [page, setPage] = useState<number>(1);
@@ -55,12 +56,12 @@ export function Pagination({
       } catch (error: any) {
         console.log(error.message);
         setLoading(false);
-        setError('Some error occured');
+        setError('Some error occurred');
       }
     };
 
     fecthPosts();
-  }, [page]);
+  }, [page, refetch]);
 
   let middlePagination: JSX.Element | JSX.Element[];
   if (pages <= LENGTH_PAGINATED) {

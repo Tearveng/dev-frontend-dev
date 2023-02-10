@@ -13,4 +13,5 @@ export interface PaginationProps {
   isScroll?: boolean;
   returnStatus?: number[];
   header?: Dictionary;
+  refetch?: boolean;
 }

@@ -22,8 +22,8 @@ export const Dialog = ({
           <Modal.Header backgroundColor={headerBackgroundColor}>
             {header}
           </Modal.Header>
-          <Modal.Body backgroundColor={bodyBackgroundColor} height='96'>
-            <ScrollView nestedScrollEnabled={true} height={'96'}>{body}</ScrollView>
+          <Modal.Body backgroundColor={bodyBackgroundColor}>
+            <ScrollView nestedScrollEnabled={true}>{body}</ScrollView>
           </Modal.Body>
           <Modal.Footer backgroundColor={footerBackgroundColor}>
             <Button.Group space={2}>{buttons}</Button.Group>
