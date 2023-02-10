@@ -9,8 +9,7 @@ export interface PaginationProps {
     [key: string]: string | number;
   }> & {pageSize: number};
   render?: (item: any) => ReactNode;
-  callback?: (item: any) => void;
-  position?: 'top' | 'buttom';
+  position?: 'top' | 'bottom';
   isScroll?: boolean;
   returnStatus?: number[];
   header?: Dictionary;

@@ -18,10 +18,17 @@
   "sampleUILandingScreen": "Sample UI Landing Screen",
   "forgotPassword": "Forgot Password",
   "blankSession": "Blank Session",
-  "sessionUnderContruction": "Session Under Contrunction",
+  "sessionUnderContruction": "Session Under Construction",
   "idleSession": "Idle Session",
   "activeSession": "Active Session",
   "sessionCorrectlyEnded": "Session Correctly Ended",
   "deletedSession": "Deleted Session",
-  "abandonedSession": "Abandoned Session"
+  "abandonedSession": "Abandoned Session",
+  "fileName": "File Name",
+  "title": "Title",
+  "abstract": "Abstract",
+  "url": "URL",
+  "errorGettingContentFile": "Error with getting content file. Please try again later",
+  "fileViewer": "File Viewer",
+  "noDocument": "No Document"
 }

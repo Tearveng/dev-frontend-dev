@@ -11,6 +11,7 @@ import {
   TSResponse,
   ResponseType,
 } from './interfaces/APIInterface';
+import {Buffer} from 'buffer'
 
 export function $barerauth(base64token: string): string {
   return `Bearer ${base64token}`;
@@ -84,7 +85,7 @@ export class NGRequest {
         timeoutError,
       );
       ret =
-        responseType === 'buffer' ? Buffer.from(response.data) : response.data;
+        responseType === 'arraybuffer' ? Buffer.from(response.data) : response.data;
       status = response.status;
       headers = response.headers as RequestHeaders;
     } catch (e: any) {

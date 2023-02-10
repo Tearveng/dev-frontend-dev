@@ -78,7 +78,7 @@ export const SlideProvider: React.FunctionComponent<
 export const useSlide = () => {
   const {slide, back, next} = useContext(SlideContext);
 
-  const toast = useMemo(
+  return useMemo(
     () => ({
       back,
       next,
@@ -86,6 +86,4 @@ export const useSlide = () => {
     }),
     [slide, back, next],
   );
-
-  return toast;
 };

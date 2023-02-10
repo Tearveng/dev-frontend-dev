@@ -16,14 +16,14 @@ export const Dialog = ({
 }: DialogProps) => {
   return (
     <>
-      <Modal isOpen={isOpen} onClose={onClose} size={size}>
+      <Modal isOpen={isOpen} onClose={onClose} size={size} >
         <Modal.Content {...props} maxH={'100%'} maxW={'100%'}>
           <Modal.CloseButton />
           <Modal.Header backgroundColor={headerBackgroundColor}>
             {header}
           </Modal.Header>
-          <Modal.Body backgroundColor={bodyBackgroundColor}>
-            <ScrollView nestedScrollEnabled={true}>{body}</ScrollView>
+          <Modal.Body backgroundColor={bodyBackgroundColor} height='96'>
+            <ScrollView nestedScrollEnabled={true} height={'96'}>{body}</ScrollView>
           </Modal.Body>
           <Modal.Footer backgroundColor={footerBackgroundColor}>
             <Button.Group space={2}>{buttons}</Button.Group>

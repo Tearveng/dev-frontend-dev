@@ -20,7 +20,7 @@ import {useTranslation} from 'react-i18next';
 import HeaderLeft from '@src/components/navigations/HeaderLeft';
 import {View} from 'native-base';
 import {ProgressBarScreen} from '@src/screens/progress_bar';
-import {SessionScreen, UploadToBeSignedScreen} from '@src/screens/documents';
+import {DocumentInProgressScreen, SessionScreen, UploadToBeSignedScreen} from '@src/screens/documents';
 const Stack = createStackNavigator();
 
 const Drawer = createDrawerNavigator();
@@ -33,10 +33,10 @@ export function DrawerNavigator() {
         useLegacyImplementation
         initialRouteName={NavigatorRoute.HOME}
       >
-        {/* SessionScreen */}
+        {/* DocumentInProgressScreen */}
         <Drawer.Screen
-          name={NavigatorRoute.SESSION_SCREEN}
-          component={SessionScreen}
+          name={NavigatorRoute.SESSION.MAIN}
+          component={SessionRoute}
           options={{
             headerShown: false,
             title: 'Sessions',
@@ -135,6 +135,32 @@ export function DrawerNavigator() {
     </>
   );
 }
+
+const SessionRoute = () => {
+    return (<Stack.Navigator
+        screenOptions={{headerShown: false}}
+        initialRouteName={NavigatorRoute.SESSION.SESSION_SCREEN}
+    >
+        <Stack.Screen
+            name={NavigatorRoute.SESSION.SESSION_SCREEN}
+            component={SessionScreen}
+        />
+        <Stack.Screen
+            name={NavigatorRoute.SESSION.DOCUMENT_IN_PROGRESS_SCREEN}
+            component={DocumentInProgressScreen}
+            options={{
+                headerShown: true,
+                header: () => <Header />,
+            }}
+        />
+    </Stack.Navigator>
+    );
+}
+const Header = () => (
+    <View backgroundColor={'#3700B3'}>
+        <HeaderLeft />
+    </View>
+)
 const SampleUI = () => (
   <Stack.Navigator
     screenOptions={{headerShown: false}}
@@ -150,11 +176,7 @@ const SampleUI = () => (
       options={{
         headerShown: true,
         // headerLeft: () => <HeaderLeft />,
-        header: () => (
-          <View backgroundColor={'#3700B3'}>
-            <HeaderLeft />
-          </View>
-        ),
+        header: () => <Header />,
       }}
     />
   </Stack.Navigator>

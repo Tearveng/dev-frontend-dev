@@ -24,7 +24,7 @@ export interface TSRequestOptions {
 }
 
 export type ResponseType =
-  | 'buffer'
+  | 'arraybuffer'
   | 'blob'
   | 'document'
   | 'json'

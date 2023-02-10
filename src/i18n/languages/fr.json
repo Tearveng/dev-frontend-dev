@@ -23,5 +23,12 @@
   "activeSession": "Séance active",
   "sessionCorrectlyEnded": "Session correctement terminée",
   "deletedSession": "Session supprimée",
-  "abandonedSession": "Session abandonnée"
+  "abandonedSession": "Session abandonnée",
+  "fileName": "Nom de fichier",
+  "title": "Titre",
+  "abstract": "Abstraite",
+  "url": "URL",
+  "errorGettingContentFile": "Erreur lors de l'obtention du fichier de contenu. Veuillez réessayer plus tard",
+  "fileViewer": "Visionneuse de fichiers",
+  "noDocument": "Aucun document"
 }

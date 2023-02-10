@@ -1,17 +1,18 @@
-import {Dialog, DialogHook, useDialog} from '@src/components/commons/dailog';
-import {LoadingButton} from '@src/components/commons/loading_btn';
 import {MyText} from '@src/components/commons/my_text';
 import {Pagination} from '@src/components/commons/pagination';
 import {Layout} from '@src/components/layout';
 import {API_URL} from '@src/config/env';
 import {getDeadLineTimer, useTimer} from '@src/hooks';
-import {useNavigation} from '@src/navigation';
-import {HStack, InfoIcon, View} from 'native-base';
+import {NavigatorRoute, useNavigation} from '@src/navigation';
+import {ArrowForwardIcon, HStack, View} from 'native-base';
 import React, {useEffect, useRef, useState} from 'react';
 import dayjs from 'dayjs';
 import {SessionStatus} from '@src/utils/commons/mappingObject';
 import {MyIconButton} from '@src/components/commons/my_icon_button';
+import {StackNavigationProp} from "@react-navigation/stack";
+import {ParamListBase} from "@react-navigation/native";
 export interface Session {
+  id: number;
   createdAt: Date;
   expiresAt: Date;
   publicId: number;
@@ -23,7 +24,6 @@ export interface Session {
 
 export const SessionScreen = () => {
   const navigation = useNavigation();
-  const dialog = useDialog();
 
   return (
     <Layout navigation={navigation}>
@@ -33,54 +33,20 @@ export const SessionScreen = () => {
           baseUrl={API_URL ?? 'http://10.2.50.26:8080'}
           prefixUrl="/api/v1/sessions"
           queryString={{pageSize: 10, expirationstatus: 'all'}}
-          render={(item: Session) => <Body item={{...item}} dialog={dialog} />}
+          render={(item: Session) => <Body item={item} navigation={navigation} />}
           header={{
             DefaultLanguage: 'fr',
             Accept: 'application/json',
             Certignarole: 1,
           }}
-          position="buttom"
-        />
-        <Dialog
-          size="full"
-          headerBackgroundColor={'gray.800'}
-          bodyBackgroundColor={'gray.800'}
-          footerBackgroundColor={'gray.800'}
-          header={
-            <MyText fontSize="lg" type="white">
-              Session Detail
-            </MyText>
-          }
-          buttons={
-            <View>
-              <LoadingButton text={'Close'} onPress={dialog.onClose} />
-            </View>
-          }
-          isOpen={dialog.isOpen}
-          onClose={dialog.onClose}
-          body={
-            <HStack space={3}>
-              <View>
-                <MyText type="white">ID: </MyText>
-                <MyText type="white">TTL: </MyText>
-                <MyText type="white">Created Date: </MyText>
-                <MyText type="white">Expired Date: </MyText>
-              </View>
-              <View>
-                <MyText type="white">404 </MyText>
-                <MyText type="white">2m : 20s </MyText>
-                <MyText type="white">{Date.now()}</MyText>
-                <MyText type="white">{`${Date.now() + 3343}`} </MyText>
-              </View>
-            </HStack>
-          }
+          position="bottom"
         />
       </View>
     </Layout>
   );
 };
 
-const Body = ({item, dialog}: {item: Session; dialog: DialogHook}) => {
+const Body = ({item, navigation}: {item: Session; navigation: StackNavigationProp<ParamListBase, string, undefined>}) => {
   const [timer, setTimer] = useState('00:00:00');
   const intervalRef = useRef<NodeJS.Timer | null>(null);
   const {isTimeOut, clearTimer, total} = useTimer(setTimer, intervalRef);
@@ -93,34 +59,40 @@ const Body = ({item, dialog}: {item: Session; dialog: DialogHook}) => {
   }, []);
 
   return (
-    <HStack
-      width={'100%'}
-      background={'gray.800'}
-      p={3}
-      my={2}
-      borderRadius={10}
-      backgroundColor={isTimeOut || total === 0 ? 'red.500' : undefined}
-    >
-      <HStack width={'85%'} space={2}>
-        <View>
-          <MyText type="white">URL :</MyText>
-          <MyText type="white">Expire In :</MyText>
-          <MyText type="white">Status :</MyText>
-        </View>
-        <View>
-          <MyText type="white">{item.url}</MyText>
-          <MyText type="white">{timer}</MyText>
-          <MyText type="white">{`${SessionStatus[item.status]}`}</MyText>
+      <HStack
+          width={'100%'}
+          background={'gray.800'}
+          p={3}
+          my={2}
+          borderRadius={10}
+          backgroundColor={isTimeOut || total === 0 ? 'red.500' : undefined}
+      >
+        <HStack width={'85%'} space={2}>
+          <View>
+            <MyText type="white">URL :</MyText>
+            <MyText type="white">Expire In :</MyText>
+            <MyText type="white">Status :</MyText>
+          </View>
+          <View>
+            <MyText type="white">{item.url}</MyText>
+            <MyText type="white">{timer}</MyText>
+            <MyText type="white">{`${SessionStatus[item.status]}`}</MyText>
+          </View>
+        </HStack>
+        <View display="flex" justifyContent={'center'}>
+          <MyIconButton
+              colorScheme="dark"
+              size="md"
+              icon={<ArrowForwardIcon/>}
+              onPress={() => {
+                navigation.navigate(NavigatorRoute.SESSION.MAIN, {
+                  screen: NavigatorRoute.SESSION.DOCUMENT_IN_PROGRESS_SCREEN,
+                  initial: false,
+                  params: {id: item.id},
+                })
+              }}
+          />
         </View>
       </HStack>
-      <View display="flex" justifyContent={'center'}>
-        <MyIconButton
-          colorScheme="dark"
-          size="md"
-          icon={<InfoIcon />}
-          onPress={dialog.onOpen}
-        />
-      </View>
-    </HStack>
   );
 };

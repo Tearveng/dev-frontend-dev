@@ -1,4 +1,4 @@
-import {UploadPage} from './type';
+import {UploadPage, DocumentSession} from './type';
 import {UploadService} from './upload.service';
 
-export {UploadPage, UploadService};
+export {UploadPage, UploadService, DocumentSession};

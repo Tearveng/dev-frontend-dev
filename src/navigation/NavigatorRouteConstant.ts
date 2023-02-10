@@ -11,7 +11,11 @@ export const NavigatorRoute = {
   FILE_PICKER: 'file_picker',
   PROGRESS_BAR: 'progress_bar',
   UPLOAD_SCREEN: 'upload_screen',
-  SESSION_SCREEN: 'session_screen',
+  SESSION: {
+    MAIN: 'main_session',
+    SESSION_SCREEN: 'session_screen',
+    DOCUMENT_IN_PROGRESS_SCREEN: 'document_in_progress_screen'
+  },
   SAMPLE_UI: {
     LANDING: 'landing',
     MAIN: 'main_landing',

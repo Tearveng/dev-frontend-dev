@@ -31,7 +31,7 @@ export const UploadToBeSignedScreen = () => {
               </View>
             )}
             header={{DefaultLanguage: 'fr', Accept: 'application/json'}}
-            position="buttom"
+            position="bottom"
           />
         </View>
       </View>

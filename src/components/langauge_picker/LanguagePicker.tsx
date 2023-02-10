@@ -43,7 +43,7 @@ export const LanguagePicker = () => {
       >
         <Modal.Content>
           <Modal.CloseButton />
-          <Modal.Header>{t('chooseYourPreferLanguage')}</Modal.Header>
+          <Modal.Header>{t(Localization('chooseYourPreferLanguage'))}</Modal.Header>
           <Modal.Body>
             {languages.map(lang => (
               <LanguageItem {...lang} key={lang.name} />

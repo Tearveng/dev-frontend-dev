@@ -1,26 +1,14 @@
 import {MyForm} from '@src/components/commons/my_form';
 import {MyRadioButton} from '@src/components/commons/my_radio_button';
-import {MyText} from '@src/components/commons/my_text';
 import {Slide, SlideProvider} from '@src/components/commons/slide';
 import {Layout} from '@src/components/layout';
 import {useNavigation} from '@src/navigation';
-import {View} from 'native-base';
 import React from 'react';
+import {Child} from "@screens/slide/TestChild";
 
 export const SlideScreen = () => {
-  const Child = ({text}: {text: string}) => (
-    <View
-      width={'100%'}
-      height={'100%'}
-      display={'flex'}
-      justifyContent="center"
-      alignItems="center"
-    >
-      <MyText fontSize="3xl" type="primary">
-        Hello From {text}
-      </MyText>
-    </View>
-  );
+
+
   const obj = {
     slideContent: [
       {
@@ -133,7 +121,7 @@ export const SlideScreen = () => {
             leftButton: {text: 'Previous', type: 'danger', variant: 'outline'},
             rightButton: {
               text: 'Next Step',
-              type: 'success',
+              type: 'danger',
               variant: 'solid',
             },
           }}

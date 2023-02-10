@@ -9,14 +9,13 @@ import {MyText} from '../my_text';
 
 export function Pagination({
   render,
-  callback,
-  position = 'buttom',
   isScroll,
   baseUrl,
   prefixUrl,
   queryString,
   header,
   returnStatus,
+  position = 'bottom',
 }: PaginationProps) {
   const [pages, setPages] = useState<number>(0);
   const [page, setPage] = useState<number>(1);
@@ -180,7 +179,6 @@ export function Pagination({
             (isScroll ? (
               <ScrollView height={'100%'} width={'100%'}>
                 {dataServer?.map((item, index) => {
-                  callback && callback(item);
                   return <View key={`${index + 1}`}>{render(item)}</View>;
                 })}
               </ScrollView>
@@ -192,7 +190,7 @@ export function Pagination({
           )}
         </View>
         <Box height={'2%'} />
-        {position === 'buttom' && (
+        {position === 'bottom' && (
           <Page
             pages={pages}
             page={page}
@@ -220,13 +218,13 @@ const Page = ({
     <HStack flexWrap={'wrap'} space={1}>
       <LoadingButton
         text="«"
-        onPress={() => setPage(page => page - 1)}
+        onPress={() => setPage(_page => _page - 1)}
         disabled={page === 1}
       />
       {middlePagination}
       <LoadingButton
         text="»"
-        onPress={() => setPage(page => page + 1)}
+        onPress={() => setPage(_page => _page + 1)}
         disabled={page === pages}
       />
     </HStack>

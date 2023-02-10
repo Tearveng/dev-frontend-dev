@@ -11,15 +11,16 @@ import {FilePickerMobileProps} from '.';
 import {decode} from '@src/utils/base64_arraybuffer';
 
 export const FilePickerMobile = ({onFileChange}: FilePickerMobileProps) => {
+  const {t} = useTranslation();
+
+  const [strBase64, setStrBase64] = useState<string | undefined>();
+  const [typeFile, setTypeFile] = useState('');
   if (Platform.OS === 'web') {
     return <></>;
   }
   const RNFetchBlob = require('react-native-blob-util').default;
   const DocumentPicker = require('react-native-document-picker');
-  const {t} = useTranslation();
 
-  const [strBase64, setStrBase64] = useState<string | undefined>();
-  const [typeFile, setTypeFile] = useState('');
   const chooseFile = async () => {
     try {
       const pickerResult = await DocumentPicker.pickSingle({
