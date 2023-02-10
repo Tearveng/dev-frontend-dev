@@ -13,7 +13,7 @@ import {NavigatorRoute} from './NavigatorRouteConstant';
 import TestComponent from '@src/screens/test_commponents';
 import {SlideScreen} from '@src/screens/slide';
 import {PaginationScreen} from '@src/screens/pagination';
-import {DailogScreen} from '@src/screens/dialog';
+import {DialogScreen} from '@src/screens/dialog';
 import {SampleDetailScreen} from '@src/screens/sample_ui/SampleDetailScreen';
 import {Localization} from '@src/i18n/languages';
 import {useTranslation} from 'react-i18next';
@@ -70,7 +70,7 @@ export function DrawerNavigator() {
 
         <Drawer.Screen
           name={NavigatorRoute.DIALOG_SCREEN}
-          component={DailogScreen}
+          component={DialogScreen}
           options={{
             headerShown: false,
             title: t(Localization('dialogScreen')) ?? '',

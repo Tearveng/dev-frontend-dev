@@ -1,3 +1,3 @@
-import { DailogScreen } from "./DailogScreen";
+import { DialogScreen } from "./DialogScreen";
 
-export {DailogScreen}
+export {DialogScreen}

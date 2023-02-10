@@ -18,8 +18,8 @@ import {useTranslation} from "react-i18next";
 import {SessionService} from "@src/services/session";
 import {MyInputField} from "@components/commons/my_input_field";
 import {$ok} from "@src/utils/commons";
-import {ColorType, ResponsiveValue} from "native-base/src/components/types";
-import {ILinearGradientProps} from "native-base/src/components/primitives/Box/types";
+import {BackGroundColor} from "@screens/documents/index";
+
 export interface Session {
   id: number;
   createdAt: Date;
@@ -74,9 +74,7 @@ const Body = ({item, navigation, setReFetch}: {item: Session; navigation: StackN
   const [errorReasonInput, setErrorReasonInput] = useState<string | null | undefined>();
   const [deleteLoading, setDeleteLoading] = useState(false);
   const status = item.status.toString();
-  const backgroundBaseOnStatus = (status: keyof typeof SessionStatus): ResponsiveValue<
-    ColorType | string | ILinearGradientProps
-  > => {
+  const backgroundBaseOnStatus = (status: keyof typeof SessionStatus): BackGroundColor => {
     switch (status){
       case "1":
         return undefined
@@ -127,7 +125,7 @@ const Body = ({item, navigation, setReFetch}: {item: Session; navigation: StackN
             <MyText type="white">{`${SessionStatus[item.status]}`}</MyText>
           </View>
         </HStack>
-        <HStack width={'30%'} justifyContent={status === '20' ? 'flex-end' :'center'} p={3} space={2}>
+        <HStack width={'22%'} justifyContent={'flex-end'} p={3} space={2}>
           {
             status !== '20' && (
               <MyIconButton

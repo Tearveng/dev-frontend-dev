@@ -6,7 +6,7 @@ import {Center, VStack} from 'native-base';
 import React, {useState} from 'react';
 import {ViewButton} from '../test_commponents/ViewButton';
 
-export const DailogScreen = () => {
+export const DialogScreen = () => {
   const navigation = useNavigation();
   const dialog = useDialog();
   const [size, setSize] = useState('');

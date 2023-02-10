@@ -18,6 +18,14 @@ const config = {
           NavigatorRoute.SAMPLE_UI.SAMPLE_DETAIL,
       },
     },
+    [NavigatorRoute.SESSION.MAIN]: {
+      initialRouteName: NavigatorRoute.SESSION.SESSION_SCREEN,
+      screens: {
+        [NavigatorRoute.SESSION.SESSION_SCREEN]: NavigatorRoute.SESSION.SESSION_SCREEN,
+        [NavigatorRoute.SESSION.DOCUMENT_IN_PROGRESS_SCREEN]:
+        NavigatorRoute.SESSION.DOCUMENT_IN_PROGRESS_SCREEN,
+      },
+    },
     [NavigatorRoute.UPLOAD_SCREEN]: NavigatorRoute.UPLOAD_SCREEN,
   },
 };
