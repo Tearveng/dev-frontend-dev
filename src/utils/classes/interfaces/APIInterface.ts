@@ -81,3 +81,9 @@ export enum SignatureType {
   Envelopping = 2,
   Detached = 3,
 }
+
+export enum CertificateType {
+  generate = 'generate',
+  server = 'server',
+  'test-parameters' = 'test-parameters',
+}
