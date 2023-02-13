@@ -1,4 +1,19 @@
-import { SessionService } from "./session.service";
-import {DetailForDownloadFile, DocumentSession, ForceToCloseSessionBody } from "./type";
+import {SessionService} from './session.service';
+import {
+  CheckOtpBody,
+  ExtendSessionBody,
+  ForceToCloseSessionBody,
+  GenerateOtpBody,
+  ApproveDocumentBody,
+  SignDocumentBody,
+} from './type';
 
-export {DocumentSession, SessionService, ForceToCloseSessionBody, DetailForDownloadFile}
+export {
+  SessionService,
+  ForceToCloseSessionBody,
+  ExtendSessionBody,
+  GenerateOtpBody,
+  CheckOtpBody,
+  ApproveDocumentBody,
+  SignDocumentBody,
+};
