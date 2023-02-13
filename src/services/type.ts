@@ -15,3 +15,4 @@ export type QueryString<T> = Partial<{
   T;
 
 export interface UserData {}
+export type ManifestData = object | null | undefined;

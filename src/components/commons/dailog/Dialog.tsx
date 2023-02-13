@@ -16,7 +16,7 @@ export const Dialog = ({
 }: DialogProps) => {
   return (
     <>
-      <Modal isOpen={isOpen} onClose={onClose} size={size} >
+      <Modal isOpen={isOpen} onClose={onClose} size={size}>
         <Modal.Content {...props} maxH={'100%'} maxW={'100%'}>
           <Modal.CloseButton />
           <Modal.Header backgroundColor={headerBackgroundColor}>
