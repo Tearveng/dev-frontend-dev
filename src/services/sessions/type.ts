@@ -1,10 +1,5 @@
 import {Dictionary} from '@src/utils/commons/type';
 
-export type QueryString = Partial<{
-  [key: string]: string | number | number[] | string[];
-}> &
-  SessionQueryString;
-
 export interface SessionQueryString {
   ttlmin?: number;
   ttlmax?: number;

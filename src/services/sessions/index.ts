@@ -1,4 +1,4 @@
 import {SessionsService} from './sessions.service';
-import {CreateSessionBody, QueryString} from './type';
+import {CreateSessionBody} from './type';
 
-export {SessionsService, QueryString, CreateSessionBody};
+export {SessionsService, CreateSessionBody};

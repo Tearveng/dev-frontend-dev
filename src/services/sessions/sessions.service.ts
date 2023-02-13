@@ -5,7 +5,10 @@ import {
 import {APIServer} from '@utils/classes/APIService';
 import {Resp, Verb} from '@utils/classes/interfaces/APIConstants';
 import {API_VERSION} from '@src/config/env';
-import {CreateSessionBody, QueryString} from '.';
+import {CreateSessionBody} from '.';
+import {QueryString} from '@src/services/type';
+import {SessionQueryString} from '@src/services/sessions/type';
+import {urlFormat} from '../utils';
 
 export class SessionsService extends APIServer {
   constructor(baseUrl: string, authentication?: APIHeaders | undefined) {
@@ -13,11 +16,11 @@ export class SessionsService extends APIServer {
   }
 
   public async getSessions<T>(
-    queryString: QueryString,
+    queryString: QueryString<SessionQueryString>,
     header?: RequestHeaders,
     timeOut?: number,
   ): Promise<T | undefined> {
-    const url = this.urlFormat(queryString);
+    const url = urlFormat(`/api/v${API_VERSION}/sessions`, queryString);
     const data = await this.ngrequest<T>(
       url,
       Verb.Get,
@@ -55,15 +58,5 @@ export class SessionsService extends APIServer {
       timeOut,
     );
     return !data ? undefined : (data as T);
-  }
-
-  private urlFormat(queryString: QueryString) {
-    let stringQueries = '';
-    let index = 0;
-    for (let key in queryString) {
-      index++;
-      stringQueries += `${index > 1 ? '&' : ''}${key}=${queryString[key]}`;
-    }
-    return `/api/v${API_VERSION}/sessions?${stringQueries}`;
   }
 }
