@@ -1,11 +1,13 @@
 import {APIServer} from '@src/utils/classes/APIService';
 import {Verb} from '@src/utils/classes/interfaces/APIConstants';
-import {Box, HStack, View, ScrollView} from 'native-base';
+import {Box, HStack, View, ScrollView, VStack} from 'native-base';
 import React, {useEffect, useState} from 'react';
 import {PaginationProps} from '.';
 import {Loading} from '../loading';
 import {LoadingButton} from '../loading_btn';
 import {MyText} from '../my_text';
+import {Localization} from '@src/i18n/languages';
+import {useTranslation} from 'react-i18next';
 
 export function Pagination({
   render,
@@ -18,11 +20,12 @@ export function Pagination({
   position = 'bottom',
   refetch = false,
 }: PaginationProps) {
+  const {t} = useTranslation();
   const [pages, setPages] = useState<number>(0);
   const [page, setPage] = useState<number>(1);
   const [dataServer, setDataServer] = useState<[] | undefined>([]);
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState('');
+  const [error, setError] = useState<string | null | undefined>();
   const api = new APIServer(baseUrl ?? 'http://10.2.50.26:3000', {
     certignahash: 'ySsPUR23',
     certignarole: 2,
@@ -36,31 +39,32 @@ export function Pagination({
     return `${prefixUrl ?? '/api/products'}?${stringQueries}`;
   };
   const LENGTH_PAGINATED = 2;
+  const fetchPosts = async () => {
+    setLoading(true);
+
+    const url = urlFormat();
+    try {
+      const {items, totalPages} = await api.ngrequest(
+        url,
+        Verb.Get,
+        'json',
+        returnStatus,
+        undefined,
+        header,
+      );
+      setPages(totalPages);
+      setDataServer(items);
+      setLoading(false);
+      setError(undefined);
+      // eslint-disable-next-line no-catch-shadow,no-shadow
+    } catch (error: any) {
+      console.log(error.message);
+      setLoading(false);
+      setError(t(Localization('someErrorOccurred')));
+    }
+  };
   useEffect(() => {
-    const fecthPosts = async () => {
-      setLoading(true);
-
-      const url = urlFormat();
-      try {
-        const {items, totalPages} = await api.ngrequest(
-          url,
-          Verb.Get,
-          'json',
-          returnStatus,
-          undefined,
-          header,
-        );
-        setPages(totalPages);
-        setDataServer(items);
-        setLoading(false);
-      } catch (error: any) {
-        console.log(error.message);
-        setLoading(false);
-        setError('Some error occurred');
-      }
-    };
-
-    fecthPosts();
+    fetchPosts();
   }, [page, refetch]);
 
   let middlePagination: JSX.Element | JSX.Element[];
@@ -174,7 +178,17 @@ export function Pagination({
               }}
             />
           ) : error ? (
-            <MyText type="danger">{error}</MyText>
+            <VStack
+              width={'100%'}
+              justifyContent={'center'}
+              alignItems={'center'}
+            >
+              <MyText type="danger">{error}</MyText>
+              <LoadingButton
+                onPress={async () => await fetchPosts()}
+                text={t(Localization('tryAgain'))}
+              />
+            </VStack>
           ) : (
             render &&
             (isScroll ? (

@@ -87,6 +87,7 @@ const Body = ({
   const [deleteLoading, setDeleteLoading] = useState(false);
   const status = item.status.toString();
   const backgroundBaseOnStatus = (
+    // eslint-disable-next-line no-shadow
     status: keyof typeof SessionStatus,
   ): BackGroundColor => {
     switch (status) {
@@ -103,7 +104,7 @@ const Body = ({
       case '20':
         return 'red.800';
       case '21':
-        return undefined;
+        return 'red.800';
       default:
         return undefined;
     }
@@ -139,9 +140,9 @@ const Body = ({
     >
       <HStack width={'75%'} space={2}>
         <View>
-          <MyText type="white">URL :</MyText>
-          <MyText type="white">Expire In :</MyText>
-          <MyText type="white">Status :</MyText>
+          <MyText type="white">{`${t(Localization('url'))} :`}</MyText>
+          <MyText type="white">{`${t(Localization('expireIn'))} :`}</MyText>
+          <MyText type="white">{`${t(Localization('status'))} :`}</MyText>
         </View>
         <View>
           <MyText type="white">{item.url}</MyText>

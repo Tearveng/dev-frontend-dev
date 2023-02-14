@@ -36,5 +36,9 @@
   "reasonCannotBeEmpty": "Reason cannot be empty!",
   "reason": "reason",
   "Reason": "Reason",
-  "deleteSession": "Delete Session"
+  "deleteSession": "Delete Session",
+  "tryAgain": "Try again",
+  "someErrorOccurred": "Some error occurred",
+  "expireIn": "Expire In",
+  "status": "Status"
 }

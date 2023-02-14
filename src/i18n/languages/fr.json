@@ -36,5 +36,9 @@
   "reasonCannotBeEmpty": "La raison ne peut pas être vide !",
   "reason": "raison",
   "Reason": "Raison",
-  "deleteSession": "Supprimer la session"
+  "deleteSession": "Supprimer la session",
+  "tryAgain": "Essayer à nouveau",
+  "someErrorOccurred": "Une erreur s'est produite",
+  "expireIn": "Expire dans",
+  "status": "Statut"
 }

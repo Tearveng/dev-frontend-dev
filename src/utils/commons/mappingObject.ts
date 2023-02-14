@@ -1,6 +1,6 @@
 export const SessionStatus = {
   '1': 'Blank Session',
-  '2': 'Session Under Contrunction',
+  '2': 'Session Under Construction',
   '3': 'Idle Session',
   '4': 'Active Session',
   '10': 'Session Correctly Ended',
