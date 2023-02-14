@@ -3,6 +3,8 @@ import {Button, Modal, VStack, Pressable} from 'native-base';
 import React from 'react';
 import {useTranslation} from 'react-i18next';
 import {MyText} from '../commons/my_text';
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { STORE_LANGUAGE_KEY } from '.';
 
 export const LanguagePicker = () => {
   const [modalVisible, setModalVisible] = React.useState(false);
@@ -20,8 +22,9 @@ export const LanguagePicker = () => {
       pl={3}
       borderRadius={10}
       backgroundColor={name === i18n.language ? 'blue.200' : ''}
-      onPress={() => {
-        i18n.changeLanguage(name);
+      onPress={async () => {
+        await i18n.changeLanguage(name);
+        await AsyncStorage.setItem(STORE_LANGUAGE_KEY, name)
         setModalVisible(!modalVisible);
       }}
     >

@@ -1166,7 +1166,7 @@
   dependencies:
     regenerator-runtime "^0.13.11"
 
-"@babel/runtime@^7.10.1", "@babel/runtime@^7.10.4", "@babel/runtime@^7.11.1", "@babel/runtime@^7.16.7", "@babel/runtime@^7.18.0", "@babel/runtime@^7.18.3", "@babel/runtime@^7.20.0", "@babel/runtime@^7.20.7":
+"@babel/runtime@^7.10.1", "@babel/runtime@^7.10.4", "@babel/runtime@^7.11.1", "@babel/runtime@^7.16.7", "@babel/runtime@^7.18.0", "@babel/runtime@^7.18.3", "@babel/runtime@^7.19.4", "@babel/runtime@^7.20.0", "@babel/runtime@^7.20.7":
   version "7.20.13"
   resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.20.13.tgz#7055ab8a7cff2b8f6058bf6ae45ff84ad2aded4b"
   integrity sha512-gt3PKXs0DBoL9xCvOIIZ2NEqAGZqHjAnmVbfQtB620V0uReIQutpel14KcneZuer7UioY8ALKZ7iocavvzTNFA==
@@ -9466,6 +9466,13 @@ hyphenate-style-name@^1.0.3:
   resolved "https://registry.yarnpkg.com/hyphenate-style-name/-/hyphenate-style-name-1.0.4.tgz#691879af8e220aea5750e8827db4ef62a54e361d"
   integrity sha512-ygGZLjmXfPHj+ZWh6LwbC37l43MhfztxetbFCoYTM2VjkIUpeHgSNn7QIyVFj7YQ1Wl9Cbw5sholVJPzWvC2MQ==
 
+i18next-browser-languagedetector@^7.0.1:
+  version "7.0.1"
+  resolved "https://registry.yarnpkg.com/i18next-browser-languagedetector/-/i18next-browser-languagedetector-7.0.1.tgz#ead34592edc96c6c3a618a51cb57ad027c5b5d87"
+  integrity sha512-Pa5kFwaczXJAeHE56CHG2aWzFBMJNUNghf0Pm4SwSrEMps/PTKqW90EYWlIvhuYStf3Sn1K0vw+gH3+TLdkH1g==
+  dependencies:
+    "@babel/runtime" "^7.19.4"
+
 i18next@^22.4.9:
   version "22.4.9"
   resolved "https://registry.yarnpkg.com/i18next/-/i18next-22.4.9.tgz#98c8384c6bd41ff937da98b1e809ba03d3b41053"
@@ -13625,11 +13632,6 @@ react-native-gradle-plugin@^0.70.3:
   version "0.70.3"
   resolved "https://registry.yarnpkg.com/react-native-gradle-plugin/-/react-native-gradle-plugin-0.70.3.tgz#cbcf0619cbfbddaa9128701aa2d7b4145f9c4fc8"
   integrity sha512-oOanj84fJEXUg9FoEAQomA8ISG+DVIrTZ3qF7m69VQUJyOGYyDZmPqKcjvRku4KXlEH6hWO9i4ACLzNBh8gC0A==
-
-react-native-localize@^2.2.4:
-  version "2.2.4"
-  resolved "https://registry.yarnpkg.com/react-native-localize/-/react-native-localize-2.2.4.tgz#3bc46ade48499ab9df61bf17a9b66633a5ba9bb9"
-  integrity sha512-gVmbyAEQQnBQ8vKlAQchFfIISeId3qT6Lc7LHmKF39nsYWX9KN4PHuG6Hk+7gduMI6IHKeZGKcLsOdh6wvN6cg==
 
 react-native-pdf@^6.6.2:
   version "6.6.2"

@@ -1,28 +1,26 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import * as RNLocalize from 'react-native-localize';
 import {
   LanguagesLocalization,
   DefaultLanguagesLocalization,
 } from '@src/i18n/localization';
+import {STORE_LANGUAGE_KEY} from '@src/components/langauge_picker';
 
-const STORE_LANGUAGE_KEY = 'user-language';
 const LANG_CODES: string[] = Object.values(LanguagesLocalization) as string[];
 
 const languageDetectorPlugin = {
   type: 'languageDetector',
   async: true,
-  init: () => {},
+  init: () => {
+  },
   detect: async function (callback: (lang: string) => void) {
     try {
       await AsyncStorage.getItem(STORE_LANGUAGE_KEY).then(language => {
         if (language) {
-          const findBestAvailableLanguage =
-            RNLocalize.findBestAvailableLanguage(LANG_CODES);
+          const findBestAvailableLanguage = LANG_CODES.filter(a=> a === language)[0];
           callback(
-            findBestAvailableLanguage?.languageTag ||
-              DefaultLanguagesLocalization,
+            findBestAvailableLanguage ||
+            DefaultLanguagesLocalization,
           );
-          return;
         } else {
           return callback(DefaultLanguagesLocalization);
         }
@@ -34,7 +32,8 @@ const languageDetectorPlugin = {
   cacheUserLanguage: async function (language: string) {
     try {
       await AsyncStorage.setItem(STORE_LANGUAGE_KEY, language);
-    } catch (error) {}
+    } catch (error) {
+    }
   },
 };
 
